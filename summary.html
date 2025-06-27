@@ -1,1 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oracle Smart Pricing Tool - Summary</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>📊 Project Summary & Quote</h1>
+            <p>Professional cost breakdown with customizable pricing</p>
+        </div>
 
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-btn">🏠 Home</a>
+            <a href="equipment.html" class="nav-btn">🔧 Equipment</a>
+            <a href="materials.html" class="nav-btn">🔩 Materials</a>
+            <a href="labour.html" class="nav-btn">👷 Labour</a>
+            <a href="hire.html" class="nav-btn">🚐 Hire & Prelims</a>
+            <a href="summary.html" class="nav-btn active">📊 Summary</a>
+        </nav>
+
+        <!-- Quote Customization Section -->
+        <div class="form-section">
+            <h3>📝 Quote Details</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="project-name">Project Name</label>
+                    <input type="text" id="project-name" value="Air Conditioning Installation" onchange="updateQuoteHeader()">
+                </div>
+                <div class="form-group">
+                    <label for="client-name">Client Name</label>
+                    <input type="text" id="client-name" placeholder="Enter client name" onchange="updateQuoteHeader()">
+                </div>
+                <div class="form-group">
+                    <label for="quote-ref">Quote Reference</label>
+                    <input type="text" id="quote-ref" value="ORQ-001" onchange="updateQuoteHeader()">
+                </div>
+                <div class="form-group">
+                    <label for="quote-date">Quote Date</label>
+                    <input type="date" id="quote-date" onchange="updateQuoteHeader()">
+                </div>
+            </div>
+        </div>
+
+        <!-- Margin Controls Section -->
+        <div class="form-section">
+            <h3>💰 Pricing Controls</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Equipment Margin</label>
+                    <div id="equipment-margin-control"></div>
+                </div>
+                <div class="form-group">
+                    <label>Materials Margin</label>
+                    <div id="materials-margin-control"></div>
+                </div>
+                <div class="form-group">
+                    <label>Overall Adjustment</label>
+                    <div id="overall-margin-control"></div>
+                </div>
+                <div class="form-group">
+                    <label for="price-override">Final Price Override</label>
+                    <input type="number" id="price-override" placeholder="Leave blank for auto" min="0" step="10" onchange="updateMainTotal()">
+                </div>
+            </div>
+        </div>
+
+        <!-- Equipment Summary -->
+        <div class="breakdown">
+            <h4>🔧 Equipment Summary</h4>
+            <div id="equipment-summary-detail">
+                <div class="alert-info">
+                    Equipment details will appear here when equipment is selected.
+                    <a href="equipment.html" class="btn btn-primary" style="margin-left: 10px;">Select Equipment</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Materials Summary -->
+        <div class="breakdown">
+            <h4>🔩 Materials & Pipework Summary</h4>
+            <div id="materials-summary-detail">
+                <div class="alert-info">
+                    Materials breakdown will appear here when pipework is configured.
+                    <a href="materials.html" class="btn btn-primary" style="margin-left: 10px;">Configure Materials</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Labour Summary -->
+        <div class="breakdown">
+            <h4>👷 Labour Analysis Summary</h4>
+            <div id="labour-summary-detail">
+                <div class="alert-info">
+                    Labour breakdown will appear here when labour is configured.
+                    <a href="labour.html" class="btn btn-primary" style="margin-left: 10px;">Configure Labour</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hire & Prelims Summary -->
+        <div class="breakdown">
+            <h4>🚐 Hire & Preliminaries Summary</h4>
+            <div id="hire-summary-detail">
+                <div class="alert-info">
+                    Hire & prelims breakdown will appear here when items are selected.
+                    <a href="hire.html" class="btn btn-primary" style="margin-left: 10px;">Configure Hire & Prelims</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Quote Section -->
+        <div class="breakdown" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef); border: 2px solid #3498db;">
+            <div id="quote-header">
+                <h4>💰 Professional Quote</h4>
+            </div>
+            
+            <div class="breakdown-item">
+                <span><strong>Equipment:</strong></span>
+                <span id="total-equipment">£0.00</span>
+            </div>
+            <div class="breakdown-item">
+                <span><strong>Materials & Pipework:</strong></span>
+                <span id="total-materials">£0.00</span>
+            </div>
+            <div class="breakdown-item">
+                <span><strong>Labour:</strong></span>
+                <span id="total-labour">£0.00</span>
+            </div>
+            <div class="breakdown-item">
+                <span><strong>Hire & Preliminaries:</strong></span>
+                <span id="total-hire">£0.00</span>
+            </div>
+            
+            <div class="breakdown-item subtotal">
+                <span><strong>Sub Total:</strong></span>
+                <span id="sub-total">£0.00</span>
+            </div>
+            
+            <div class="breakdown-item">
+                <span><strong>Total Costs:</strong></span>
+                <span id="total-costs">£0.00</span>
+            </div>
+            <div class="breakdown-item">
+                <span><strong>Total Profit:</strong></span>
+                <span id="total-profit">£0.00 (0%)</span>
+            </div>
+            
+            <div class="breakdown-item total">
+                <span><strong>FINAL SALE PRICE:</strong></span>
+                <span id="grand-total">£0.00</span>
+            </div>
+        </div>
+
+        <!-- Profit Analysis -->
+        <div class="breakdown">
+            <h4>📈 Profit Analysis</h4>
+            <div id="profit-analysis">
+                <div class="breakdown-item">
+                    <span>Equipment Profit:</span>
+                    <span id="equipment-profit">£0.00 (0%)</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Materials Profit:</span>
+                    <span id="materials-profit">£0.00 (0%)</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Labour Profit:</span>
+                    <span id="labour-profit">£0.00 (0%)</span>
+                </div>
+                <div class="breakdown-item total">
+                    <span>Overall Gross Profit:</span>
+                    <span id="overall-gp">£0.00 (0%)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export Options -->
+        <div class="form-section">
+            <h3>📄 Export Options</h3>
+            <div style="text-align: center;">
+                <button class="btn btn-success" onclick="printPage()" style="margin: 10px;">
+                    🖨️ Print Quote
+                </button>
+                <button class="btn btn-primary" onclick="exportQuote('pdf')" style="margin: 10px;">
+                    📄 Export to PDF
+                </button>
+                <button class="btn btn-warning" onclick="exportQuote('excel')" style="margin: 10px;">
+                    📊 Export to Excel
+                </button>
+                <button class="btn" onclick="emailQuote()" style="margin: 10px;">
+                    📧 Email Quote
+                </button>
+            </div>
+        </div>
+
+        <!-- Quote Notes -->
+        <div class="form-section">
+            <h3>📝 Quote Notes</h3>
+            <div class="form-group">
+                <label for="quote-notes">Additional Notes</label>
+                <textarea id="quote-notes" rows="4" style="width: 100%; padding: 12px; border: 2px solid #ecf0f1; border-radius: 8px; font-family: inherit;" placeholder="Add any additional notes or terms and conditions here..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script>
+        // Summary-specific functions
+        function updateQuoteHeader() {
+            const projectName = document.getElementById('project-name').value;
+            const clientName = document.getElementById('client-name').value;
+            const quoteRef = document.getElementById('quote-ref').value;
+            const quoteDate = document.getElementById('quote-date').value;
+            
+            let headerHtml = '<h4>💰 Professional Quote</h4>';
+            
+            if (projectName) {
+                headerHtml += `<p><strong>Project:</strong> ${projectName}</p>`;
+            }
+            if (clientName) {
+                headerHtml += `<p><strong>Client:</strong> ${clientName}</p>`;
+            }
+            if (quoteRef) {
+                headerHtml += `<p><strong>Reference:</strong> ${quoteRef}</p>`;
+            }
+            if (quoteDate) {
+                const formattedDate = new Date(quoteDate).toLocaleDateString('en-GB');
+                headerHtml += `<p><strong>Date:</strong> ${formattedDate}</p>`;
+            }
+            
+            document.getElementById('quote-header').innerHTML = headerHtml;
+            
+            // Save quote details
+            saveToStorage('quoteDetails', {
+                projectName, clientName, quoteRef, quoteDate
+            });
+        }
+
+        function initializeMarginControls() {
+            // Equipment margin control
+            document.getElementById('equipment-margin-control').innerHTML = 
+                createMarginControl('equipment', margins.equipment, 'Equipment Markup');
+            
+            // Materials margin control
+            document.getElementById('materials-margin-control').innerHTML = 
+                createMarginControl('materials', margins.materials, 'Materials Markup');
+            
+            // Overall margin control
+            document.getElementById('overall-margin-control').innerHTML = 
+                createMarginControl('overall', margins.overall, 'Overall Adjustment');
+        }
+
+        function updateDetailedSummary() {
+            // Load and display detailed breakdowns from other sections
+            const equipmentData = loadFromStorage('equipmentData');
+            const materialsData = loadFromStorage('materialsData');
+            const labourData = loadFromStorage('labourData');
+            const hireData = loadFromStorage('hireData');
+            
+            // Update equipment summary
+            if (equipmentData) {
+                document.getElementById('equipment-summary-detail').innerHTML = equipmentData.breakdown || 'Equipment configured';
+            }
+            
+            // Update materials summary
+            if (materialsData) {
+                document.getElementById('materials-summary-detail').innerHTML = materialsData.breakdown || 'Materials configured';
+            }
+            
+            // Update labour summary
+            if (labourData) {
+                document.getElementById('labour-summary-detail').innerHTML = labourData.breakdown || 'Labour configured';
+            }
+            
+            // Update hire summary
+            if (hireData) {
+                document.getElementById('hire-summary-detail').innerHTML = hireData.breakdown || 'Hire & prelims configured';
+            }
+        }
+
+        function updateProfitAnalysis() {
+            // Calculate individual section profits
+            const equipmentProfit = totals.equipment - totals.equipmentCost;
+            const materialsProfit = totals.materials - totals.materialsCost;
+            const labourProfit = totals.labour - totals.labourCost;
+            
+            const equipmentGP = totals.equipment > 0 ? ((equipmentProfit / totals.equipment) * 100).toFixed(1) : 0;
+            const materialsGP = totals.materials > 0 ? ((materialsProfit / totals.materials) * 100).toFixed(1) : 0;
+            const labourGP = totals.labour > 0 ? ((labourProfit / totals.labour) * 100).toFixed(1) : 0;
+            
+            document.getElementById('equipment-profit').innerHTML = 
+                formatProfit(equipmentProfit) + ` (${formatGPPercentage(equipmentProfit, totals.equipment)})`;
+            document.getElementById('materials-profit').innerHTML = 
+                formatProfit(materialsProfit) + ` (${formatGPPercentage(materialsProfit, totals.materials)})`;
+            document.getElementById('labour-profit').innerHTML = 
+                formatProfit(labourProfit) + ` (${formatGPPercentage(labourProfit, totals.labour)})`;
+            
+            const totalSale = totals.equipment + totals.materials + totals.labour + totals.hire;
+            const totalCost = totals.equipmentCost + totals.materialsCost + totals.labourCost + totals.hireCost;
+            const overallProfit = totalSale - totalCost;
+            
+            document.getElementById('overall-gp').innerHTML = 
+                formatProfit(overallProfit) + ` (${formatGPPercentage(overallProfit, totalSale)})`;
+        }
+
+        function emailQuote() {
+            const subject = encodeURIComponent(`Quote: ${document.getElementById('project-name').value}`);
+            const body = encodeURIComponent(`Please find attached quote for: ${document.getElementById('project-name').value}\n\nTotal: £${(totals.equipment + totals.materials + totals.labour + totals.hire).toFixed(2)}`);
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+        }
+
+        // Override the main total update to include profit analysis
+        function updateMainTotal() {
+            // Call the original function from scripts.js
+            const result = window.updateMainTotal ? window.updateMainTotal() : {};
+            
+            // Update profit analysis
+            updateProfitAnalysis();
+            
+            return result;
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved quote details
+            const savedQuoteDetails = loadFromStorage('quoteDetails');
+            if (savedQuoteDetails) {
+                Object.keys(savedQuoteDetails).forEach(key => {
+                    const element = document.getElementById(key.replace(/([A-Z])/g, '-$1').toLowerCase());
+                    if (element && savedQuoteDetails[key]) {
+                        element.value = savedQuoteDetails[key];
+                    }
+                });
+                updateQuoteHeader();
+            }
+            
+            // Initialize margin controls
+            initializeMarginControls();
+            
+            // Load detailed summaries
+            updateDetailedSummary();
+            
+            // Update totals and profit analysis
+            updateMainTotal();
+        });
+
+        // Refresh data when page becomes visible (user returns from other pages)
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                updateDetailedSummary();
+                updateMainTotal();
+            }
+        });
+    </script>
+</body>
+</html>
