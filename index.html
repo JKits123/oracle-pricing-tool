@@ -272,80 +272,38 @@
         </main>
     </div>
 
-    <style>
-        .company-logo-placeholder {
-            width: 80px;
-            height: 80px;
-            background: var(--white);
-            border-radius: var(--border-radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: var(--primary-green);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .form-group input.error,
-        .form-group select.error {
-            border-color: #FF3B30 !important;
-            box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.1) !important;
-        }
-    </style>
-
     <script>
-        console.log('Oracle Wizard Loading...');
-        
         var currentStep = 1;
         var totalSteps = 3;
         
         function wizardNext() {
-            console.log('wizardNext called, step:', currentStep);
-            
             if (validateStep()) {
                 if (currentStep < totalSteps) {
-                    // Hide current step
                     document.getElementById('step' + currentStep).classList.remove('active');
-                    
-                    // Show next step
                     currentStep++;
                     document.getElementById('step' + currentStep).classList.add('active');
-                    
                     updateNavigation();
                     updateProgress();
                     
-                    // Show preview on step 3
                     if (currentStep === 3) {
                         document.getElementById('intelligencePreview').style.display = 'block';
                         updatePreview();
                     }
-                    
-                    console.log('Advanced to step:', currentStep);
                 }
             }
         }
         
         function wizardPrev() {
-            console.log('wizardPrev called, step:', currentStep);
-            
             if (currentStep > 1) {
-                // Hide current step
                 document.getElementById('step' + currentStep).classList.remove('active');
-                
-                // Show previous step
                 currentStep--;
                 document.getElementById('step' + currentStep).classList.add('active');
-                
                 updateNavigation();
                 updateProgress();
                 
-                // Hide preview
                 if (currentStep < 3) {
                     document.getElementById('intelligencePreview').style.display = 'none';
                 }
-                
-                console.log('Back to step:', currentStep);
             }
         }
         
@@ -357,10 +315,10 @@
             for (var i = 0; i < requiredFields.length; i++) {
                 var field = requiredFields[i];
                 if (!field.value.trim()) {
-                    field.classList.add('error');
+                    field.style.borderColor = '#FF3B30';
                     isValid = false;
                 } else {
-                    field.classList.remove('error');
+                    field.style.borderColor = '';
                 }
             }
             
@@ -376,10 +334,8 @@
             var nextBtn = document.getElementById('nextBtn');
             var generateBtn = document.getElementById('generateQuote');
             
-            // Show/hide previous button
             prevBtn.style.display = currentStep > 1 ? 'block' : 'none';
             
-            // Show/hide next vs generate button
             if (currentStep === totalSteps) {
                 nextBtn.style.display = 'none';
                 generateBtn.style.display = 'block';
@@ -393,11 +349,9 @@
             var progressFill = document.getElementById('progressFill');
             var progressSteps = document.querySelectorAll('.progress-step');
             
-            // Update progress bar
             var progressPercent = (currentStep / totalSteps) * 100;
             progressFill.style.width = progressPercent + '%';
             
-            // Update step indicators
             for (var i = 0; i < progressSteps.length; i++) {
                 if (i < currentStep) {
                     progressSteps[i].classList.add('active');
@@ -413,7 +367,6 @@
             var manufacturer = document.getElementById('manufacturerPreference').value;
             var distance = document.getElementById('pipeRunDistance').value;
             
-            // Equipment recommendations
             if (capacity && unitType) {
                 var equipmentText = 'Equipment for ' + capacity + 'kW ' + formatUnitType(unitType);
                 if (manufacturer && manufacturer !== 'any') {
@@ -422,42 +375,34 @@
                 document.getElementById('equipmentPreview').textContent = equipmentText;
             }
             
-            // Pipe sizing
             if (capacity) {
-                var pipeText = getPipeSize(parseFloat(capacity));
-                document.getElementById('pipeSizingPreview').textContent = pipeText;
+                document.getElementById('pipeSizingPreview').textContent = getPipeSize(parseFloat(capacity));
             }
             
-            // Cable tray
             if (distance) {
                 var trayLengths = Math.ceil((parseInt(distance) + 5) / 3);
                 document.getElementById('cableTrayPreview').textContent = 'Auto-calculated: ' + trayLengths + ' × 3m cable tray lengths';
             }
             
-            // Materials
             if (capacity && distance) {
                 document.getElementById('materialsPreview').textContent = 'Materials automatically calculated for ' + capacity + 'kW system with ' + distance + 'm pipe run';
             }
         }
         
         function formatUnitType(type) {
-            switch(type) {
-                case 'wall': return 'Wall Mounted';
-                case 'ceiling-cassette': return 'Ceiling Cassette';
-                case 'floor': return 'Floor Standing';
-                case 'ceiling-ducted': return 'Ceiling Ducted';
-                default: return type;
-            }
+            if (type === 'wall') return 'Wall Mounted';
+            if (type === 'ceiling-cassette') return 'Ceiling Cassette';
+            if (type === 'floor') return 'Floor Standing';
+            if (type === 'ceiling-ducted') return 'Ceiling Ducted';
+            return type;
         }
         
         function formatManufacturer(pref) {
-            switch(pref) {
-                case 'mitsubishi': return 'Mitsubishi Electric';
-                case 'daikin': return 'Daikin';
-                case 'fujitsu': return 'Fujitsu';
-                case 'mhi': return 'MHI';
-                default: return 'Any Manufacturer';
-            }
+            if (pref === 'mitsubishi') return 'Mitsubishi Electric';
+            if (pref === 'daikin') return 'Daikin';
+            if (pref === 'fujitsu') return 'Fujitsu';
+            if (pref === 'mhi') return 'MHI';
+            return 'Any Manufacturer';
         }
         
         function getPipeSize(capacity) {
@@ -469,22 +414,16 @@
         }
         
         function generateQuote() {
-            console.log('generateQuote called');
-            
             if (validateStep()) {
-                // Collect form data
                 var form = document.getElementById('projectWizard');
                 var formData = new FormData(form);
                 var projectData = {};
                 
-                // Convert FormData to object
-                for (var pair of formData.entries()) {
-                    projectData[pair[0]] = pair[1];
+                var entries = Array.from(formData.entries());
+                for (var i = 0; i < entries.length; i++) {
+                    projectData[entries[i][0]] = entries[i][1];
                 }
                 
-                console.log('Project data:', projectData);
-                
-                // Store in sessionStorage
                 sessionStorage.setItem('oracleProjectData', JSON.stringify(projectData));
                 
                 var intelligenceData = {
@@ -501,20 +440,30 @@
                 
                 sessionStorage.setItem('oracleIntelligenceData', JSON.stringify(intelligenceData));
                 
-                console.log('Data stored, redirecting...');
-                
-                // Show loading state
                 document.getElementById('generateQuote').textContent = 'Generating Intelligent Quote...';
                 document.getElementById('generateQuote').disabled = true;
                 
-                // Redirect
                 setTimeout(function() {
                     window.location.href = 'equipment.html';
                 }, 1500);
             }
         }
-        
-        console.log('Oracle Wizard Ready');
     </script>
+
+    <style>
+        .company-logo-placeholder {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #00A651;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </body>
 </html>
