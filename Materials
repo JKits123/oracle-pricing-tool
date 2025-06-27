@@ -1,1 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materials Selection - Oracle Smart Pricing Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Oracle Smart Pricing Tool</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="equipment.html">Equipment</a>
+                <a href="materials.html" class="active">Materials</a>
+                <a href="labour.html">Labour</a>
+                <a href="hire.html">Hire</a>
+                <a href="summary.html">Summary</a>
+            </nav>
+        </header>
 
+        <main>
+            <div class="section-header">
+                <h2>Materials Selection</h2>
+                <div class="legend">
+                    <span class="cost-indicator">Cost Prices</span>
+                    <span class="profit-indicator">GP%</span>
+                    <span class="sale-indicator">Sale Prices</span>
+                </div>
+            </div>
+
+            <!-- Pipe Sizing Warnings -->
+            <div id="pipeSizingWarnings" class="warnings-section" style="display: none;">
+                <h3>⚠️ Pipe Sizing Recommendations</h3>
+                <div id="warningsList" class="warnings-list"></div>
+            </div>
+
+            <!-- Global Margin Controls -->
+            <div class="margin-controls">
+                <h3>Material Margin Settings</h3>
+                <div class="margin-grid">
+                    <div class="margin-item">
+                        <label>Pipes & Refrigerant %:</label>
+                        <input type="number" id="pipesMargin" value="35" min="0" max="100" step="0.5">
+                    </div>
+                    <div class="margin-item">
+                        <label>Pumps & Drainage %:</label>
+                        <input type="number" id="pumpsMargin" value="40" min="0" max="100" step="0.5">
+                    </div>
+                    <div class="margin-item">
+                        <label>Electrical Materials %:</label>
+                        <input type="number" id="electricalMargin" value="45" min="0" max="100" step="0.5">
+                    </div>
+                    <div class="margin-item">
+                        <label>Support Materials %:</label>
+                        <input type="number" id="supportMargin" value="50" min="0" max="100" step="0.5">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Refrigerant Pipes & Insulation -->
+            <div class="materials-section">
+                <h3>Refrigerant Pipes & Insulation</h3>
+                
+                <!-- Individual Copper Pipes -->
+                <div class="material-category">
+                    <h4>Copper Pipes (per meter)</h4>
+                    <div class="materials-grid">
+                        <div class="material-item" data-category="pipes">
+                            <div class="material-info">
+                                <h5>1/4" Copper Pipe</h5>
+                                <p>6.35mm refrigerant pipe</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£3.20</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£4.32</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pipes">
+                            <div class="material-info">
+                                <h5>3/8" Copper Pipe</h5>
+                                <p>9.52mm refrigerant pipe</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£4.80</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£6.48</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pipes">
+                            <div class="material-info">
+                                <h5>1/2" Copper Pipe</h5>
+                                <p>12.7mm refrigerant pipe</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£7.50</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£10.13</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pipes">
+                            <div class="material-info">
+                                <h5>5/8" Copper Pipe</h5>
+                                <p>15.88mm refrigerant pipe</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£9.80</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£13.23</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pipes">
+                            <div class="material-info">
+                                <h5>3/4" Copper Pipe</h5>
+                                <p>19.05mm refrigerant pipe</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£14.20</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£19.17</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pipes">
+                            <div class="material-info">
+                                <h5>7/8" Copper Pipe</h5>
+                                <p>22.22mm refrigerant pipe</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£18.50</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£24.98</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pipe Insulation -->
+                <div class="material-category">
+                    <h4>Pipe Insulation (per meter)</h4>
+                    <div class="materials-grid">
+                        <div class="material-item" data-category="pipes">
+                            <div class="material-info">
+                                <h5>1/4" Bore 3/8" Wall</h5>
+                                <p>Elastomeric insulation</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£2.20</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£2.97</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pipes">
+                            <div class="material-info">
+                                <h5>3/8" Bore 3/8" Wall</h5>
+                                <p>Elastomeric insulation</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£2.80</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£3.78</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pipes">
+                            <div class="material-info">
+                                <h5>1/2" Bore 1/2" Wall</h5>
+                                <p>Elastomeric insulation</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£4.20</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£5.67</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pipes">
+                            <div class="material-info">
+                                <h5>5/8" Bore 1/2" Wall</h5>
+                                <p>Elastomeric insulation</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£5.40</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£7.29</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pipes">
+                            <div class="material-info">
+                                <h5>3/4" Bore 1/2" Wall</h5>
+                                <p>Elastomeric insulation</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£6.80</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£9.18</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pipes">
+                            <div class="material-info">
+                                <h5>7/8" Bore 1/2" Wall</h5>
+                                <p>Elastomeric insulation</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£8.20</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£11.07</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pre-Insulated Pipe Sets -->
+                <div class="material-category">
+                    <h4>Pre-Insulated Pipe Sets (25m rolls)</h4>
+                    <div class="materials-grid">
+                        <div class="material-item" data-category="pipes">
+                            <div class="material-info">
+                                <h5>1/4" x 3/8" Set</h5>
+                                <p>25m pre-insulated pair</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Rolls:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£185</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£250</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pipes">
+                            <div class="material-info">
+                                <h5>1/4" x 1/2" Set</h5>
+                                <p>25m pre-insulated pair</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Rolls:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£220</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£297</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pipes">
+                            <div class="material-info">
+                                <h5>1/4" x 5/8" Set</h5>
+                                <p>25m pre-insulated pair</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Rolls:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£280</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£378</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pipes">
+                            <div class="material-info">
+                                <h5>3/8" x 5/8" Set</h5>
+                                <p>25m pre-insulated pair</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Rolls:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£340</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£459</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pipes">
+                            <div class="material-info">
+                                <h5>3/8" x 3/4" Set</h5>
+                                <p>25m pre-insulated pair</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Rolls:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£420</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£567</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pumps & Drainage -->
+            <div class="materials-section">
+                <h3>Pumps & Drainage</h3>
+                
+                <!-- Condensate Pumps -->
+                <div class="material-category">
+                    <h4>Condensate Pumps</h4>
+                    <div class="materials-grid">
+                        <div class="material-item" data-category="pumps">
+                            <div class="material-info">
+                                <h5>Aspen Mini Orange</h5>
+                                <p>1.5L tank, 12m head</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Units:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£58</span>
+                                <span class="margin">40%</span>
+                                <span class="sale">£81</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pumps">
+                            <div class="material-info">
+                                <h5>Aspen Mini Aqua</h5>
+                                <p>3.3L tank, 12m head</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Units:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£75</span>
+                                <span class="margin">40%</span>
+                                <span class="sale">£105</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pumps">
+                            <div class="material-info">
+                                <h5>Sauermann Si-82</h5>
+                                <p>2.8L tank, 15m head</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Units:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£95</span>
+                                <span class="margin">40%</span>
+                                <span class="sale">£133</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pumps">
+                            <div class="material-info">
+                                <h5>Sauermann Si-30</h5>
+                                <p>7L tank, 25m head</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Units:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£185</span>
+                                <span class="margin">40%</span>
+                                <span class="sale">£259</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drainage Components -->
+                <div class="material-category">
+                    <h4>Drainage Components</h4>
+                    <div class="materials-grid">
+                        <div class="material-item" data-category="pumps">
+                            <div class="material-info">
+                                <h5>32mm Condensate Pipe</h5>
+                                <p>Per meter, white PVC</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£2.80</span>
+                                <span class="margin">40%</span>
+                                <span class="sale">£3.92</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pumps">
+                            <div class="material-info">
+                                <h5>P-Trap Kit</h5>
+                                <p>32mm with unions</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Units:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£12</span>
+                                <span class="margin">40%</span>
+                                <span class="sale">£17</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pumps">
+                            <div class="material-info">
+                                <h5>Drain Pan Tablets</h5>
+                                <p>Pack of 6 tablets</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Packs:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£8</span>
+                                <span class="margin">40%</span>
+                                <span class="sale">£11</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="pumps">
+                            <div class="material-info">
+                                <h5>External Drain Kit</h5>
+                                <p>Complete external drainage</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Kits:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£35</span>
+                                <span class="margin">40%</span>
+                                <span class="sale">£49</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Electrical Materials -->
+            <div class="materials-section">
+                <h3>Electrical Materials</h3>
+                
+                <!-- Cable & Connections -->
+                <div class="material-category">
+                    <h4>Cables & Connections</h4>
+                    <div class="materials-grid">
+                        <div class="material-item" data-category="electrical">
+                            <div class="material-info">
+                                <h5>4 Core 1.0mm SY Cable</h5>
+                                <p>Interconnecting cable per meter</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£2.40</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£3.48</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="electrical">
+                            <div class="material-info">
+                                <h5>2.5mm T&E Cable</h5>
+                                <p>Power cable per meter</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1.80</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£2.61</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="electrical">
+                            <div class="material-info">
+                                <h5>Fused Spur 13A</h5>
+                                <p>Switched fused connection</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Units:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£8.50</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£12.33</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="electrical">
+                            <div class="material-info">
+                                <h5>Isolation Switch 20A</h5>
+                                <p>Double pole isolator</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Units:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£15</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£22</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trunking & Cable Management -->
+                <div class="material-category">
+                    <h4>Trunking & Cable Management</h4>
+                    <div class="materials-grid">
+                        <div class="material-item" data-category="electrical">
+                            <div class="material-info">
+                                <h5>50mm x 50mm Trunking</h5>
+                                <p>White PVC per meter</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£4.20</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£6.09</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="electrical">
+                            <div class="material-info">
+                                <h5>100mm Cable Tray</h5>
+                                <p>Galvanised per meter</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£12.50</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£18.13</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="electrical">
+                            <div class="material-info">
+                                <h5>200mm Cable Tray</h5>
+                                <p>Galvanised per meter</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£18.80</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£27.26</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="electrical">
+                            <div class="material-info">
+                                <h5>300mm Cable Tray</h5>
+                                <p>Galvanised per meter</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£24.50</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£35.53</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support Materials -->
+            <div class="materials-section">
+                <h3>Support Materials</h3>
+                
+                <!-- Standard Support Materials -->
+                <div class="material-category">
+                    <h4>Mounting & Support</h4>
+                    <div class="materials-grid">
+                        <div class="material-item" data-category="support">
+                            <div class="material-info">
+                                <h5>Wall Mounting Bracket</h5>
+                                <p>Standard indoor unit bracket</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Sets:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£25</span>
+                                <span class="margin">50%</span>
+                                <span class="sale">£38</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="support">
+                            <div class="material-info">
+                                <h5>Anti-Vibration Pad Set</h5>
+                                <p>Outdoor unit pads (4 pack)</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Sets:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£18</span>
+                                <span class="margin">50%</span>
+                                <span class="sale">£27</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="support">
+                            <div class="material-info">
+                                <h5>M8 Threaded Rod</h5>
+                                <p>Zinc plated per meter</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£3.20</span>
+                                <span class="margin">50%</span>
+                                <span class="sale">£4.80</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="support">
+                            <div class="material-info">
+                                <h5>41mm x 41mm Uni-Strut</h5>
+                                <p>Slotted channel per meter</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Meters:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="0.5">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£8.50</span>
+                                <span class="margin">50%</span>
+                                <span class="sale">£12.75</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="support">
+                            <div class="material-info">
+                                <h5>Cassette Suspension Kit</h5>
+                                <p>Complete ceiling cassette kit</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Kits:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£45</span>
+                                <span class="margin">50%</span>
+                                <span class="sale">£68</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="support">
+                            <div class="material-info">
+                                <h5>Pipe Clips & Brackets</h5>
+                                <p>Mixed pack of 20</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Packs:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£12</span>
+                                <span class="margin">50%</span>
+                                <span class="sale">£18</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Non-Identified Materials -->
+            <div class="materials-section">
+                <h3>Non-Identified Materials & Fittings</h3>
+                
+                <!-- Cable Tray Fittings -->
+                <div class="material-category">
+                    <h4>Cable Tray Fittings</h4>
+                    <div class="materials-grid">
+                        <div class="material-item" data-category="electrical">
+                            <div class="material-info">
+                                <h5>90° Bend - 100mm</h5>
+                                <p>Cable tray horizontal bend</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Units:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£15</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£22</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="electrical">
+                            <div class="material-info">
+                                <h5>90° Bend - 200mm</h5>
+                                <p>Cable tray horizontal bend</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Units:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£28</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£41</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="electrical">
+                            <div class="material-info">
+                                <h5>Cable Tray Joiner</h5>
+                                <p>Universal coupling plate</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Units:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£8</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£12</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="electrical">
+                            <div class="material-info">
+                                <h5>Stand-Off Bracket</h5>
+                                <p>150mm wall standoff</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Units:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£12</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£17</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="electrical">
+                            <div class="material-info">
+                                <h5>Tray End Cap</h5>
+                                <p>Cable tray termination</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Units:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£6</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£9</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Miscellaneous Fittings -->
+                <div class="material-category">
+                    <h4>Miscellaneous Items</h4>
+                    <div class="materials-grid">
+                        <div class="material-item" data-category="support">
+                            <div class="material-info">
+                                <h5>Rawl Plugs Mixed Pack</h5>
+                                <p>Assorted fixing plugs</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Packs:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£8</span>
+                                <span class="margin">50%</span>
+                                <span class="sale">£12</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="support">
+                            <div class="material-info">
+                                <h5>Bolts & Nuts M8</h5>
+                                <p>Pack of 10 sets</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Packs:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£6</span>
+                                <span class="margin">50%</span>
+                                <span class="sale">£9</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="electrical">
+                            <div class="material-info">
+                                <h5>Cable Ties Pack</h5>
+                                <p>300mm black ties (100 pack)</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Packs:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£4</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£6</span>
+                            </div>
+                        </div>
+
+                        <div class="material-item" data-category="support">
+                            <div class="material-info">
+                                <h5>Weatherproof Box</h5>
+                                <p>Outdoor electrical enclosure</p>
+                            </div>
+                            <div class="quantity-control">
+                                <label>Units:</label>
+                                <input type="number" class="quantity-input" min="0" value="0" step="1">
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£25</span>
+                                <span class="margin">50%</span>
+                                <span class="sale">£38</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Materials Section -->
+            <div class="materials-section">
+                <h3>Custom Materials</h3>
+                <div class="custom-materials">
+                    <button id="addCustomMaterial" class="btn-primary">+ Add Custom Material</button>
+                    <div id="customMaterialsList" class="custom-materials-list"></div>
+                </div>
+            </div>
+
+            <!-- Materials Summary & BOQ -->
+            <div class="materials-summary">
+                <h3>Materials Summary</h3>
+                <div class="summary-controls">
+                    <button id="generateBOQ" class="btn-primary">Generate BOQ</button>
+                    <button id="printBOQ" class="btn-secondary">Print BOQ</button>
+                    <button id="exportBOQ" class="btn-secondary">Export BOQ</button>
+                </div>
+                
+                <div id="materialsSummary" class="selected-materials">
+                    <p>No materials selected yet.</p>
+                </div>
+                
+                <div class="summary-totals">
+                    <div class="total-row">
+                        <span>Total Material Cost:</span>
+                        <span id="totalMaterialCost" class="cost">£0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Average Material Margin:</span>
+                        <span id="avgMaterialMargin" class="profit">0%</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Total Material Sale Price:</span>
+                        <span id="totalMaterialSale" class="sale">£0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOQ Modal -->
+            <div id="boqModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Bill of Quantities - Materials</h2>
+                    <div id="boqContent" class="boq-content"></div>
+                    <div class="modal-actions">
+                        <button id="printBOQModal" class="btn-primary">Print</button>
+                        <button id="exportBOQModal" class="btn-secondary">Export CSV</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="section-navigation">
+                <button class="nav-btn secondary" onclick="window.location.href='equipment.html'">← Back to Equipment</button>
+                <button class="nav-btn primary" onclick="window.location.href='labour.html'">Continue to Labour →</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script>
+        // Materials-specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMaterialsPage();
+            checkPipeSizing();
+        });
+
+        function initializeMaterialsPage() {
+            // Add event listeners for margin changes
+            document.getElementById('pipesMargin').addEventListener('input', () => updateCategoryMargins('pipes'));
+            document.getElementById('pumpsMargin').addEventListener('input', () => updateCategoryMargins('pumps'));
+            document.getElementById('electricalMargin').addEventListener('input', () => updateCategoryMargins('electrical'));
+            document.getElementById('supportMargin').addEventListener('input', () => updateCategoryMargins('support'));
+            
+            // Add event listeners for quantity changes
+            const quantityInputs = document.querySelectorAll('.quantity-input');
+            quantityInputs.forEach(input => {
+                input.addEventListener('input', updateMaterialsSummary);
+            });
+
+            // Add event listeners for BOQ functions
+            document.getElementById('generateBOQ').addEventListener('click', generateBOQ);
+            document.getElementById('printBOQ').addEventListener('click', printBOQ);
+            document.getElementById('exportBOQ').addEventListener('click', exportBOQ);
+            document.getElementById('addCustomMaterial').addEventListener('click', addCustomMaterial);
+
+            // Modal controls
+            document.querySelector('.close-modal').addEventListener('click', () => {
+                document.getElementById('boqModal').style.display = 'none';
+            });
+        }
+
+        function checkPipeSizing() {
+            // Check if equipment is selected and show pipe sizing warnings
+            if (window.pricingData && window.pricingData.equipment && window.pricingData.equipment.length > 0) {
+                const warnings = generatePipeSizingWarnings();
+                if (warnings.length > 0) {
+                    displayPipeSizingWarnings(warnings);
+                }
+            }
+        }
+
+        function generatePipeSizingWarnings() {
+            const warnings = [];
+            const equipment = window.pricingData.equipment;
+            
+            equipment.forEach(item => {
+                const capacity = parseFloat(item.capacity);
+                let liquidPipe, gasePipe;
+                
+                // Pipe sizing recommendations based on capacity
+                if (capacity <= 3.5) {
+                    liquidPipe = '1/4"';
+                    gasePipe = '3/8"';
+                } else if (capacity <= 5.0) {
+                    liquidPipe = '1/4"';
+                    gasePipe = '1/2"';
+                } else if (capacity <= 7.1) {
+                    liquidPipe = '3/8"';
+                    gasePipe = '5/8"';
+                } else if (capacity <= 10.0) {
+                    liquidPipe = '3/8"';
+                    gasePipe = '3/4"';
+                } else {
+                    liquidPipe = '1/2"';
+                    gasePipe = '7/8"';
+                }
+                
+                warnings.push({
+                    equipment: item.title,
+                    capacity: capacity + 'kW',
+                    liquidPipe: liquidPipe,
+                    gasePipe: gasePipe,
+                    preInsulated: liquidPipe + ' x ' + gasePipe + ' Set'
+                });
+            });
+            
+            return warnings;
+        }
+
+        function displayPipeSizingWarnings(warnings) {
+            const warningsSection = document.getElementById('pipeSizingWarnings');
+            const warningsList = document.getElementById('warningsList');
+            
+            let html = '';
+            warnings.forEach(warning => {
+                html += `
+                    <div class="warning-item">
+                        <strong>${warning.equipment}</strong> (${warning.capacity})
+                        <br>Recommended: Liquid ${warning.liquidPipe}, Gas ${warning.gasePipe}
+                        <br>Or use pre-insulated: ${warning.preInsulated}
+                    </div>
+                `;
+            });
+            
+            warningsList.innerHTML = html;
+            warningsSection.style.display = 'block';
+        }
+
+        function updateCategoryMargins(category) {
+            let marginValue, marginInput;
+            
+            switch(category) {
+                case 'pipes':
+                    marginValue = parseFloat(document.getElementById('pipesMargin').value);
+                    break;
+                case 'pumps':
+                    marginValue = parseFloat(document.getElementById('pumpsMargin').value);
+                    break;
+                case 'electrical':
+                    marginValue = parseFloat(document.getElementById('electricalMargin').value);
+                    break;
+                case 'support':
+                    marginValue = parseFloat(document.getElementById('supportMargin').value);
+                    break;
+            }
+            
+            const categoryItems = document.querySelectorAll(`[data-category="${category}"]`);
+            categoryItems.forEach(item => {
+                updateMaterialPricing(item, marginValue);
+            });
+            
+            updateMaterialsSummary();
+        }
+
+        function updateMaterialPricing(item, margin) {
+            const costElement = item.querySelector('.cost');
+            const marginElement = item.querySelector('.margin');
+            const saleElement = item.querySelector('.sale');
+            
+            const cost = parseFloat(costElement.textContent.replace('£', '').replace(',', ''));
+            const salePrice = cost * (1 + margin / 100);
+            
+            marginElement.textContent = margin + '%';
+            saleElement.textContent = '£' + salePrice.toLocaleString('en-GB', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+        }
+
+        function updateMaterialsSummary() {
+            const summaryContainer = document.getElementById('materialsSummary');
+            const totalCostElement = document.getElementById('totalMaterialCost');
+            const avgMarginElement = document.getElementById('avgMaterialMargin');
+            const totalSaleElement = document.getElementById('totalMaterialSale');
+            
+            // Get all materials with quantities > 0
+            const selectedMaterials = [];
+            const materialItems = document.querySelectorAll('.material-item');
+            
+            materialItems.forEach(item => {
+                const quantityInput = item.querySelector('.quantity-input');
+                const quantity = parseFloat(quantityInput.value);
+                
+                if (quantity > 0) {
+                    const title = item.querySelector('h5').textContent;
+                    const description = item.querySelector('p').textContent;
+                    const cost = parseFloat(item.querySelector('.cost').textContent.replace('£', '').replace(',', ''));
+                    const margin = parseFloat(item.querySelector('.margin').textContent.replace('%', ''));
+                    const sale = parseFloat(item.querySelector('.sale').textContent.replace('£', '').replace(',', ''));
+                    
+                    selectedMaterials.push({
+                        title,
+                        description,
+                        quantity,
+                        unitCost: cost,
+                        unitSale: sale,
+                        totalCost: cost * quantity,
+                        totalSale: sale * quantity,
+                        margin
+                    });
+                }
+            });
+            
+            // Store in global data
+            if (!window.pricingData) {
+                window.pricingData = {};
+            }
+            window.pricingData.materials = selectedMaterials;
+            
+            // Update display
+            if (selectedMaterials.length === 0) {
+                summaryContainer.innerHTML = '<p>No materials selected yet.</p>';
+                totalCostElement.textContent = '£0.00';
+                avgMarginElement.textContent = '0%';
+                totalSaleElement.textContent = '£0.00';
+                return;
+            }
+            
+            let totalCost = 0;
+            let totalSale = 0;
+            let totalMarginWeighted = 0;
+            
+            let html = '';
+            selectedMaterials.forEach(material => {
+                totalCost += material.totalCost;
+                totalSale += material.totalSale;
+                totalMarginWeighted += material.margin * material.totalCost;
+                
+                html += `
+                    <div class="selected-material">
+                        <div class="material-details">
+                            <strong>${material.title}</strong>
+                            <span>${material.description}</span>
+                            <span>Qty: ${material.quantity}</span>
+                        </div>
+                        <div class="material-pricing">
+                            <span class="cost">£${material.totalCost.toFixed(2)}</span>
+                            <span class="profit">${material.margin}%</span>
+                            <span class="sale">£${material.totalSale.toFixed(2)}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            summaryContainer.innerHTML = html;
+            
+            const avgMargin = totalCost > 0 ? totalMarginWeighted / totalCost : 0;
+            
+            totalCostElement.textContent = '£' + totalCost.toFixed(2);
+            avgMarginElement.textContent = avgMargin.toFixed(1) + '%';
+            totalSaleElement.textContent = '£' + totalSale.toFixed(2);
+        }
+
+        function addCustomMaterial() {
+            const customList = document.getElementById('customMaterialsList');
+            const customId = 'custom_' + Date.now();
+            
+            const customMaterialHtml = `
+                <div class="custom-material-item" id="${customId}">
+                    <div class="custom-inputs">
+                        <input type="text" placeholder="Material Name" class="custom-name">
+                        <input type="text" placeholder="Description" class="custom-description">
+                        <input type="number" placeholder="Cost £" class="custom-cost" step="0.01">
+                        <input type="number" placeholder="Margin %" class="custom-margin" value="45" step="0.5">
+                        <input type="number" placeholder="Quantity" class="custom-quantity" min="0" step="0.1">
+                        <button class="remove-custom" onclick="removeCustomMaterial('${customId}')">Remove</button>
+                    </div>
+                    <div class="custom-pricing">
+                        <span class="custom-sale">£0.00</span>
+                    </div>
+                </div>
+            `;
+            
+            customList.insertAdjacentHTML('beforeend', customMaterialHtml);
+            
+            // Add event listeners to new custom material
+            const newItem = document.getElementById(customId);
+            const inputs = newItem.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('input', () => updateCustomMaterial(customId));
+            });
+        }
+
+        function removeCustomMaterial(customId) {
+            document.getElementById(customId).remove();
+            updateMaterialsSummary();
+        }
+
+        function updateCustomMaterial(customId) {
+            const item = document.getElementById(customId);
+            const cost = parseFloat(item.querySelector('.custom-cost').value) || 0;
+            const margin = parseFloat(item.querySelector('.custom-margin').value) || 0;
+            const salePrice = cost * (1 + margin / 100);
+            
+            item.querySelector('.custom-sale').textContent = '£' + salePrice.toFixed(2);
+            updateMaterialsSummary();
+        }
+
+        function generateBOQ() {
+            const boqModal = document.getElementById('boqModal');
+            const boqContent = document.getElementById('boqContent');
+            
+            let html = `
+                <table class="boq-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Description</th>
+                            <th>Qty</th>
+                            <th>Unit</th>
+                            <th>Unit Cost</th>
+                            <th>Total Cost</th>
+                            <th>Margin %</th>
+                            <th>Unit Sale</th>
+                            <th>Total Sale</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            if (window.pricingData && window.pricingData.materials) {
+                let totalCost = 0;
+                let totalSale = 0;
+                
+                window.pricingData.materials.forEach((material, index) => {
+                    totalCost += material.totalCost;
+                    totalSale += material.totalSale;
+                    
+                    html += `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td><strong>${material.title}</strong><br>${material.description}</td>
+                            <td>${material.quantity}</td>
+                            <td>Each</td>
+                            <td>£${material.unitCost.toFixed(2)}</td>
+                            <td>£${material.totalCost.toFixed(2)}</td>
+                            <td>${material.margin}%</td>
+                            <td>£${material.unitSale.toFixed(2)}</td>
+                            <td>£${material.totalSale.toFixed(2)}</td>
+                        </tr>
+                    `;
+                });
+                
+                html += `
+                    </tbody>
+                    <tfoot>
+                        <tr class="totals-row">
+                            <td colspan="5"><strong>TOTALS</strong></td>
+                            <td><strong>£${totalCost.toFixed(2)}</strong></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong>£${totalSale.toFixed(2)}</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                
+                <div class="boq-summary">
+                    <h4>BOQ Summary</h4>
+                    <p>Total Material Cost: £${totalCost.toFixed(2)}</p>
+                    <p>Total Material Sale: £${totalSale.toFixed(2)}</p>
+                    <p>Total Material Profit: £${(totalSale - totalCost).toFixed(2)}</p>
+                </div>
+            `;
+            } else {
+                html += '<tr><td colspan="9">No materials selected</td></tr></tbody></table>';
+            }
+            
+            boqContent.innerHTML = html;
+            boqModal.style.display = 'block';
+        }
+
+        function printBOQ() {
+            generateBOQ();
+            setTimeout(() => {
+                window.print();
+            }, 100);
+        }
+
+        function exportBOQ() {
+            if (!window.pricingData || !window.pricingData.materials) {
+                alert('No materials to export');
+                return;
+            }
+            
+            let csv = 'Item,Description,Quantity,Unit,Unit Cost,Total Cost,Margin %,Unit Sale,Total Sale\n';
+            
+            window.pricingData.materials.forEach((material, index) => {
+                csv += `${index + 1},"${material.title} - ${material.description}",${material.quantity},Each,${material.unitCost.toFixed(2)},${material.totalCost.toFixed(2)},${material.margin},${material.unitSale.toFixed(2)},${material.totalSale.toFixed(2)}\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'materials_boq.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
