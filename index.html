@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oracle Smart Pricing Tool - Current Development Limited</title>
+    <title>Oracle Smart Pricing Tool</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,18 +22,14 @@
             <div class="wizard-container">
                 <div class="wizard-header-section">
                     <h2>Project Configuration Wizard</h2>
-                    <p>Answer a few questions to get an intelligent, pre-configured quote</p>
+                    <p>Complete the form below to generate your intelligent quote</p>
                 </div>
 
-                <form id="projectWizard" class="wizard-form">
+                <!-- Single Page Form - No Steps -->
+                <form id="projectForm" class="wizard-form">
                     
-                    <!-- Step 1: Customer Information -->
-                    <div class="wizard-step active" id="step1">
-                        <div class="step-header">
-                            <span class="step-number">1</span>
-                            <h3>Customer Information</h3>
-                        </div>
-                        
+                    <div class="form-section">
+                        <h3>👤 Customer Information</h3>
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="customerName">Customer Name *</label>
@@ -62,17 +58,12 @@
                         </div>
                     </div>
 
-                    <!-- Step 2: Project Type & Requirements -->
-                    <div class="wizard-step" id="step2">
-                        <div class="step-header">
-                            <span class="step-number">2</span>
-                            <h3>Project Requirements</h3>
-                        </div>
-                        
+                    <div class="form-section">
+                        <h3>⚙️ System Requirements</h3>
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="projectType">Project Type *</label>
-                                <select id="projectType" name="projectType" required onchange="updatePreview()">
+                                <select id="projectType" name="projectType" required>
                                     <option value="">Select project type...</option>
                                     <option value="domestic">Domestic Installation</option>
                                     <option value="commercial">Commercial Installation</option>
@@ -81,8 +72,8 @@
                             </div>
                             
                             <div class="form-group">
-                                <label for="capacityRequired">Cooling Capacity Required (kW) *</label>
-                                <select id="capacityRequired" name="capacityRequired" required onchange="updatePreview()">
+                                <label for="capacityRequired">Cooling Capacity (kW) *</label>
+                                <select id="capacityRequired" name="capacityRequired" required>
                                     <option value="">Select capacity...</option>
                                     <option value="2.5">2.5kW (Small room/office)</option>
                                     <option value="3.5">3.5kW (Medium room/office)</option>
@@ -99,7 +90,7 @@
                             
                             <div class="form-group">
                                 <label for="indoorUnitType">Indoor Unit Type *</label>
-                                <select id="indoorUnitType" name="indoorUnitType" required onchange="updatePreview()">
+                                <select id="indoorUnitType" name="indoorUnitType" required>
                                     <option value="">Select unit type...</option>
                                     <option value="wall">Wall Mounted Split</option>
                                     <option value="floor">Floor Standing</option>
@@ -111,7 +102,7 @@
 
                             <div class="form-group">
                                 <label for="manufacturerPreference">Manufacturer Preference</label>
-                                <select id="manufacturerPreference" name="manufacturerPreference" onchange="updatePreview()">
+                                <select id="manufacturerPreference" name="manufacturerPreference">
                                     <option value="any">Any Manufacturer (Best Value)</option>
                                     <option value="mitsubishi">Mitsubishi Electric Preferred</option>
                                     <option value="daikin">Daikin Preferred</option>
@@ -122,7 +113,7 @@
                             
                             <div class="form-group">
                                 <label for="pipeRunDistance">Pipe Run Distance (meters) *</label>
-                                <select id="pipeRunDistance" name="pipeRunDistance" required onchange="updatePreview()">
+                                <select id="pipeRunDistance" name="pipeRunDistance" required>
                                     <option value="">Select distance...</option>
                                     <option value="5">Up to 5m (Very short run)</option>
                                     <option value="10">5-10m (Short run)</option>
@@ -147,13 +138,8 @@
                         </div>
                     </div>
 
-                    <!-- Step 3: Site Conditions -->
-                    <div class="wizard-step" id="step3">
-                        <div class="step-header">
-                            <span class="step-number">3</span>
-                            <h3>Site Conditions & Requirements</h3>
-                        </div>
-                        
+                    <div class="form-section">
+                        <h3>🏗️ Site Conditions</h3>
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="drainageOption">Condensate Drainage</label>
@@ -186,39 +172,6 @@
                                 </select>
                             </div>
                             
-                            <div class="form-group">
-                                <label for="workingHours">Preferred Working Hours</label>
-                                <select id="workingHours" name="workingHours">
-                                    <option value="standard">Standard hours (8am-5pm)</option>
-                                    <option value="early">Early start required</option>
-                                    <option value="evening">Evening work required</option>
-                                    <option value="weekend">Weekend work required</option>
-                                    <option value="out-of-hours">Out of hours premium</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group full-width">
-                                <label>Documentation Required</label>
-                                <div class="checkbox-group">
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="documentation" value="method-statement">
-                                        Method Statement
-                                    </label>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="documentation" value="risk-assessment">
-                                        Risk Assessment
-                                    </label>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="documentation" value="permit-to-work">
-                                        Permit to Work
-                                    </label>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="documentation" value="hot-works">
-                                        Hot Works Permit
-                                    </label>
-                                </div>
-                            </div>
-                            
                             <div class="form-group full-width">
                                 <label for="additionalNotes">Additional Notes / Special Requirements</label>
                                 <textarea id="additionalNotes" name="additionalNotes" rows="4" placeholder="Any specific requirements, constraints, or notes about the installation..."></textarea>
@@ -226,226 +179,96 @@
                         </div>
                     </div>
 
-                    <!-- Navigation Buttons -->
-                    <div class="wizard-navigation">
-                        <button type="button" id="prevBtn" class="nav-btn secondary" style="display: none;" onclick="wizardPrev()">← Previous</button>
-                        <button type="button" id="nextBtn" class="nav-btn primary" onclick="wizardNext()">Next →</button>
-                        <button type="button" id="generateQuote" class="nav-btn success" style="display: none;" onclick="generateQuote()">Generate Intelligent Quote →</button>
+                    <!-- Generate Quote Button -->
+                    <div class="generate-section">
+                        <button type="button" onclick="generateQuote()" class="generate-btn">
+                            🚀 Generate Intelligent Quote
+                        </button>
+                        <p class="help-text">Click above to create your professional quote and equipment selection</p>
                     </div>
 
-                    <!-- Progress Indicator -->
-                    <div class="progress-indicator">
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progressFill" style="width: 33%;"></div>
-                        </div>
-                        <div class="progress-steps">
-                            <span class="progress-step active">Customer Info</span>
-                            <span class="progress-step">Requirements</span>
-                            <span class="progress-step">Site Conditions</span>
-                        </div>
-                    </div>
                 </form>
-
-                <!-- System Intelligence Preview -->
-                <div class="intelligence-preview" id="intelligencePreview" style="display: none;">
-                    <h3>🧠 System Intelligence Preview</h3>
-                    <div class="preview-content">
-                        <div class="preview-section">
-                            <h4>Recommended Equipment:</h4>
-                            <p id="equipmentPreview">Select capacity and unit type to see recommendations...</p>
-                        </div>
-                        <div class="preview-section">
-                            <h4>Pipe Sizing:</h4>
-                            <p id="pipeSizingPreview">Select capacity to see pipe size recommendations...</p>
-                        </div>
-                        <div class="preview-section">
-                            <h4>Estimated Cable Tray:</h4>
-                            <p id="cableTrayPreview">Select pipe run distance for tray calculations...</p>
-                        </div>
-                        <div class="preview-section">
-                            <h4>Pre-Selected Materials:</h4>
-                            <p id="materialsPreview">Materials will be automatically calculated...</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </main>
     </div>
 
     <script>
-        var currentStep = 1;
-        var totalSteps = 3;
-        
-        function wizardNext() {
-            if (validateStep()) {
-                if (currentStep < totalSteps) {
-                    document.getElementById('step' + currentStep).classList.remove('active');
-                    currentStep++;
-                    document.getElementById('step' + currentStep).classList.add('active');
-                    updateNavigation();
-                    updateProgress();
-                    
-                    if (currentStep === 3) {
-                        document.getElementById('intelligencePreview').style.display = 'block';
-                        updatePreview();
-                    }
-                }
-            }
-        }
-        
-        function wizardPrev() {
-            if (currentStep > 1) {
-                document.getElementById('step' + currentStep).classList.remove('active');
-                currentStep--;
-                document.getElementById('step' + currentStep).classList.add('active');
-                updateNavigation();
-                updateProgress();
-                
-                if (currentStep < 3) {
-                    document.getElementById('intelligencePreview').style.display = 'none';
-                }
-            }
-        }
-        
-        function validateStep() {
-            var stepElement = document.getElementById('step' + currentStep);
-            var requiredFields = stepElement.querySelectorAll('[required]');
-            var isValid = true;
+        function generateQuote() {
+            alert('Generate Quote button clicked!');
             
-            for (var i = 0; i < requiredFields.length; i++) {
-                var field = requiredFields[i];
-                if (!field.value.trim()) {
-                    field.style.borderColor = '#FF3B30';
-                    isValid = false;
-                } else {
-                    field.style.borderColor = '';
-                }
-            }
-            
-            if (!isValid) {
-                alert('Please fill in all required fields before continuing.');
-            }
-            
-            return isValid;
-        }
-        
-        function updateNavigation() {
-            var prevBtn = document.getElementById('prevBtn');
-            var nextBtn = document.getElementById('nextBtn');
-            var generateBtn = document.getElementById('generateQuote');
-            
-            prevBtn.style.display = currentStep > 1 ? 'block' : 'none';
-            
-            if (currentStep === totalSteps) {
-                nextBtn.style.display = 'none';
-                generateBtn.style.display = 'block';
-            } else {
-                nextBtn.style.display = 'block';
-                generateBtn.style.display = 'none';
-            }
-        }
-        
-        function updateProgress() {
-            var progressFill = document.getElementById('progressFill');
-            var progressSteps = document.querySelectorAll('.progress-step');
-            
-            var progressPercent = (currentStep / totalSteps) * 100;
-            progressFill.style.width = progressPercent + '%';
-            
-            for (var i = 0; i < progressSteps.length; i++) {
-                if (i < currentStep) {
-                    progressSteps[i].classList.add('active');
-                } else {
-                    progressSteps[i].classList.remove('active');
-                }
-            }
-        }
-        
-        function updatePreview() {
+            // Validate required fields
+            var customerName = document.getElementById('customerName').value;
+            var customerAddress = document.getElementById('customerAddress').value;
+            var projectType = document.getElementById('projectType').value;
             var capacity = document.getElementById('capacityRequired').value;
             var unitType = document.getElementById('indoorUnitType').value;
-            var manufacturer = document.getElementById('manufacturerPreference').value;
-            var distance = document.getElementById('pipeRunDistance').value;
+            var pipeDistance = document.getElementById('pipeRunDistance').value;
             
-            if (capacity && unitType) {
-                var equipmentText = 'Equipment for ' + capacity + 'kW ' + formatUnitType(unitType);
-                if (manufacturer && manufacturer !== 'any') {
-                    equipmentText += ' - ' + formatManufacturer(manufacturer) + ' preferred';
-                }
-                document.getElementById('equipmentPreview').textContent = equipmentText;
+            if (!customerName || !customerAddress || !projectType || !capacity || !unitType || !pipeDistance) {
+                alert('Please fill in all required fields (marked with *)');
+                return;
             }
             
-            if (capacity) {
-                document.getElementById('pipeSizingPreview').textContent = getPipeSize(parseFloat(capacity));
-            }
+            alert('Validation passed! Collecting data...');
             
-            if (distance) {
-                var trayLengths = Math.ceil((parseInt(distance) + 5) / 3);
-                document.getElementById('cableTrayPreview').textContent = 'Auto-calculated: ' + trayLengths + ' × 3m cable tray lengths';
-            }
+            // Simple data collection
+            var projectData = {
+                customerName: customerName,
+                customerAddress: customerAddress,
+                projectName: document.getElementById('projectName').value,
+                contactPhone: document.getElementById('contactPhone').value,
+                contactEmail: document.getElementById('contactEmail').value,
+                projectType: projectType,
+                capacityRequired: capacity,
+                indoorUnitType: unitType,
+                manufacturerPreference: document.getElementById('manufacturerPreference').value,
+                pipeRunDistance: pipeDistance,
+                installationDifficulty: document.getElementById('installationDifficulty').value,
+                drainageOption: document.getElementById('drainageOption').value,
+                accessEquipment: document.getElementById('accessEquipment').value,
+                coreHoles: document.getElementById('coreHoles').value,
+                additionalNotes: document.getElementById('additionalNotes').value
+            };
             
-            if (capacity && distance) {
-                document.getElementById('materialsPreview').textContent = 'Materials automatically calculated for ' + capacity + 'kW system with ' + distance + 'm pipe run';
-            }
-        }
-        
-        function formatUnitType(type) {
-            if (type === 'wall') return 'Wall Mounted';
-            if (type === 'ceiling-cassette') return 'Ceiling Cassette';
-            if (type === 'floor') return 'Floor Standing';
-            if (type === 'ceiling-ducted') return 'Ceiling Ducted';
-            return type;
-        }
-        
-        function formatManufacturer(pref) {
-            if (pref === 'mitsubishi') return 'Mitsubishi Electric';
-            if (pref === 'daikin') return 'Daikin';
-            if (pref === 'fujitsu') return 'Fujitsu';
-            if (pref === 'mhi') return 'MHI';
-            return 'Any Manufacturer';
-        }
-        
-        function getPipeSize(capacity) {
-            if (capacity <= 3.5) return 'Auto-selected: 1/4" × 3/8" pre-insulated set (Max: 20m)';
-            if (capacity <= 5.0) return 'Auto-selected: 1/4" × 1/2" pre-insulated set (Max: 30m)';
-            if (capacity <= 7.1) return 'Auto-selected: 3/8" × 5/8" pre-insulated set (Max: 40m)';
-            if (capacity <= 10.0) return 'Auto-selected: 3/8" × 3/4" pre-insulated set (Max: 45m)';
-            return 'Auto-selected: 1/2" × 7/8" pre-insulated set (Max: 50m)';
-        }
-        
-        function generateQuote() {
-            if (validateStep()) {
-                var form = document.getElementById('projectWizard');
-                var formData = new FormData(form);
-                var projectData = {};
-                
-                var entries = Array.from(formData.entries());
-                for (var i = 0; i < entries.length; i++) {
-                    projectData[entries[i][0]] = entries[i][1];
-                }
-                
+            alert('Data collected successfully!');
+            
+            // Store data
+            try {
                 sessionStorage.setItem('oracleProjectData', JSON.stringify(projectData));
+                alert('Project data stored!');
                 
                 var intelligenceData = {
-                    capacity: parseFloat(projectData.capacityRequired),
-                    unitType: projectData.indoorUnitType,
-                    pipeDistance: parseInt(projectData.pipeRunDistance),
-                    projectType: projectData.projectType,
-                    manufacturerPref: projectData.manufacturerPreference,
-                    complexity: projectData.installationDifficulty,
-                    drainageOption: projectData.drainageOption,
-                    accessEquipment: projectData.accessEquipment,
-                    coreHoles: projectData.coreHoles
+                    capacity: parseFloat(capacity),
+                    unitType: unitType,
+                    pipeDistance: parseInt(pipeDistance),
+                    projectType: projectType,
+                    manufacturerPref: document.getElementById('manufacturerPreference').value
                 };
                 
                 sessionStorage.setItem('oracleIntelligenceData', JSON.stringify(intelligenceData));
+                alert('Intelligence data stored!');
                 
-                document.getElementById('generateQuote').textContent = 'Generating Intelligent Quote...';
-                document.getElementById('generateQuote').disabled = true;
+                // Test read back
+                var testData = sessionStorage.getItem('oracleProjectData');
+                if (testData) {
+                    alert('SUCCESS! Data verified. Redirecting to equipment page...');
+                    
+                    // Change button text
+                    var btn = document.querySelector('.generate-btn');
+                    btn.textContent = 'Redirecting to Equipment Selection...';
+                    btn.disabled = true;
+                    
+                    // Redirect after 2 seconds
+                    setTimeout(function() {
+                        window.location.href = 'equipment.html';
+                    }, 2000);
+                    
+                } else {
+                    alert('ERROR: Could not verify data storage');
+                }
                 
-                setTimeout(function() {
-                    window.location.href = 'equipment.html';
-                }, 1500);
+            } catch (error) {
+                alert('ERROR storing data: ' + error.message);
             }
         }
     </script>
@@ -463,6 +286,53 @@
             font-size: 1.2rem;
             color: #00A651;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-section {
+            margin: 30px 0;
+            padding: 25px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            border-left: 4px solid #00A651;
+        }
+        
+        .form-section h3 {
+            color: #00A651;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .generate-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, #00A651, #008B44);
+            border-radius: 20px;
+            color: white;
+        }
+        
+        .generate-btn {
+            background: white;
+            color: #00A651;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .help-text {
+            margin-top: 15px;
+            opacity: 0.9;
+            font-size: 1rem;
         }
     </style>
 </body>
