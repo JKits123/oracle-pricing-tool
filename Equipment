@@ -1,1 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Selection - Oracle Smart Pricing Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Oracle Smart Pricing Tool</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="equipment.html" class="active">Equipment</a>
+                <a href="materials.html">Materials</a>
+                <a href="labour.html">Labour</a>
+                <a href="hire.html">Hire</a>
+                <a href="summary.html">Summary</a>
+            </nav>
+        </header>
 
+        <main>
+            <div class="section-header">
+                <h2>Equipment Selection</h2>
+                <div class="legend">
+                    <span class="cost-indicator">Cost Prices</span>
+                    <span class="profit-indicator">GP%</span>
+                    <span class="sale-indicator">Sale Prices</span>
+                </div>
+            </div>
+
+            <!-- Global Margin Controls -->
+            <div class="margin-controls">
+                <h3>Global Margin Settings</h3>
+                <div class="margin-grid">
+                    <div class="margin-item">
+                        <label>Domestic Margin %:</label>
+                        <input type="number" id="domesticMargin" value="45" min="0" max="100" step="0.5">
+                    </div>
+                    <div class="margin-item">
+                        <label>Commercial Margin %:</label>
+                        <input type="number" id="commercialMargin" value="35" min="0" max="100" step="0.5">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mitsubishi Electric Section -->
+            <div class="manufacturer-section">
+                <h3>Mitsubishi Electric</h3>
+                
+                <!-- M Series (Domestic) -->
+                <div class="product-range domestic">
+                    <h4>M Series <span class="range-type">(Domestic)</span></h4>
+                    <div class="equipment-grid">
+                        <div class="equipment-item" data-capacity="2.5" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>MSZ-AP25VG</h5>
+                                <p>2.5kW Split System</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£850</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£1,233</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="3.5" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>MSZ-AP35VG</h5>
+                                <p>3.5kW Split System</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£950</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£1,378</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="5.0" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>MSZ-AP50VG</h5>
+                                <p>5.0kW Split System</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,150</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£1,668</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="6.0" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>MSZ-AP60VG</h5>
+                                <p>6.0kW Split System</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,350</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£1,958</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="7.1" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>MSZ-AP71VG</h5>
+                                <p>7.1kW Split System</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,550</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£2,248</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="9.0" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>MSZ-AP90VG</h5>
+                                <p>9.0kW Split System</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,850</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£2,683</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mr Slim (Commercial) -->
+                <div class="product-range commercial">
+                    <h4>Mr Slim <span class="range-type">(Commercial)</span></h4>
+                    <div class="equipment-grid">
+                        <div class="equipment-item" data-capacity="2.5" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>MSZ-SF25VE3</h5>
+                                <p>2.5kW Multi-Split</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,050</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£1,418</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="3.5" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>MSZ-SF35VE3</h5>
+                                <p>3.5kW Multi-Split</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,200</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£1,620</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="5.0" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>MSZ-SF50VE3</h5>
+                                <p>5.0kW Multi-Split</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,450</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£1,958</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="7.1" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>MSZ-SF71VE3</h5>
+                                <p>7.1kW Multi-Split</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,750</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£2,363</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="9.0" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>MSZ-SF90VE3</h5>
+                                <p>9.0kW Multi-Split</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£2,100</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£2,835</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="12.0" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>MSZ-SF120VE3</h5>
+                                <p>12.0kW Multi-Split</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£2,650</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£3,578</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daikin Section -->
+            <div class="manufacturer-section">
+                <h3>Daikin</h3>
+                
+                <!-- Standard Range (Domestic) -->
+                <div class="product-range domestic">
+                    <h4>Standard Range <span class="range-type">(Domestic)</span></h4>
+                    <div class="equipment-grid">
+                        <div class="equipment-item" data-capacity="2.5" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>FTXM25M</h5>
+                                <p>2.5kW Sensira Split</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£820</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£1,189</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="3.5" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>FTXM35M</h5>
+                                <p>3.5kW Sensira Split</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£920</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£1,334</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="5.0" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>FTXM50M</h5>
+                                <p>5.0kW Sensira Split</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,100</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£1,595</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="6.0" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>FTXM60M</h5>
+                                <p>6.0kW Sensira Split</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,300</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£1,885</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="7.1" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>FTXM71M</h5>
+                                <p>7.1kW Sensira Split</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,500</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£2,175</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sky Air (Commercial) -->
+                <div class="product-range commercial">
+                    <h4>Sky Air <span class="range-type">(Commercial)</span></h4>
+                    <div class="equipment-grid">
+                        <div class="equipment-item" data-capacity="3.5" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>FXS35F</h5>
+                                <p>3.5kW VRV System</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,350</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£1,823</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="5.0" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>FXS50F</h5>
+                                <p>5.0kW VRV System</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,650</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£2,228</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="7.1" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>FXS71F</h5>
+                                <p>7.1kW VRV System</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£2,100</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£2,835</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="10.0" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>FXS100F</h5>
+                                <p>10.0kW VRV System</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£2,800</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£3,780</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="12.5" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>FXS125F</h5>
+                                <p>12.5kW VRV System</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£3,400</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£4,590</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="14.0" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>FXS140F</h5>
+                                <p>14.0kW VRV System</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£3,800</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£5,130</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MHI Section -->
+            <div class="manufacturer-section">
+                <h3>MHI (Mitsubishi Heavy Industries)</h3>
+                
+                <!-- RAC (Room Air Conditioners) -->
+                <div class="product-range mixed">
+                    <h4>RAC <span class="range-type">(Mixed Application)</span></h4>
+                    <div class="equipment-grid">
+                        <div class="equipment-item" data-capacity="2.5" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>SRK25ZS-S</h5>
+                                <p>2.5kW Room Unit</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£780</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£1,131</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="3.5" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>SRK35ZS-S</h5>
+                                <p>3.5kW Room Unit</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£880</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£1,276</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="5.0" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>SRK50ZS-S</h5>
+                                <p>5.0kW Room Unit</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,050</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£1,523</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="6.0" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>SRK60ZS-S</h5>
+                                <p>6.0kW Room Unit</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,250</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£1,813</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="7.1" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>SRK71ZS-S</h5>
+                                <p>7.1kW Room Unit</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,450</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£2,103</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAC (Packaged Air Conditioners) -->
+                <div class="product-range commercial">
+                    <h4>PAC <span class="range-type">(Commercial)</span></h4>
+                    <div class="equipment-grid">
+                        <div class="equipment-item" data-capacity="5.0" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>FDC50VNX</h5>
+                                <p>5.0kW Package Unit</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,800</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£2,430</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="7.1" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>FDC71VNX</h5>
+                                <p>7.1kW Package Unit</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£2,200</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£2,970</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="10.0" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>FDC100VNX</h5>
+                                <p>10.0kW Package Unit</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£3,200</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£4,320</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="12.5" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>FDC125VNX</h5>
+                                <p>12.5kW Package Unit</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£3,800</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£5,130</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="16.0" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>FDC160VNX</h5>
+                                <p>16.0kW Package Unit</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£4,500</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£6,075</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fujitsu Section -->
+            <div class="manufacturer-section">
+                <h3>Fujitsu</h3>
+                
+                <!-- Split Systems (Domestic) -->
+                <div class="product-range domestic">
+                    <h4>Split Systems <span class="range-type">(Domestic)</span></h4>
+                    <div class="equipment-grid">
+                        <div class="equipment-item" data-capacity="2.5" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>ASYG09KETA</h5>
+                                <p>2.5kW Classic Split</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£790</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£1,146</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="3.5" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>ASYG12KETA</h5>
+                                <p>3.5kW Classic Split</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£890</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£1,291</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="5.0" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>ASYG18KETA</h5>
+                                <p>5.0kW Classic Split</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,080</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£1,566</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="6.0" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>ASYG24KETA</h5>
+                                <p>6.0kW Classic Split</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,280</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£1,856</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="7.1" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>ASYG30KETA</h5>
+                                <p>7.1kW Classic Split</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,480</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£2,146</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="9.0" data-type="domestic">
+                            <div class="equipment-info">
+                                <h5>ASYG36KETA</h5>
+                                <p>9.0kW Classic Split</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£1,750</span>
+                                <span class="margin">45%</span>
+                                <span class="sale">£2,538</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Air Stage (Commercial) -->
+                <div class="product-range commercial">
+                    <h4>Air Stage <span class="range-type">(Commercial 10kW+)</span></h4>
+                    <div class="equipment-grid">
+                        <div class="equipment-item" data-capacity="10.0" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>AOYG36LATT</h5>
+                                <p>10.0kW Heat Pump</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£3,500</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£4,725</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="11.2" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>AOYG40LATT</h5>
+                                <p>11.2kW Heat Pump</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£3,800</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£5,130</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="12.5" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>AOYG45LATT</h5>
+                                <p>12.5kW Heat Pump</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£4,200</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£5,670</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="14.0" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>AOYG50LATT</h5>
+                                <p>14.0kW Heat Pump</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£4,600</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£6,210</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+
+                        <div class="equipment-item" data-capacity="16.0" data-type="commercial">
+                            <div class="equipment-info">
+                                <h5>AOYG56LATT</h5>
+                                <p>16.0kW Heat Pump</p>
+                            </div>
+                            <div class="pricing">
+                                <span class="cost">£5,200</span>
+                                <span class="margin">35%</span>
+                                <span class="sale">£7,020</span>
+                            </div>
+                            <button class="select-btn">Select</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Selection Summary -->
+            <div class="selection-summary">
+                <h3>Selected Equipment</h3>
+                <div id="selectedEquipment" class="selected-items">
+                    <p>No equipment selected yet.</p>
+                </div>
+                <div class="summary-totals">
+                    <div class="total-row">
+                        <span>Total Cost:</span>
+                        <span id="totalCost" class="cost">£0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Average Margin:</span>
+                        <span id="avgMargin" class="profit">0%</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Total Sale Price:</span>
+                        <span id="totalSale" class="sale">£0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="section-navigation">
+                <button class="nav-btn secondary" onclick="window.location.href='index.html'">← Back to Home</button>
+                <button class="nav-btn primary" onclick="window.location.href='materials.html'">Continue to Materials →</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script>
+        // Equipment-specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize equipment page
+            initializeEquipmentPage();
+        });
+
+        function initializeEquipmentPage() {
+            // Add event listeners for margin changes
+            document.getElementById('domesticMargin').addEventListener('input', updateDomesticMargins);
+            document.getElementById('commercialMargin').addEventListener('input', updateCommercialMargins);
+            
+            // Add event listeners for equipment selection
+            const selectButtons = document.querySelectorAll('.select-btn');
+            selectButtons.forEach(button => {
+                button.addEventListener('click', selectEquipment);
+            });
+        }
+
+        function updateDomesticMargins() {
+            const newMargin = parseFloat(document.getElementById('domesticMargin').value);
+            const domesticItems = document.querySelectorAll('[data-type="domestic"]');
+            
+            domesticItems.forEach(item => {
+                updateEquipmentPricing(item, newMargin);
+            });
+        }
+
+        function updateCommercialMargins() {
+            const newMargin = parseFloat(document.getElementById('commercialMargin').value);
+            const commercialItems = document.querySelectorAll('[data-type="commercial"]');
+            
+            commercialItems.forEach(item => {
+                updateEquipmentPricing(item, newMargin);
+            });
+        }
+
+        function updateEquipmentPricing(item, margin) {
+            const costElement = item.querySelector('.cost');
+            const marginElement = item.querySelector('.margin');
+            const saleElement = item.querySelector('.sale');
+            
+            const cost = parseFloat(costElement.textContent.replace('£', '').replace(',', ''));
+            const salePrice = cost * (1 + margin / 100);
+            
+            marginElement.textContent = margin + '%';
+            saleElement.textContent = '£' + salePrice.toLocaleString('en-GB', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+        }
+
+        function selectEquipment(event) {
+            const button = event.target;
+            const equipmentItem = button.closest('.equipment-item');
+            const isSelected = button.classList.contains('selected');
+            
+            if (isSelected) {
+                // Deselect
+                button.classList.remove('selected');
+                button.textContent = 'Select';
+                removeFromSelection(equipmentItem);
+            } else {
+                // Select
+                button.classList.add('selected');
+                button.textContent = 'Selected';
+                addToSelection(equipmentItem);
+            }
+            
+            updateSelectionSummary();
+        }
+
+        function addToSelection(equipmentItem) {
+            const capacity = equipmentItem.dataset.capacity;
+            const type = equipmentItem.dataset.type;
+            const title = equipmentItem.querySelector('h5').textContent;
+            const description = equipmentItem.querySelector('p').textContent;
+            const cost = equipmentItem.querySelector('.cost').textContent;
+            const margin = equipmentItem.querySelector('.margin').textContent;
+            const sale = equipmentItem.querySelector('.sale').textContent;
+            
+            // Store in session data
+            if (!window.pricingData) {
+                window.pricingData = {};
+            }
+            if (!window.pricingData.equipment) {
+                window.pricingData.equipment = [];
+            }
+            
+            window.pricingData.equipment.push({
+                id: title,
+                title: title,
+                description: description,
+                capacity: capacity,
+                type: type,
+                cost: cost,
+                margin: margin,
+                sale: sale
+            });
+        }
+
+        function removeFromSelection(equipmentItem) {
+            const title = equipmentItem.querySelector('h5').textContent;
+            
+            if (window.pricingData && window.pricingData.equipment) {
+                window.pricingData.equipment = window.pricingData.equipment.filter(item => item.id !== title);
+            }
+        }
+
+        function updateSelectionSummary() {
+            const selectedContainer = document.getElementById('selectedEquipment');
+            const totalCostElement = document.getElementById('totalCost');
+            const avgMarginElement = document.getElementById('avgMargin');
+            const totalSaleElement = document.getElementById('totalSale');
+            
+            if (!window.pricingData || !window.pricingData.equipment || window.pricingData.equipment.length === 0) {
+                selectedContainer.innerHTML = '<p>No equipment selected yet.</p>';
+                totalCostElement.textContent = '£0.00';
+                avgMarginElement.textContent = '0%';
+                totalSaleElement.textContent = '£0.00';
+                return;
+            }
+            
+            let totalCost = 0;
+            let totalSale = 0;
+            let totalMargin = 0;
+            
+            let html = '';
+            window.pricingData.equipment.forEach(item => {
+                const cost = parseFloat(item.cost.replace('£', '').replace(',', ''));
+                const sale = parseFloat(item.sale.replace('£', '').replace(',', ''));
+                const margin = parseFloat(item.margin.replace('%', ''));
+                
+                totalCost += cost;
+                totalSale += sale;
+                totalMargin += margin;
+                
+                html += `
+                    <div class="selected-item">
+                        <div class="item-info">
+                            <strong>${item.title}</strong>
+                            <span>${item.description}</span>
+                        </div>
+                        <div class="item-pricing">
+                            <span class="cost">${item.cost}</span>
+                            <span class="profit">${item.margin}</span>
+                            <span class="sale">${item.sale}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            selectedContainer.innerHTML = html;
+            
+            const avgMargin = window.pricingData.equipment.length > 0 ? 
+                totalMargin / window.pricingData.equipment.length : 0;
+            
+            totalCostElement.textContent = '£' + totalCost.toLocaleString('en-GB', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+            
+            avgMarginElement.textContent = avgMargin.toFixed(1) + '%';
+            
+            totalSaleElement.textContent = '£' + totalSale.toLocaleString('en-GB', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+    </script>
+</body>
+</html>
