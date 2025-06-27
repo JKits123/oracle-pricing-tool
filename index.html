@@ -3,509 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oracle Smart Pricing Tool - Current Development Limited</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Oracle Smart Pricing Tool - Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .wizard-step { display: none; padding: 20px; border: 2px solid #00A651; margin: 20px 0; }
+        .wizard-step.active { display: block; }
+        .form-group { margin: 15px 0; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select, textarea { width: 100%; padding: 10px; margin-bottom: 10px; }
+        button { padding: 15px 25px; margin: 10px; background: #00A651; color: white; border: none; cursor: pointer; }
+        button:hover { background: #008B44; }
+        .error { border: 2px solid red !important; }
+        .debug { background: #f0f0f0; padding: 10px; margin: 10px 0; }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header class="wizard-header">
-            <div class="logo-section">
-                <div class="company-logo-placeholder">CDL</div>
-                <div class="tool-title">
-                    <h1>Oracle Smart Pricing Tool</h1>
-                    <p>Intelligent Air Conditioning System Pricing</p>
-                </div>
-            </div>
-        </header>
-
-        <main class="wizard-main">
-            <div class="wizard-container">
-                <div class="wizard-header-section">
-                    <h2>Project Configuration Wizard</h2>
-                    <p>Answer a few questions to get an intelligent, pre-configured quote</p>
-                </div>
-
-                <form id="projectWizard" class="wizard-form">
-                    
-                    <!-- Step 1: Customer Information -->
-                    <div class="wizard-step active" id="step1">
-                        <div class="step-header">
-                            <span class="step-number">1</span>
-                            <h3>Customer Information</h3>
-                        </div>
-                        
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="customerName">Customer Name *</label>
-                                <input type="text" id="customerName" name="customerName" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="projectName">Project Name</label>
-                                <input type="text" id="projectName" name="projectName" placeholder="e.g., Office Air Con Installation">
-                            </div>
-                            
-                            <div class="form-group full-width">
-                                <label for="customerAddress">Installation Address *</label>
-                                <textarea id="customerAddress" name="customerAddress" rows="3" required></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="contactPhone">Contact Phone</label>
-                                <input type="tel" id="contactPhone" name="contactPhone">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="contactEmail">Contact Email</label>
-                                <input type="email" id="contactEmail" name="contactEmail">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Step 2: Project Type & Requirements -->
-                    <div class="wizard-step" id="step2">
-                        <div class="step-header">
-                            <span class="step-number">2</span>
-                            <h3>Project Requirements</h3>
-                        </div>
-                        
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="projectType">Project Type *</label>
-                                <select id="projectType" name="projectType" required>
-                                    <option value="">Select project type...</option>
-                                    <option value="domestic">Domestic Installation</option>
-                                    <option value="commercial">Commercial Installation</option>
-                                    <option value="mixed">Mixed Use</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="capacityRequired">Cooling Capacity Required (kW) *</label>
-                                <select id="capacityRequired" name="capacityRequired" required>
-                                    <option value="">Select capacity...</option>
-                                    <option value="2.5">2.5kW (Small room/office)</option>
-                                    <option value="3.5">3.5kW (Medium room/office)</option>
-                                    <option value="5.0">5.0kW (Large room/small office)</option>
-                                    <option value="6.0">6.0kW (Large room/medium office)</option>
-                                    <option value="7.1">7.1kW (Very large room/office)</option>
-                                    <option value="9.0">9.0kW (Small commercial space)</option>
-                                    <option value="10.0">10.0kW (Medium commercial space)</option>
-                                    <option value="12.0">12.0kW (Large commercial space)</option>
-                                    <option value="14.0">14.0kW (Very large commercial)</option>
-                                    <option value="16.0">16.0kW (Industrial application)</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="indoorUnitType">Indoor Unit Type *</label>
-                                <select id="indoorUnitType" name="indoorUnitType" required>
-                                    <option value="">Select unit type...</option>
-                                    <option value="wall">Wall Mounted Split</option>
-                                    <option value="floor">Floor Standing</option>
-                                    <option value="ceiling-cassette">Ceiling Cassette (4-way)</option>
-                                    <option value="ceiling-ducted">Ceiling Ducted</option>
-                                    <option value="multi-split">Multi-Split System</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="manufacturerPreference">Manufacturer Preference</label>
-                                <select id="manufacturerPreference" name="manufacturerPreference">
-                                    <option value="any">Any Manufacturer (Best Value)</option>
-                                    <option value="mitsubishi">Mitsubishi Electric Preferred</option>
-                                    <option value="daikin">Daikin Preferred</option>
-                                    <option value="fujitsu">Fujitsu Preferred</option>
-                                    <option value="mhi">MHI Preferred</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="pipeRunDistance">Pipe Run Distance (meters) *</label>
-                                <select id="pipeRunDistance" name="pipeRunDistance" required>
-                                    <option value="">Select distance...</option>
-                                    <option value="5">Up to 5m (Very short run)</option>
-                                    <option value="10">5-10m (Short run)</option>
-                                    <option value="15">10-15m (Medium run)</option>
-                                    <option value="20">15-20m (Long run)</option>
-                                    <option value="25">20-25m (Very long run)</option>
-                                    <option value="30">25-30m (Extended run)</option>
-                                    <option value="40">30-40m (Commercial long run)</option>
-                                    <option value="50">40-50m (Maximum run)</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="installationDifficulty">Installation Complexity</label>
-                                <select id="installationDifficulty" name="installationDifficulty">
-                                    <option value="standard">Standard (Easy access, ground floor)</option>
-                                    <option value="moderate">Moderate (Some height work, normal access)</option>
-                                    <option value="difficult">Difficult (High access, tight spaces)</option>
-                                    <option value="complex">Complex (Specialist access, multiple obstacles)</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Step 3: Site Conditions -->
-                    <div class="wizard-step" id="step3">
-                        <div class="step-header">
-                            <span class="step-number">3</span>
-                            <h3>Site Conditions & Requirements</h3>
-                        </div>
-                        
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="drainageOption">Condensate Drainage</label>
-                                <select id="drainageOption" name="drainageOption">
-                                    <option value="gravity">Gravity drainage (downhill to outside)</option>
-                                    <option value="pump-required">Condensate pump required</option>
-                                    <option value="external-only">External drainage only</option>
-                                    <option value="assessment-needed">Assessment required</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="accessEquipment">Access Equipment Required</label>
-                                <select id="accessEquipment" name="accessEquipment">
-                                    <option value="none">No special access required</option>
-                                    <option value="ladders">Extension ladders sufficient</option>
-                                    <option value="scaffold">Mobile scaffold required</option>
-                                    <option value="cherry-picker">Cherry picker required</option>
-                                    <option value="specialist">Specialist access required</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="coreHoles">Core Drilling Required</label>
-                                <select id="coreHoles" name="coreHoles">
-                                    <option value="none">No core drilling</option>
-                                    <option value="small">1-2 small holes (110mm)</option>
-                                    <option value="medium">2-3 medium holes (150mm)</option>
-                                    <option value="large">Large holes or multiple (200mm+)</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="workingHours">Preferred Working Hours</label>
-                                <select id="workingHours" name="workingHours">
-                                    <option value="standard">Standard hours (8am-5pm)</option>
-                                    <option value="early">Early start required</option>
-                                    <option value="evening">Evening work required</option>
-                                    <option value="weekend">Weekend work required</option>
-                                    <option value="out-of-hours">Out of hours premium</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group full-width">
-                                <label>Documentation Required</label>
-                                <div class="checkbox-group">
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="documentation" value="method-statement">
-                                        Method Statement
-                                    </label>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="documentation" value="risk-assessment">
-                                        Risk Assessment
-                                    </label>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="documentation" value="permit-to-work">
-                                        Permit to Work
-                                    </label>
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" name="documentation" value="hot-works">
-                                        Hot Works Permit
-                                    </label>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group full-width">
-                                <label for="additionalNotes">Additional Notes / Special Requirements</label>
-                                <textarea id="additionalNotes" name="additionalNotes" rows="4" placeholder="Any specific requirements, constraints, or notes about the installation..."></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Navigation Buttons -->
-                    <div class="wizard-navigation">
-                        <button type="button" id="prevBtn" class="nav-btn secondary" style="display: none;">← Previous</button>
-                        <button type="button" id="nextBtn" class="nav-btn primary">Next →</button>
-                        <button type="button" id="generateQuote" class="nav-btn success" style="display: none;">Generate Intelligent Quote →</button>
-                    </div>
-
-                    <!-- Progress Indicator -->
-                    <div class="progress-indicator">
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progressFill"></div>
-                        </div>
-                        <div class="progress-steps">
-                            <span class="progress-step active">Customer Info</span>
-                            <span class="progress-step">Requirements</span>
-                            <span class="progress-step">Site Conditions</span>
-                        </div>
-                    </div>
-                </form>
-
-                <!-- System Intelligence Preview -->
-                <div class="intelligence-preview" id="intelligencePreview" style="display: none;">
-                    <h3>🧠 System Intelligence Preview</h3>
-                    <div class="preview-content">
-                        <div class="preview-section">
-                            <h4>Recommended Equipment:</h4>
-                            <p id="equipmentPreview">Select capacity and unit type to see recommendations...</p>
-                        </div>
-                        <div class="preview-section">
-                            <h4>Pipe Sizing:</h4>
-                            <p id="pipeSizingPreview">Select capacity to see pipe size recommendations...</p>
-                        </div>
-                        <div class="preview-section">
-                            <h4>Estimated Cable Tray:</h4>
-                            <p id="cableTrayPreview">Select pipe run distance for tray calculations...</p>
-                        </div>
-                        <div class="preview-section">
-                            <h4>Pre-Selected Materials:</h4>
-                            <p id="materialsPreview">Materials will be automatically calculated...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+    <h1>Oracle Smart Pricing Tool - Test Version</h1>
+    
+    <div class="debug" id="debugInfo">
+        <strong>Debug Info:</strong> Page loaded, waiting for user interaction...
     </div>
 
+    <form id="testWizard">
+        <!-- Step 1 -->
+        <div class="wizard-step active" id="step1">
+            <h2>Step 1: Basic Info</h2>
+            <div class="form-group">
+                <label for="customerName">Customer Name (Required):</label>
+                <input type="text" id="customerName" name="customerName" required>
+            </div>
+            <div class="form-group">
+                <label for="customerAddress">Address (Required):</label>
+                <textarea id="customerAddress" name="customerAddress" required></textarea>
+            </div>
+            <button type="button" onclick="testNext()">NEXT TEST</button>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="wizard-step" id="step2">
+            <h2>Step 2: Requirements</h2>
+            <div class="form-group">
+                <label for="capacity">Capacity:</label>
+                <select id="capacity" name="capacity" required>
+                    <option value="">Select...</option>
+                    <option value="5.0">5.0kW</option>
+                    <option value="7.1">7.1kW</option>
+                </select>
+            </div>
+            <button type="button" onclick="testPrev()">PREVIOUS</button>
+            <button type="button" onclick="testFinish()">FINISH TEST</button>
+        </div>
+    </form>
+
     <script>
-        console.log('Script loading...');
+        console.log('=== MINIMAL TEST SCRIPT LOADED ===');
         
-        // Wizard functionality - Clean version
         let currentStep = 1;
-        const totalSteps = 3;
-
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM loaded, initializing wizard...');
-            initializeWizard();
-        });
-
-        function initializeWizard() {
-            console.log('Wizard initializing...');
-            
-            // Add event listeners for navigation
-            const nextBtn = document.getElementById('nextBtn');
-            const prevBtn = document.getElementById('prevBtn');
-            const generateBtn = document.getElementById('generateQuote');
-            
-            if (nextBtn) {
-                nextBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    console.log('Next button clicked');
-                    nextStep();
-                });
-                console.log('Next button listener added');
-            } else {
-                console.error('Next button not found');
-            }
-            
-            if (prevBtn) {
-                prevBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    console.log('Previous button clicked');
-                    prevStep();
-                });
-            }
-            
-            if (generateBtn) {
-                generateBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    console.log('Generate quote clicked');
-                    generateQuote();
-                });
-            }
-            
-            // Add event listeners for intelligence preview
-            const selects = ['capacityRequired', 'indoorUnitType', 'pipeRunDistance', 'projectType', 'manufacturerPreference'];
-            selects.forEach(selectId => {
-                const element = document.getElementById(selectId);
-                if (element) {
-                    element.addEventListener('change', function(e) {
-                        updateIntelligencePreview();
-                    });
-                }
-            });
-            
-            updateProgressBar();
-            console.log('Wizard initialized successfully');
-        }
-
-        function nextStep() {
-            console.log('nextStep called, current step:', currentStep);
-            
-            if (validateCurrentStep()) {
-                if (currentStep < totalSteps) {
-                    // Hide current step
-                    document.getElementById('step' + currentStep).classList.remove('active');
-                    
-                    // Show next step
-                    currentStep++;
-                    document.getElementById('step' + currentStep).classList.add('active');
-                    
-                    updateNavigation();
-                    updateProgressBar();
-                    
-                    // Show intelligence preview on final step
-                    if (currentStep === totalSteps) {
-                        document.getElementById('intelligencePreview').style.display = 'block';
-                        updateIntelligencePreview();
-                    }
-                    
-                    console.log('Advanced to step:', currentStep);
-                }
-            }
-        }
-
-        function prevStep() {
-            if (currentStep > 1) {
-                // Hide current step
-                document.getElementById('step' + currentStep).classList.remove('active');
-                
-                // Show previous step
-                currentStep--;
-                document.getElementById('step' + currentStep).classList.add('active');
-                
-                updateNavigation();
-                updateProgressBar();
-                
-                // Hide intelligence preview
-                if (currentStep < totalSteps) {
-                    document.getElementById('intelligencePreview').style.display = 'none';
-                }
-            }
-        }
-
-        function updateNavigation() {
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const generateBtn = document.getElementById('generateQuote');
-            
-            // Show/hide previous button
-            prevBtn.style.display = currentStep > 1 ? 'block' : 'none';
-            
-            // Show/hide next vs generate button
-            if (currentStep === totalSteps) {
-                nextBtn.style.display = 'none';
-                generateBtn.style.display = 'block';
-            } else {
-                nextBtn.style.display = 'block';
-                generateBtn.style.display = 'none';
-            }
-        }
-
-        function updateProgressBar() {
-            const progressFill = document.getElementById('progressFill');
-            const progressSteps = document.querySelectorAll('.progress-step');
-            
-            // Update progress bar
-            const progressPercent = (currentStep / totalSteps) * 100;
-            progressFill.style.width = progressPercent + '%';
-            
-            // Update step indicators
-            progressSteps.forEach(function(step, index) {
-                if (index < currentStep) {
-                    step.classList.add('active');
-                } else {
-                    step.classList.remove('active');
-                }
-            });
-        }
-
-        function validateCurrentStep() {
-            const currentStepElement = document.getElementById('step' + currentStep);
-            const requiredFields = currentStepElement.querySelectorAll('[required]');
-            
-            let isValid = true;
-            for (let i = 0; i < requiredFields.length; i++) {
-                const field = requiredFields[i];
-                if (!field.value.trim()) {
-                    field.classList.add('error');
-                    isValid = false;
-                } else {
-                    field.classList.remove('error');
-                }
-            }
-            
-            if (!isValid) {
-                alert('Please fill in all required fields before continuing.');
-            }
-            
-            return isValid;
-        }
-
-        function updateIntelligencePreview() {
-            // Simple preview update - will add full functionality later
-            const capacity = document.getElementById('capacityRequired').value;
-            const unitType = document.getElementById('indoorUnitType').value;
-            
-            if (capacity && unitType) {
-                const preview = document.getElementById('equipmentPreview');
-                if (preview) {
-                    preview.textContent = 'Equipment recommendations for ' + capacity + 'kW ' + unitType + ' unit';
-                }
-            }
-        }
-
-        function generateQuote() {
-            if (validateCurrentStep()) {
-                // Collect form data
-                const form = document.getElementById('projectWizard');
-                const formData = new FormData(form);
-                const projectData = {};
-                
-                // Convert FormData to object
-                for (let pair of formData.entries()) {
-                    projectData[pair[0]] = pair[1];
-                }
-                
-                // Store in sessionStorage
-                sessionStorage.setItem('oracleProjectData', JSON.stringify(projectData));
-                
-                const intelligenceData = {
-                    capacity: parseFloat(projectData.capacityRequired),
-                    unitType: projectData.indoorUnitType,
-                    pipeDistance: parseInt(projectData.pipeRunDistance),
-                    projectType: projectData.projectType,
-                    manufacturerPref: projectData.manufacturerPreference
-                };
-                
-                sessionStorage.setItem('oracleIntelligenceData', JSON.stringify(intelligenceData));
-                
-                // Show loading state
-                document.getElementById('generateQuote').textContent = 'Generating Quote...';
-                
-                // Redirect after delay
-                setTimeout(function() {
-                    window.location.href = 'equipment.html';
-                }, 1000);
-            }
-        }
-    </script>
-
-    <style>
-        .company-logo-placeholder {
-            width: 80px;
-            height: 80px;
-            background: var(--white);
-            border-radius: var(--border-radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: var(--primary-green);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        
+        function updateDebug(message) {
+            const debug = document.getElementById('debugInfo');
+            debug.innerHTML = '<strong>Debug Info:</strong> ' + message;
+            console.log('DEBUG: ' + message);
         }
         
-        .form-group input.error,
-        .form-group select.error {
-            border-color: #FF3B30;
-            box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.1);
+        function testNext() {
+            updateDebug('testNext() function called');
+            
+            // Check required fields
+            const customerName = document.getElementById('customerName').value;
+            const customerAddress = document.getElementById('customerAddress').value;
+            
+            updateDebug('Customer Name: "' + customerName + '", Address: "' + customerAddress + '"');
+            
+            if (!customerName.trim() || !customerAddress.trim()) {
+                updateDebug('VALIDATION FAILED - Missing required fields');
+                alert('Please fill in both Customer Name and Address');
+                return;
+            }
+            
+            updateDebug('Validation passed, advancing to step 2');
+            
+            // Hide step 1
+            document.getElementById('step1').classList.remove('active');
+            
+            // Show step 2
+            document.getElementById('step2').classList.add('active');
+            
+            currentStep = 2;
+            updateDebug('Successfully advanced to step 2');
         }
-    </style>
+        
+        function testPrev() {
+            updateDebug('Going back to step 1');
+            
+            // Hide step 2
+            document.getElementById('step2').classList.remove('active');
+            
+            // Show step 1
+            document.getElementById('step1').classList.add('active');
+            
+            currentStep = 1;
+            updateDebug('Back to step 1');
+        }
+        
+        function testFinish() {
+            updateDebug('Test completed successfully!');
+            alert('Test wizard completed! Next button is working.');
+        }
+        
+        // Test if script is working
+        updateDebug('JavaScript is working correctly');
+    </script>
 </body>
 </html>
