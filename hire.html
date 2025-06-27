@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hire & Prelims - Oracle Smart Pricing Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Oracle Smart Pricing Tool</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="equipment.html">Equipment</a>
+                <a href="materials.html">Materials</a>
+                <a href="labour.html">Labour</a>
+                <a href="hire.html" class="active">Hire</a>
+                <a href="summary.html">Summary</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="section-header">
+                <h2>Hire & Preliminaries</h2>
+                <div class="legend">
+                    <span class="cost-indicator">Hire Costs</span>
+                    <span class="profit-indicator">Margin</span>
+                    <span class="sale-indicator">Charge Rates</span>
+                </div>
+            </div>
+
+            <!-- Hire Margin Settings -->
+            <div class="hire-settings">
+                <h3>Hire Rate Settings</h3>
+                <div class="settings-grid">
+                    <div class="setting-item">
+                        <label>Hire Equipment Margin %:</label>
+                        <input type="number" id="hireMargin" value="25" min="0" max="100" step="0.5">
+                    </div>
+                    <div class="setting-item">
+                        <label>Delivery Charge £:</label>
+                        <input type="number" id="deliveryCharge" value="45" min="0" step="5">
+                    </div>
+                    <div class="setting-item">
+                        <label>Collection Charge £:</label>
+                        <input type="number" id="collectionCharge" value="45" min="0" step="5">
+                    </div>
+                    <div class="setting-item">
+                        <label>Damage Waiver %:</label>
+                        <input type="number" id="damageWaiver" value="10" min="0" max="50" step="1">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Preliminaries & Documentation -->
+            <div class="prelims-section">
+                <h3>Project Preliminaries & Documentation</h3>
+                <div class="prelims-grid">
+                    <div class="prelim-item">
+                        <div class="prelim-checkbox-container">
+                            <input type="checkbox" id="methodStatement" class="prelim-checkbox">
+                            <label for="methodStatement">Method Statement Required</label>
+                        </div>
+                        <div class="prelim-cost">
+                            <span class="cost">£150</span>
+                            <span class="sale" id="methodStatementSale">£225</span>
+                        </div>
+                    </div>
+
+                    <div class="prelim-item">
+                        <div class="prelim-checkbox-container">
+                            <input type="checkbox" id="riskAssessment" class="prelim-checkbox">
+                            <label for="riskAssessment">Risk Assessment Required</label>
+                        </div>
+                        <div class="prelim-cost">
+                            <span class="cost">£125</span>
+                            <span class="sale" id="riskAssessmentSale">£188</span>
+                        </div>
+                    </div>
+
+                    <div class="prelim-item">
+                        <div class="prelim-checkbox-container">
+                            <input type="checkbox" id="permitToWork" class="prelim-checkbox">
+                            <label for="permitToWork">Permit to Work Required</label>
+                        </div>
+                        <div class="prelim-cost">
+                            <span class="cost">£200</span>
+                            <span class="sale" id="permitToWorkSale">£300</span>
+                        </div>
+                    </div>
+
+                    <div class="prelim-item">
+                        <div class="prelim-checkbox-container">
+                            <input type="checkbox" id="hotWorks" class="prelim-checkbox">
+                            <label for="hotWorks">Hot Works Permit Required</label>
+                        </div>
+                        <div class="prelim-cost">
+                            <span class="cost">£175</span>
+                            <span class="sale" id="hotWorksSale">£263</span>
+                        </div>
+                    </div>
+
+                    <div class="prelim-item">
+                        <div class="prelim-checkbox-container">
+                            <input type="checkbox" id="loneWorking" class="prelim-checkbox">
+                            <label for="loneWorking">Lone Working Assessment</label>
+                        </div>
+                        <div class="prelim-cost">
+                            <span class="cost">£100</span>
+                            <span class="sale" id="loneWorkingSale">£150</span>
+                        </div>
+                    </div>
+
+                    <div class="prelim-item">
+                        <div class="prelim-checkbox-container">
+                            <input type="checkbox" id="siteInduction" class="prelim-checkbox">
+                            <label for="siteInduction">Site Induction & Training</label>
+                        </div>
+                        <div class="prelim-cost">
+                            <span class="cost">£75</span>
+                            <span class="sale" id="siteInductionSale">£113</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ME&P Equipment Hire -->
+            <div class="hire-section">
+                <h3>ME&P Equipment Hire</h3>
+
+                <!-- Core Drilling Equipment -->
+                <div class="hire-category">
+                    <h4>Core Drilling Equipment</h4>
+                    <div class="hire-grid">
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Diamond Core Drill 110mm</h5>
+                                <p>Electric diamond drill with 110mm capacity</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="coreDrill110" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£45/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£56/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Diamond Core Drill 150mm</h5>
+                                <p>Electric diamond drill with 150mm capacity</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="coreDrill150" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£65/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£81/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Diamond Core Drill 200mm</h5>
+                                <p>Heavy duty drill for large diameter holes</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="coreDrill200" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£85/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£106/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Diamond Drilling Bits Set</h5>
+                                <p>Assorted diamond drilling bits (110-200mm)</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="drillingBits" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£25/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£31/day</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Working Access Equipment -->
+                <div class="hire-category">
+                    <h4>Working Access Equipment</h4>
+                    <div class="hire-grid">
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Mobile Scaffold Tower 3m</h5>
+                                <p>3m working height mobile tower</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="scaffold3m" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£35/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£44/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Mobile Scaffold Tower 5m</h5>
+                                <p>5m working height mobile tower</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="scaffold5m" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£55/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£69/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Cherry Picker 12m</h5>
+                                <p>12m working height cherry picker</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="cherryPicker12m" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£180/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£225/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Extension Ladders</h5>
+                                <p>Professional extension ladder set</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="extensionLadders" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£15/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£19/day</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mechanical Handling Tools -->
+                <div class="hire-category">
+                    <h4>Mechanical Handling Tools</h4>
+                    <div class="hire-grid">
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Engine Hoist 2 Tonne</h5>
+                                <p>2 tonne capacity engine hoist for outdoor units</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="engineHoist" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£95/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£119/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Stair Climbing Trolley</h5>
+                                <p>Electric stair climbing trolley for equipment</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="stairTrolley" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£75/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£94/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Heavy Duty Sack Truck</h5>
+                                <p>500kg capacity sack truck</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="sackTruck" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£12/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£15/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Pallet Truck</h5>
+                                <p>Manual pallet truck for material handling</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="palletTruck" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£18/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£23/day</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testing Equipment -->
+                <div class="hire-category">
+                    <h4>Testing Equipment</h4>
+                    <div class="hire-grid">
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Electronic Leak Detector</h5>
+                                <p>Professional refrigerant leak detector</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="leakDetector" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£35/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£44/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Pressure Testing Kit</h5>
+                                <p>Complete nitrogen pressure testing kit</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="pressureKit" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£45/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£56/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Digital Manifold Gauge</h5>
+                                <p>Digital refrigeration manifold gauge set</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="manifoldGauge" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£25/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£31/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Vacuum Pump Kit</h5>
+                                <p>Complete evacuation and vacuum pump kit</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="vacuumPump" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£55/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£69/day</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Power Tools -->
+                <div class="hire-category">
+                    <h4>Power Tools</h4>
+                    <div class="hire-grid">
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>SDS Rotary Hammer Drill</h5>
+                                <p>Heavy duty SDS hammer drill with bits</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="sdsHammer" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£25/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£31/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Angle Grinder Set</h5>
+                                <p>115mm and 230mm angle grinders with discs</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="angleGrinder" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£15/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£19/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Pipe Cutting Machine</h5>
+                                <p>Electric pipe cutting machine up to 2"</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="pipeCutter" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£35/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£44/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>110V Transformer</h5>
+                                <p>3kVA 110V site transformer</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="transformer" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£18/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£23/day</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Safety Equipment -->
+                <div class="hire-category">
+                    <h4>Safety Equipment</h4>
+                    <div class="hire-grid">
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Safety Harness Kit</h5>
+                                <p>Full body harness with lanyard set</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="safetyHarness" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£12/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£15/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Safety Barriers & Signs</h5>
+                                <p>Work area barriers and warning signs set</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="safetyBarriers" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£8/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£10/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>Dust Extraction Unit</h5>
+                                <p>Industrial dust extraction for drilling</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="dustExtractor" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£45/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£56/day</span>
+                            </div>
+                        </div>
+
+                        <div class="hire-item">
+                            <div class="hire-info">
+                                <h5>First Aid & Spill Kit</h5>
+                                <p>Site first aid and refrigerant spill kit</p>
+                            </div>
+                            <div class="hire-duration">
+                                <label>Days:</label>
+                                <input type="number" class="duration-input" data-item="firstAidKit" min="0" value="0" step="1">
+                            </div>
+                            <div class="hire-pricing">
+                                <span class="cost">£5/day</span>
+                                <span class="margin">25%</span>
+                                <span class="sale">£6/day</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delivery & Collection -->
+            <div class="delivery-section">
+                <h3>Delivery & Collection</h3>
+                <div class="delivery-grid">
+                    <div class="delivery-item">
+                        <input type="checkbox" id="requireDelivery" class="delivery-checkbox">
+                        <label for="requireDelivery">Equipment Delivery Required</label>
+                        <div class="delivery-cost">
+                            <span class="cost" id="deliveryCostDisplay">£45</span>
+                            <span class="sale" id="deliverySaleDisplay">£56</span>
+                        </div>
+                    </div>
+                    
+                    <div class="delivery-item">
+                        <input type="checkbox" id="requireCollection" class="delivery-checkbox">
+                        <label for="requireCollection">Equipment Collection Required</label>
+                        <div class="delivery-cost">
+                            <span class="cost" id="collectionCostDisplay">£45</span>
+                            <span class="sale" id="collectionSaleDisplay">£56</span>
+                        </div>
+                    </div>
+                    
+                    <div class="delivery-item">
+                        <input type="checkbox" id="requireDamageWaiver" class="delivery-checkbox">
+                        <label for="requireDamageWaiver">Damage Waiver Insurance</label>
+                        <div class="delivery-cost">
+                            <span class="cost" id="damageWaiverCostDisplay">10% of hire value</span>
+                            <span class="sale" id="damageWaiverSaleDisplay">13% of hire value</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hire Summary -->
+            <div class="hire-summary">
+                <h3>Hire & Preliminaries Summary</h3>
+                <div id="hireSummary" class="hire-summary-content">
+                    <p>No items selected yet.</p>
+                </div>
+                
+                <div class="summary-totals">
+                    <div class="total-row">
+                        <span>Equipment Hire Cost:</span>
+                        <span id="totalHireCost" class="cost">£0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Preliminaries Cost:</span>
+                        <span id="totalPrelimsCost" class="cost">£0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Delivery & Collection:</span>
+                        <span id="totalDeliveryCost" class="cost">£0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Total Hire & Prelims Cost:</span>
+                        <span id="totalAllCost" class="cost">£0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Total Sale Price:</span>
+                        <span id="totalHireSale" class="sale">£0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Total Profit:</span>
+                        <span id="hireProfit" class="profit">£0.00 (0%)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="section-navigation">
+                <button class="nav-btn secondary" onclick="window.location.href='labour.html'">← Back to Labour</button>
+                <button class="nav-btn primary" onclick="window.location.href='summary.html'">Continue to Summary →</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script>
+        // Hire-specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeHirePage();
+        });
+
+        function initializeHirePage() {
+            // Add event listeners for hire settings
+            document.getElementById('hireMargin').addEventListener('input', updateHireRates);
+            document.getElementById('deliveryCharge').addEventListener('input', updateDeliveryRates);
+            document.getElementById('collectionCharge').addEventListener('input', updateDeliveryRates);
+            document.getElementById('damageWaiver').addEventListener('input', updateDeliveryRates);
+            
+            // Add event listeners for duration changes
+            const durationInputs = document.querySelectorAll('.duration-input');
+            durationInputs.forEach(input => {
+                input.addEventListener('input', updateHireSummary);
+            });
+
+            // Add event listeners for preliminaries checkboxes
+            const prelimCheckboxes = document.querySelectorAll('.prelim-checkbox');
+            prelimCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateHireSummary);
+            });
+
+            // Add event listeners for delivery checkboxes
+            const deliveryCheckboxes = document.querySelectorAll('.delivery-checkbox');
+            deliveryCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateHireSummary);
+            });
+
+            // Initial calculations
+            updateHireRates();
+            updateDeliveryRates();
+            updatePrelimRates();
+            updateHireSummary();
+        }
+
+        function updateHireRates() {
+            const margin = parseFloat(document.getElementById('hireMargin').value) / 100;
+            
+            // Update all hire item prices
+            const hireItems = document.querySelectorAll('.hire-item');
+            hireItems.forEach(item => {
+                const costElement = item.querySelector('.cost');
+                const marginElement = item.querySelector('.margin');
+                const saleElement = item.querySelector('.sale');
+                
+                const costText = costElement.textContent;
+                const costValue = parseFloat(costText.replace('£', '').replace('/day', ''));
+                const saleValue = costValue * (1 + margin);
+                
+                marginElement.textContent = Math.round(margin * 100) + '%';
+                saleElement.textContent = '£' + Math.round(saleValue) + '/day';
+            });
+            
+            updateHireSummary();
+        }
+
+        function updateDeliveryRates() {
+            const margin = parseFloat(document.getElementById('hireMargin').value) / 100;
+            const deliveryCharge = parseFloat(document.getElementById('deliveryCharge').value);
+            const collectionCharge = parseFloat(document.getElementById('collectionCharge').value);
+            const damageWaiver = parseFloat(document.getElementById('damageWaiver').value);
+            
+            // Update delivery display
+            document.getElementById('deliveryCostDisplay').textContent = '£' + deliveryCharge;
+            document.getElementById('deliverySaleDisplay').textContent = '£' + Math.round(deliveryCharge * (1 + margin));
+            
+            // Update collection display
+            document.getElementById('collectionCostDisplay').textContent = '£' + collectionCharge;
+            document.getElementById('collectionSaleDisplay').textContent = '£' + Math.round(collectionCharge * (1 + margin));
+            
+            // Update damage waiver display
+            document.getElementById('damageWaiverCostDisplay').textContent = damageWaiver + '% of hire value';
+            document.getElementById('damageWaiverSaleDisplay').textContent = Math.round(damageWaiver * (1 + margin)) + '% of hire value';
+            
+            updateHireSummary();
+        }
+
+        function updatePrelimRates() {
+            const margin = 1.5; // 50% margin on preliminaries
+            
+            // Method Statement
+            document.getElementById('methodStatementSale').textContent = '£' + Math.round(150 * margin);
+            
+            // Risk Assessment
+            document.getElementById('riskAssessmentSale').textContent = '£' + Math.round(125 * margin);
+            
+            // Permit to Work
+            document.getElementById('permitToWorkSale').textContent = '£' + Math.round(200 * margin);
+            
+            // Hot Works
+            document.getElementById('hotWorksSale').textContent = '£' + Math.round(175 * margin);
+            
+            // Lone Working
+            document.getElementById('loneWorkingSale').textContent = '£' + Math.round(100 * margin);
+            
+            // Site Induction
+            document.getElementById('siteInductionSale').textContent = '£' + Math.round(75 * margin);
+        }
+
+        function updateHireSummary() {
+            const margin = parseFloat(document.getElementById('hireMargin').value) / 100;
+            const deliveryCharge = parseFloat(document.getElementById('deliveryCharge').value);
+            const collectionCharge = parseFloat(document.getElementById('collectionCharge').value);
+            const damageWaiver = parseFloat(document.getElementById('damageWaiver').value) / 100;
+            
+            let totalHireCost = 0;
+            let totalHireSale = 0;
+            let totalPrelimsCost = 0;
+            let totalPrelimsSale = 0;
+            let totalDeliveryCost = 0;
+            let totalDeliverySale = 0;
+            
+            const selectedItems = [];
+            
+            // Calculate hire equipment costs
+            const durationInputs = document.querySelectorAll('.duration-input');
+            durationInputs.forEach(input => {
+                const days = parseInt(input.value) || 0;
+                if (days > 0) {
+                    const hireItem = input.closest('.hire-item');
+                    const title = hireItem.querySelector('h5').textContent;
+                    const description = hireItem.querySelector('p').textContent;
+                    const costText = hireItem.querySelector('.cost').textContent;
+                    const dailyCost = parseFloat(costText.replace('£', '').replace('/day', ''));
+                    const dailySale = dailyCost * (1 + margin);
+                    
+                    const itemTotalCost = dailyCost * days;
+                    const itemTotalSale = dailySale * days;
+                    
+                    totalHireCost += itemTotalCost;
+                    totalHireSale += itemTotalSale;
+                    
+                    selectedItems.push({
+                        type: 'hire',
+                        title: title,
+                        description: description,
+                        days: days,
+                        dailyCost: dailyCost,
+                        dailySale: dailySale,
+                        totalCost: itemTotalCost,
+                        totalSale: itemTotalSale
+                    });
+                }
+            });
+            
+            // Calculate preliminaries costs
+            const prelimItems = [
+                { id: 'methodStatement', cost: 150, title: 'Method Statement' },
+                { id: 'riskAssessment', cost: 125, title: 'Risk Assessment' },
+                { id: 'permitToWork', cost: 200, title: 'Permit to Work' },
+                { id: 'hotWorks', cost: 175, title: 'Hot Works Permit' },
+                { id: 'loneWorking', cost: 100, title: 'Lone Working Assessment' },
+                { id: 'siteInduction', cost: 75, title: 'Site Induction & Training' }
+            ];
+            
+            prelimItems.forEach(item => {
+                const checkbox = document.getElementById(item.id);
+                if (checkbox.checked) {
+                    const cost = item.cost;
+                    const sale = cost * 1.5; // 50% margin on preliminaries
+                    
+                    totalPrelimsCost += cost;
+                    totalPrelimsSale += sale;
+                    
+                    selectedItems.push({
+                        type: 'prelim',
+                        title: item.title,
+                        totalCost: cost,
+                        totalSale: sale
+                    });
+                }
+            });
+            
+            // Calculate delivery costs
+            if (document.getElementById('requireDelivery').checked) {
+                totalDeliveryCost += deliveryCharge;
+                totalDeliverySale += deliveryCharge * (1 + margin);
+                selectedItems.push({
+                    type: 'delivery',
+                    title: 'Equipment Delivery',
+                    totalCost: deliveryCharge,
+                    totalSale: deliveryCharge * (1 + margin)
+                });
+            }
+            
+            if (document.getElementById('requireCollection').checked) {
+                totalDeliveryCost += collectionCharge;
+                totalDeliverySale += collectionCharge * (1 + margin);
+                selectedItems.push({
+                    type: 'delivery',
+                    title: 'Equipment Collection',
+                    totalCost: collectionCharge,
+                    totalSale: collectionCharge * (1 + margin)
+                });
+            }
+            
+            if (document.getElementById('requireDamageWaiver').checked) {
+                const waiverCost = totalHireCost * damageWaiver;
+                const waiverSale = totalHireSale * damageWaiver;
+                totalDeliveryCost += waiverCost;
+                totalDeliverySale += waiverSale;
+                selectedItems.push({
+                    type: 'delivery',
+                    title: 'Damage Waiver Insurance',
+                    totalCost: waiverCost,
+                    totalSale: waiverSale
+                });
+            }
+            
+            // Update summary display
+            const summaryContainer = document.getElementById('hireSummary');
+            if (selectedItems.length === 0) {
+                summaryContainer.innerHTML = '<p>No items selected yet.</p>';
+            } else {
+                let html = '';
+                selectedItems.forEach(item => {
+                    html += `
+                        <div class="selected-hire-item">
+                            <div class="hire-item-info">
+                                <strong>${item.title}</strong>
+                                ${item.description ? `<span>${item.description}</span>` : ''}
+                                ${item.days ? `<span>${item.days} days</span>` : ''}
+                            </div>
+                            <div class="hire-item-pricing">
+                                <span class="cost">£${item.totalCost.toFixed(2)}</span>
+                                <span class="sale">£${item.totalSale.toFixed(2)}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                summaryContainer.innerHTML = html;
+            }
+            
+            // Update totals
+            const totalAllCost = totalHireCost + totalPrelimsCost + totalDeliveryCost;
+            const totalAllSale = totalHireSale + totalPrelimsSale + totalDeliverySale;
+            const totalProfit = totalAllSale - totalAllCost;
+            const profitMargin = totalAllCost > 0 ? (totalProfit / totalAllCost * 100).toFixed(1) : 0;
+            
+            document.getElementById('totalHireCost').textContent = '£' + totalHireCost.toFixed(2);
+            document.getElementById('totalPrelimsCost').textContent = '£' + totalPrelimsCost.toFixed(2);
+            document.getElementById('totalDeliveryCost').textContent = '£' + totalDeliveryCost.toFixed(2);
+            document.getElementById('totalAllCost').textContent = '£' + totalAllCost.toFixed(2);
+            document.getElementById('totalHireSale').textContent = '£' + totalAllSale.toFixed(2);
+            document.getElementById('hireProfit').textContent = '£' + totalProfit.toFixed(2) + ' (' + profitMargin + '%)';
+            
+            // Store in global data
+            if (!window.pricingData) {
+                window.pricingData = {};
+            }
+            
+            window.pricingData.hire = {
+                selectedItems: selectedItems,
+                totalHireCost: totalHireCost,
+                totalPrelimsCost: totalPrelimsCost,
+                totalDeliveryCost: totalDeliveryCost,
+                totalCost: totalAllCost,
+                totalSale: totalAllSale,
+                profit: totalProfit,
+                profitMargin: profitMargin
+            };
+        }
+    </script>
+</body>
+</html>
