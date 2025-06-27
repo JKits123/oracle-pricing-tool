@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labour & Installation - Oracle Smart Pricing Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Oracle Smart Pricing Tool</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="equipment.html">Equipment</a>
+                <a href="materials.html">Materials</a>
+                <a href="labour.html" class="active">Labour</a>
+                <a href="hire.html">Hire</a>
+                <a href="summary.html">Summary</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="section-header">
+                <h2>Labour & Installation</h2>
+                <div class="legend">
+                    <span class="cost-indicator">Cost Rates</span>
+                    <span class="profit-indicator">Margin</span>
+                    <span class="sale-indicator">Charge Rates</span>
+                </div>
+            </div>
+
+            <!-- Labour Rate Settings -->
+            <div class="labour-rates-section">
+                <h3>Labour Rate Settings</h3>
+                <div class="rates-grid">
+                    <div class="rate-item">
+                        <h4>Engineer</h4>
+                        <div class="rate-controls">
+                            <label>Cost Rate £/hr:</label>
+                            <input type="number" id="engineerCost" value="30.00" min="0" step="0.25">
+                            <label>Charge Rate £/hr:</label>
+                            <input type="number" id="engineerCharge" value="42.50" min="0" step="0.25">
+                            <span class="margin-display" id="engineerMargin">41.7%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="rate-item">
+                        <h4>Mate/Apprentice</h4>
+                        <div class="rate-controls">
+                            <label>Cost Rate £/hr:</label>
+                            <input type="number" id="mateCost" value="15.00" min="0" step="0.25">
+                            <label>Charge Rate £/hr:</label>
+                            <input type="number" id="mateCharge" value="25.25" min="0" step="0.25">
+                            <span class="margin-display" id="mateMargin">68.3%</span>
+                        </div>
+                    </div>
+
+                    <div class="rate-item">
+                        <h4>Subcontractor Uplift</h4>
+                        <div class="rate-controls">
+                            <label>Additional Margin %:</label>
+                            <input type="number" id="subcontractorUplift" value="15" min="0" max="50" step="0.5">
+                            <span class="help-text">Apply when work is subcontracted</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Installation Steps -->
+            <div class="installation-steps-section">
+                <h3>Installation Steps & Time Estimates</h3>
+
+                <!-- Site Preparation -->
+                <div class="step-category">
+                    <h4>1. Site Preparation & Containment</h4>
+                    <div class="steps-grid">
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>Initial Site Survey</h5>
+                                <p>Measure, assess access, confirm installation points</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="survey" data-role="engineer" value="1.0" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="survey" data-role="mate" value="0.5" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-survey">£57.50</span>
+                                <span class="sale" id="sale-survey">£55.13</span>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>Protection & Containment</h5>
+                                <p>Dust sheets, floor protection, work area setup</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="protection" data-role="engineer" value="0.5" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="protection" data-role="mate" value="1.0" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-protection">£30.00</span>
+                                <span class="sale" id="sale-protection">£46.50</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services Containment -->
+                <div class="step-category">
+                    <h4>2. Services Containment Installation</h4>
+                    <div class="steps-grid">
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>Cable Tray Installation</h5>
+                                <p>Install cable tray routes for pipe and cable runs</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="cabletray" data-role="engineer" value="2.0" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="cabletray" data-role="mate" value="3.0" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-cabletray">£105.00</span>
+                                <span class="sale" id="sale-cabletray">£160.75</span>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>Trunking Installation</h5>
+                                <p>Install trunking for concealed pipe and cable routes</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="trunking" data-role="engineer" value="1.5" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="trunking" data-role="mate" value="2.0" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-trunking">£75.00</span>
+                                <span class="sale" id="sale-trunking">£114.25</span>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>Support Bracket Installation</h5>
+                                <p>Install pipe clips, hangers, and support brackets</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="brackets" data-role="engineer" value="1.0" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="brackets" data-role="mate" value="1.5" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-brackets">£52.50</span>
+                                <span class="sale" id="sale-brackets">£80.38</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Equipment Installation -->
+                <div class="step-category">
+                    <h4>3. Equipment Positioning & Mounting</h4>
+                    <div class="steps-grid">
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>Indoor Unit Installation</h5>
+                                <p>Mount indoor unit, ensure level and secure fixing</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="indoor" data-role="engineer" value="1.5" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="indoor" data-role="mate" value="1.0" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-indoor">£60.00</span>
+                                <span class="sale" id="sale-indoor">£88.88</span>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>Outdoor Unit Installation</h5>
+                                <p>Position outdoor unit, anti-vibration pads, secure</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="outdoor" data-role="engineer" value="2.0" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="outdoor" data-role="mate" value="1.5" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-outdoor">£82.50</span>
+                                <span class="sale" id="sale-outdoor">£122.88</span>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>Cassette Ceiling Installation</h5>
+                                <p>Ceiling cut-out, suspension, cassette mounting</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="cassette" data-role="engineer" value="3.0" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="cassette" data-role="mate" value="2.0" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-cassette">£120.00</span>
+                                <span class="sale" id="sale-cassette">£178.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pipe Installation -->
+                <div class="step-category">
+                    <h4>4. Pipe Installation & Routing</h4>
+                    <div class="steps-grid">
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>Copper Pipe Installation</h5>
+                                <p>Route, cut, bend and joint refrigerant pipes</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="pipes" data-role="engineer" value="3.0" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="pipes" data-role="mate" value="2.0" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-pipes">£120.00</span>
+                                <span class="sale" id="sale-pipes">£178.00</span>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>Pipe Insulation</h5>
+                                <p>Apply insulation to all refrigerant pipework</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="insulation" data-role="engineer" value="1.0" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="insulation" data-role="mate" value="1.5" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-insulation">£52.50</span>
+                                <span class="sale" id="sale-insulation">£80.38</span>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>Pressure Testing</h5>
+                                <p>Pressure test system, leak detection</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="testing" data-role="engineer" value="1.5" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="testing" data-role="mate" value="0.5" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-testing">£52.50</span>
+                                <span class="sale" id="sale-testing">£76.13</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Electrical Connections -->
+                <div class="step-category">
+                    <h4>5. Electrical Connections</h4>
+                    <div class="steps-grid">
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>Control Cable Installation</h5>
+                                <p>Run and connect interconnecting cables</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="controlcable" data-role="engineer" value="1.5" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="controlcable" data-role="mate" value="1.0" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-controlcable">£60.00</span>
+                                <span class="sale" id="sale-controlcable">£88.88</span>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>Unit Terminations</h5>
+                                <p>Connect units to isolators, test continuity</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="terminations" data-role="engineer" value="1.0" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="terminations" data-role="mate" value="0.5" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-terminations">£37.50</span>
+                                <span class="sale" id="sale-terminations">£55.13</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drainage Installation -->
+                <div class="step-category">
+                    <h4>6. Drainage Installation</h4>
+                    <div class="steps-grid">
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>Condensate Pipe Installation</h5>
+                                <p>Route condensate drainage, install pipe and fittings</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="drainage" data-role="engineer" value="1.5" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="drainage" data-role="mate" value="1.0" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-drainage">£60.00</span>
+                                <span class="sale" id="sale-drainage">£88.88</span>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>Condensate Pump Setup</h5>
+                                <p>Install and commission condensate pump</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="pump" data-role="engineer" value="1.0" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="pump" data-role="mate" value="0.5" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-pump">£37.50</span>
+                                <span class="sale" id="sale-pump">£55.13</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Commissioning -->
+                <div class="step-category">
+                    <h4>7. Commissioning & Testing</h4>
+                    <div class="steps-grid">
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>System Commissioning</h5>
+                                <p>Start-up, parameter setting, performance test</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="commissioning" data-role="engineer" value="2.0" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="commissioning" data-role="mate" value="0.5" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-commissioning">£67.50</span>
+                                <span class="sale" id="sale-commissioning">£97.63</span>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>Final Testing & Certification</h5>
+                                <p>Performance verification, documentation</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="certification" data-role="engineer" value="1.0" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="certification" data-role="mate" value="0.25" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-certification">£33.75</span>
+                                <span class="sale" id="sale-certification">£48.81</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Handover -->
+                <div class="step-category">
+                    <h4>8. Customer Handover</h4>
+                    <div class="steps-grid">
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>System Demonstration</h5>
+                                <p>Customer training, remote control setup</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="demonstration" data-role="engineer" value="0.5" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="demonstration" data-role="mate" value="0" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-demonstration">£15.00</span>
+                                <span class="sale" id="sale-demonstration">£21.25</span>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-info">
+                                <h5>Site Clean-up</h5>
+                                <p>Remove protection, clean work areas, waste removal</p>
+                            </div>
+                            <div class="time-allocation">
+                                <label>Engineer Hours:</label>
+                                <input type="number" class="time-input" data-step="cleanup" data-role="engineer" value="0.25" min="0" step="0.25">
+                                <label>Mate Hours:</label>
+                                <input type="number" class="time-input" data-step="cleanup" data-role="mate" value="1.0" min="0" step="0.25">
+                            </div>
+                            <div class="step-cost">
+                                <span class="cost" id="cost-cleanup">£22.50</span>
+                                <span class="sale" id="sale-cleanup">£35.88</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Labour Summary -->
+            <div class="labour-summary">
+                <h3>Labour Summary</h3>
+                <div class="summary-totals">
+                    <div class="total-row">
+                        <span>Total Engineer Hours:</span>
+                        <span id="totalEngineerHours">21.75</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Total Mate Hours:</span>
+                        <span id="totalMateHours">16.75</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Total Labour Cost:</span>
+                        <span id="totalLabourCost" class="cost">£903.75</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Total Labour Sale:</span>
+                        <span id="totalLabourSale" class="sale">£1,347.94</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Labour Profit:</span>
+                        <span id="labourProfit" class="profit">£444.19 (49.1%)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="section-navigation">
+                <button class="nav-btn secondary" onclick="window.location.href='materials.html'">← Back to Materials</button>
+                <button class="nav-btn primary" onclick="window.location.href='hire.html'">Continue to Hire & Prelims →</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script>
+        // Labour-specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeLabourPage();
+        });
+
+        function initializeLabourPage() {
+            // Add event listeners for rate changes
+            document.getElementById('engineerCost').addEventListener('input', updateLabourRates);
+            document.getElementById('engineerCharge').addEventListener('input', updateLabourRates);
+            document.getElementById('mateCost').addEventListener('input', updateLabourRates);
+            document.getElementById('mateCharge').addEventListener('input', updateLabourRates);
+            document.getElementById('subcontractorUplift').addEventListener('input', updateLabourRates);
+            
+            // Add event listeners for time input changes
+            const timeInputs = document.querySelectorAll('.time-input');
+            timeInputs.forEach(input => {
+                input.addEventListener('input', updateLabourCalculations);
+            });
+
+            // Initial calculations
+            updateLabourRates();
+            updateLabourCalculations();
+        }
+
+        function updateLabourRates() {
+            const engineerCost = parseFloat(document.getElementById('engineerCost').value);
+            const engineerCharge = parseFloat(document.getElementById('engineerCharge').value);
+            const mateCost = parseFloat(document.getElementById('mateCost').value);
+            const mateCharge = parseFloat(document.getElementById('mateCharge').value);
+            
+            // Calculate and display margins
+            const engineerMargin = ((engineerCharge - engineerCost) / engineerCost * 100).toFixed(1);
+            const mateMargin = ((mateCharge - mateCost) / mateCost * 100).toFixed(1);
+            
+            document.getElementById('engineerMargin').textContent = engineerMargin + '%';
+            document.getElementById('mateMargin').textContent = mateMargin + '%';
+            
+            // Recalculate all step costs
+            updateLabourCalculations();
+        }
+
+        function updateLabourCalculations() {
+            const engineerCost = parseFloat(document.getElementById('engineerCost').value);
+            const engineerCharge = parseFloat(document.getElementById('engineerCharge').value);
+            const mateCost = parseFloat(document.getElementById('mateCost').value);
+            const mateCharge = parseFloat(document.getElementById('mateCharge').value);
+            const subcontractorUplift = parseFloat(document.getElementById('subcontractorUplift').value) / 100;
+            
+            let totalEngineerHours = 0;
+            let totalMateHours = 0;
+            let totalCost = 0;
+            let totalSale = 0;
+            
+            // Get all time inputs and calculate costs for each step
+            const timeInputs = document.querySelectorAll('.time-input');
+            const stepCosts = {};
+            
+            timeInputs.forEach(input => {
+                const step = input.dataset.step;
+                const role = input.dataset.role;
+                const hours = parseFloat(input.value) || 0;
+                
+                if (!stepCosts[step]) {
+                    stepCosts[step] = { engineerHours: 0, mateHours: 0, cost: 0, sale: 0 };
+                }
+                
+                if (role === 'engineer') {
+                    stepCosts[step].engineerHours = hours;
+                    totalEngineerHours += hours;
+                } else if (role === 'mate') {
+                    stepCosts[step].mateHours = hours;
+                    totalMateHours += hours;
+                }
+            });
+            
+            // Calculate costs for each step
+            Object.keys(stepCosts).forEach(step => {
+                const stepData = stepCosts[step];
+                const stepCost = (stepData.engineerHours * engineerCost) + (stepData.mateHours * mateCost);
+                const stepSale = (stepData.engineerHours * engineerCharge) + (stepData.mateHours * mateCharge);
+                
+                stepData.cost = stepCost;
+                stepData.sale = stepSale;
+                
+                totalCost += stepCost;
+                totalSale += stepSale;
+                
+                // Update display
+                const costElement = document.getElementById(`cost-${step}`);
+                const saleElement = document.getElementById(`sale-${step}`);
+                
+                if (costElement) {
+                    costElement.textContent = '£' + stepCost.toFixed(2);
+                }
+                if (saleElement) {
+                    saleElement.textContent = '£' + stepSale.toFixed(2);
+                }
+            });
+            
+            // Apply subcontractor uplift if needed
+            const finalSale = totalSale * (1 + subcontractorUplift);
+            const profit = finalSale - totalCost;
+            const profitMargin = totalCost > 0 ? (profit / totalCost * 100).toFixed(1) : 0;
+            
+            // Update summary
+            document.getElementById('totalEngineerHours').textContent = totalEngineerHours.toFixed(2);
+            document.getElementById('totalMateHours').textContent = totalMateHours.toFixed(2);
+            document.getElementById('totalLabourCost').textContent = '£' + totalCost.toFixed(2);
+            document.getElementById('totalLabourSale').textContent = '£' + finalSale.toFixed(2);
+            document.getElementById('labourProfit').textContent = '£' + profit.toFixed(2) + ' (' + profitMargin + '%)';
+            
+            // Store in global data
+            if (!window.pricingData) {
+                window.pricingData = {};
+            }
+            
+            window.pricingData.labour = {
+                totalEngineerHours: totalEngineerHours,
+                totalMateHours: totalMateHours,
+                totalCost: totalCost,
+                totalSale: finalSale,
+                profit: profit,
+                profitMargin: profitMargin,
+                engineerRate: { cost: engineerCost, charge: engineerCharge },
+                mateRate: { cost: mateCost, charge: mateCharge },
+                subcontractorUplift: subcontractorUplift,
+                steps: stepCosts
+            };
+        }
+    </script>
+</body>
+</html>
