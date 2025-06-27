@@ -10,7 +10,7 @@
     <div class="container">
         <header class="wizard-header">
             <div class="logo-section">
-                <img src="company-logo.png" alt="Current Development Limited" class="company-logo">
+                <div class="company-logo-placeholder">CDL</div>
                 <div class="tool-title">
                     <h1>Oracle Smart Pricing Tool</h1>
                     <p>Intelligent Air Conditioning System Pricing</p>
@@ -230,7 +230,7 @@
                     <div class="wizard-navigation">
                         <button type="button" id="prevBtn" class="nav-btn secondary" style="display: none;">← Previous</button>
                         <button type="button" id="nextBtn" class="nav-btn primary">Next →</button>
-                        <button type="submit" id="generateQuote" class="nav-btn success" style="display: none;">Generate Intelligent Quote →</button>
+                        <button type="button" id="generateQuote" class="nav-btn success" style="display: none;">Generate Intelligent Quote →</button>
                     </div>
 
                     <!-- Progress Indicator -->
@@ -272,55 +272,79 @@
         </main>
     </div>
 
-    <script src="scripts.js"></script>
     <script>
-        // Wizard functionality - Fixed refresh hanging issue
+        console.log('Script loading...');
+        
+        // Wizard functionality - Clean version
         let currentStep = 1;
         const totalSteps = 3;
 
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing wizard...');
             initializeWizard();
         });
 
         function initializeWizard() {
-            // Add event listeners for intelligent previews - Fixed to prevent page refresh
+            console.log('Wizard initializing...');
+            
+            // Add event listeners for navigation
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            const generateBtn = document.getElementById('generateQuote');
+            
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Next button clicked');
+                    nextStep();
+                });
+                console.log('Next button listener added');
+            } else {
+                console.error('Next button not found');
+            }
+            
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Previous button clicked');
+                    prevStep();
+                });
+            }
+            
+            if (generateBtn) {
+                generateBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Generate quote clicked');
+                    generateQuote();
+                });
+            }
+            
+            // Add event listeners for intelligence preview
             const selects = ['capacityRequired', 'indoorUnitType', 'pipeRunDistance', 'projectType', 'manufacturerPreference'];
             selects.forEach(selectId => {
                 const element = document.getElementById(selectId);
                 if (element) {
                     element.addEventListener('change', function(e) {
-                        e.preventDefault();
                         updateIntelligencePreview();
                     });
                 }
             });
             
-            // Navigation event listeners
-            document.getElementById('nextBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-                nextStep();
-            });
-            document.getElementById('prevBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-                prevStep();
-            });
-            document.getElementById('generateQuote').addEventListener('click', function(e) {
-                e.preventDefault();
-                generateQuote();
-            });
-            
             updateProgressBar();
+            console.log('Wizard initialized successfully');
         }
 
         function nextStep() {
+            console.log('nextStep called, current step:', currentStep);
+            
             if (validateCurrentStep()) {
                 if (currentStep < totalSteps) {
                     // Hide current step
-                    document.getElementById(`step${currentStep}`).classList.remove('active');
+                    document.getElementById('step' + currentStep).classList.remove('active');
                     
                     // Show next step
                     currentStep++;
-                    document.getElementById(`step${currentStep}`).classList.add('active');
+                    document.getElementById('step' + currentStep).classList.add('active');
                     
                     updateNavigation();
                     updateProgressBar();
@@ -330,6 +354,8 @@
                         document.getElementById('intelligencePreview').style.display = 'block';
                         updateIntelligencePreview();
                     }
+                    
+                    console.log('Advanced to step:', currentStep);
                 }
             }
         }
@@ -337,11 +363,11 @@
         function prevStep() {
             if (currentStep > 1) {
                 // Hide current step
-                document.getElementById(`step${currentStep}`).classList.remove('active');
+                document.getElementById('step' + currentStep).classList.remove('active');
                 
                 // Show previous step
                 currentStep--;
-                document.getElementById(`step${currentStep}`).classList.add('active');
+                document.getElementById('step' + currentStep).classList.add('active');
                 
                 updateNavigation();
                 updateProgressBar();
@@ -380,7 +406,7 @@
             progressFill.style.width = progressPercent + '%';
             
             // Update step indicators
-            progressSteps.forEach((step, index) => {
+            progressSteps.forEach(function(step, index) {
                 if (index < currentStep) {
                     step.classList.add('active');
                 } else {
@@ -390,18 +416,19 @@
         }
 
         function validateCurrentStep() {
-            const currentStepElement = document.getElementById(`step${currentStep}`);
+            const currentStepElement = document.getElementById('step' + currentStep);
             const requiredFields = currentStepElement.querySelectorAll('[required]');
             
             let isValid = true;
-            requiredFields.forEach(field => {
+            for (let i = 0; i < requiredFields.length; i++) {
+                const field = requiredFields[i];
                 if (!field.value.trim()) {
                     field.classList.add('error');
                     isValid = false;
                 } else {
                     field.classList.remove('error');
                 }
-            });
+            }
             
             if (!isValid) {
                 alert('Please fill in all required fields before continuing.');
@@ -411,216 +438,74 @@
         }
 
         function updateIntelligencePreview() {
+            // Simple preview update - will add full functionality later
             const capacity = document.getElementById('capacityRequired').value;
             const unitType = document.getElementById('indoorUnitType').value;
-            const pipeDistance = document.getElementById('pipeRunDistance').value;
-            const projectType = document.getElementById('projectType').value;
-            const manufacturerPref = document.getElementById('manufacturerPreference').value;
             
-            updateEquipmentRecommendations(capacity, unitType, projectType, manufacturerPref);
-            updatePipeSizing(capacity);
-            updateCableTrayCalculation(pipeDistance);
-            updateMaterialsPreview(capacity, pipeDistance, unitType);
-        }
-
-        function updateEquipmentRecommendations(capacity, unitType, projectType, manufacturerPref) {
-            const preview = document.getElementById('equipmentPreview');
-            
-            if (!capacity || !unitType) {
-                preview.textContent = 'Select capacity and unit type to see recommendations...';
-                return;
-            }
-            
-            let recommendations = [];
-            const cap = parseFloat(capacity);
-            
-            // Smart filtering based on manufacturer preference
-            if (manufacturerPref === 'mitsubishi') {
-                if (cap <= 9.0 && (projectType === 'domestic' || unitType === 'wall')) {
-                    recommendations.push('Mitsubishi M Series');
-                }
-                if (cap >= 2.5) {
-                    recommendations.push('Mitsubishi Mr Slim');
-                }
-            } else if (manufacturerPref === 'daikin') {
-                if (cap <= 7.1 && (projectType === 'domestic' || unitType === 'wall')) {
-                    recommendations.push('Daikin Standard Range');
-                }
-                if (cap >= 3.5) {
-                    recommendations.push('Daikin Sky Air');
-                }
-            } else if (manufacturerPref === 'fujitsu') {
-                if (cap <= 9.0 && (projectType === 'domestic' || unitType === 'wall')) {
-                    recommendations.push('Fujitsu Split Systems');
-                }
-                if (cap >= 10.0) {
-                    recommendations.push('Fujitsu Air Stage');
-                }
-            } else if (manufacturerPref === 'mhi') {
-                if (cap <= 7.1) {
-                    recommendations.push('MHI RAC');
-                }
-                if (cap >= 5.0) {
-                    recommendations.push('MHI PAC');
-                }
-            } else {
-                // Any manufacturer - show best options
-                if (cap <= 7.1 && (projectType === 'domestic' || unitType === 'wall')) {
-                    recommendations.push('M Series', 'Standard Range', 'Split Systems');
-                }
-                if (cap >= 5.0 && (projectType === 'commercial' || unitType === 'ceiling-cassette')) {
-                    recommendations.push('Mr Slim', 'Sky Air', 'PAC');
-                }
-                if (cap >= 10.0) {
-                    recommendations.push('Air Stage', 'Sky Air', 'PAC');
+            if (capacity && unitType) {
+                const preview = document.getElementById('equipmentPreview');
+                if (preview) {
+                    preview.textContent = 'Equipment recommendations for ' + capacity + 'kW ' + unitType + ' unit';
                 }
             }
-            
-            // Filter out incompatible unit types
-            if (unitType === 'ceiling-cassette') {
-                recommendations = recommendations.filter(r => !r.includes('M Series') && !r.includes('Split Systems'));
-            }
-            
-            preview.textContent = recommendations.length > 0 ? 
-                `Will show: ${recommendations.join(', ')} at ${capacity}kW` : 
-                'No suitable equipment for this combination';
-        }
-
-        function updatePipeSizing(capacity) {
-            const preview = document.getElementById('pipeSizingPreview');
-            
-            if (!capacity) {
-                preview.textContent = 'Select capacity to see pipe size recommendations...';
-                return;
-            }
-            
-            const cap = parseFloat(capacity);
-            let liquidPipe, gasPipe, maxRun;
-            
-            if (cap <= 3.5) {
-                liquidPipe = '1/4"';
-                gasPipe = '3/8"';
-                maxRun = '20m';
-            } else if (cap <= 5.0) {
-                liquidPipe = '1/4"';
-                gasPipe = '1/2"';
-                maxRun = '30m';
-            } else if (cap <= 7.1) {
-                liquidPipe = '3/8"';
-                gasPipe = '5/8"';
-                maxRun = '40m';
-            } else if (cap <= 10.0) {
-                liquidPipe = '3/8"';
-                gasPipe = '3/4"';
-                maxRun = '45m';
-            } else {
-                liquidPipe = '1/2"';
-                gasPipe = '7/8"';
-                maxRun = '50m';
-            }
-            
-            preview.textContent = `Auto-selected: ${liquidPipe} × ${gasPipe} pre-insulated set (Max: ${maxRun})`;
-        }
-
-        function updateCableTrayCalculation(pipeDistance) {
-            const preview = document.getElementById('cableTrayPreview');
-            
-            if (!pipeDistance) {
-                preview.textContent = 'Select pipe run distance for tray calculations...';
-                return;
-            }
-            
-            const distance = parseInt(pipeDistance);
-            const allowance = 5; // 2.5m each end
-            const totalDistance = distance + allowance;
-            const trayLengths = Math.ceil(totalDistance / 3); // 3m tray lengths
-            
-            preview.textContent = `Auto-calculated: ${trayLengths} × 3m cable tray lengths`;
-        }
-
-        function updateMaterialsPreview(capacity, pipeDistance, unitType) {
-            const preview = document.getElementById('materialsPreview');
-            
-            if (!capacity || !pipeDistance) {
-                preview.textContent = 'Materials will be automatically calculated...';
-                return;
-            }
-            
-            let materials = [];
-            
-            // Pipe set
-            const cap = parseFloat(capacity);
-            if (cap <= 3.5) materials.push('1/4" × 3/8" pipe set');
-            else if (cap <= 5.0) materials.push('1/4" × 1/2" pipe set');
-            else if (cap <= 7.1) materials.push('3/8" × 5/8" pipe set');
-            else if (cap <= 10.0) materials.push('3/8" × 3/4" pipe set');
-            else materials.push('1/2" × 7/8" pipe set');
-            
-            // Cable tray
-            const distance = parseInt(pipeDistance);
-            const trayLengths = Math.ceil((distance + 5) / 3);
-            materials.push(`${trayLengths} × cable tray lengths`);
-            
-            // Unit-specific materials
-            if (unitType === 'ceiling-cassette') {
-                materials.push('Cassette suspension kit', 'Threaded studding', 'Uni-Strut');
-            } else if (unitType === 'wall') {
-                materials.push('Wall mounting brackets');
-            }
-            
-            // Drainage
-            materials.push('Condensate drainage', 'P-trap kit');
-            
-            preview.textContent = `Pre-selected: ${materials.join(', ')}`;
         }
 
         function generateQuote() {
             if (validateCurrentStep()) {
-                // Collect all form data
-                const formData = new FormData(document.getElementById('projectWizard'));
+                // Collect form data
+                const form = document.getElementById('projectWizard');
+                const formData = new FormData(form);
                 const projectData = {};
                 
                 // Convert FormData to object
-                for (let [key, value] of formData.entries()) {
-                    if (projectData[key]) {
-                        // Handle multiple values (like checkboxes)
-                        if (Array.isArray(projectData[key])) {
-                            projectData[key].push(value);
-                        } else {
-                            projectData[key] = [projectData[key], value];
-                        }
-                    } else {
-                        projectData[key] = value;
-                    }
+                for (let pair of formData.entries()) {
+                    projectData[pair[0]] = pair[1];
                 }
                 
-                // Store project data globally
-                window.projectData = projectData;
-                // Store project data in sessionStorage for persistence
+                // Store in sessionStorage
                 sessionStorage.setItem('oracleProjectData', JSON.stringify(projectData));
-                // Store intelligence data for equipment filtering
-                const.intelligenceData = {
+                
+                const intelligenceData = {
                     capacity: parseFloat(projectData.capacityRequired),
                     unitType: projectData.indoorUnitType,
                     pipeDistance: parseInt(projectData.pipeRunDistance),
                     projectType: projectData.projectType,
-                    manufacturerPref: projectData.manufacturerPreference,
-                    complexity: projectData.installationDifficulty,
-                    drainageOption: projectData.drainageOption,
-                    accessEquipment: projectData.accessEquipment,
-                    coreHoles: projectData.coreHoles
+                    manufacturerPref: projectData.manufacturerPreference
                 };
-                sessionStorage.setItem('oracleIntelligenceData', JSON.stringify(intelligenceData));
-                // Show loading state
-                document.getElementById('generateQuote').textContent = 'Generating Intelligent Quote...';
-                document.getElementById('generateQuote').disabled = true;
                 
-                // Simulate processing time then redirect
-                setTimeout(() => {
+                sessionStorage.setItem('oracleIntelligenceData', JSON.stringify(intelligenceData));
+                
+                // Show loading state
+                document.getElementById('generateQuote').textContent = 'Generating Quote...';
+                
+                // Redirect after delay
+                setTimeout(function() {
                     window.location.href = 'equipment.html';
-                }, 1500);
+                }, 1000);
             }
         }
     </script>
+
+    <style>
+        .company-logo-placeholder {
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary-green);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group input.error,
+        .form-group select.error {
+            border-color: #FF3B30;
+            box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.1);
+        }
+    </style>
 </body>
 </html>
