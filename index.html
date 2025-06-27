@@ -1,339 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oracle Smart Pricing Tool</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <header class="wizard-header">
-            <div class="logo-section">
-                <div class="company-logo-placeholder">CDL</div>
-                <div class="tool-title">
-                    <h1>Oracle Smart Pricing Tool</h1>
-                    <p>Intelligent Air Conditioning System Pricing</p>
-                </div>
-            </div>
-        </header>
+// FIX 1: Outdoor unit switching when changing indoor manufacturer
+function updateIndoorManufacturer() {
+    const manufacturer = document.getElementById('indoorManufacturer').value;
+    state.indoorManufacturer = manufacturer;
+    
+    // Auto-update outdoor manufacturer to match (FIXES ISSUE #1)
+    state.outdoorManufacturer = manufacturer;
+    document.getElementById('outdoorManufacturer').value = manufacturer;
+    
+    displayIndoorUnits();
+    displayOutdoorUnits(); // Update outdoor units when indoor changes
+}
 
-        <main class="wizard-main">
-            <div class="wizard-container">
-                <div class="wizard-header-section">
-                    <h2>Project Configuration Wizard</h2>
-                    <p>Complete the form below to generate your intelligent quote</p>
-                </div>
-
-                <!-- Single Page Form - No Steps -->
-                <form id="projectForm" class="wizard-form">
+// FIX 2: Materials filtering to remove unnecessary items
+function updateMaterials() {
+    const container = document.getElementById('materialsList');
+    container.innerHTML = '';
+    
+    state.materials = [];
+    
+    // Filter out unnecessary materials (FIXES ISSUE #2)
+    Object.values(materialsDatabase).forEach(category => {
+        category.forEach(material => {
+            if (!material.exclude) { // Filter out flare nuts and other unnecessary items
+                if (material.required || shouldIncludeMaterial(material)) {
+                    state.materials.push(material);
                     
-                    <div class="form-section">
-                        <h3>👤 Customer Information</h3>
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="customerName">Customer Name *</label>
-                                <input type="text" id="customerName" name="customerName" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="projectName">Project Name</label>
-                                <input type="text" id="projectName" name="projectName" placeholder="e.g., Office Air Con Installation">
-                            </div>
-                            
-                            <div class="form-group full-width">
-                                <label for="customerAddress">Installation Address *</label>
-                                <textarea id="customerAddress" name="customerAddress" rows="3" required></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="contactPhone">Contact Phone</label>
-                                <input type="tel" id="contactPhone" name="contactPhone">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="contactEmail">Contact Email</label>
-                                <input type="email" id="contactEmail" name="contactEmail">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-section">
-                        <h3>⚙️ System Requirements</h3>
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="projectType">Project Type *</label>
-                                <select id="projectType" name="projectType" required>
-                                    <option value="">Select project type...</option>
-                                    <option value="domestic">Domestic Installation</option>
-                                    <option value="commercial">Commercial Installation</option>
-                                    <option value="mixed">Mixed Use</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="capacityRequired">Cooling Capacity (kW) *</label>
-                                <select id="capacityRequired" name="capacityRequired" required>
-                                    <option value="">Select capacity...</option>
-                                    <option value="2.5">2.5kW (Small room/office)</option>
-                                    <option value="3.5">3.5kW (Medium room/office)</option>
-                                    <option value="5.0">5.0kW (Large room/small office)</option>
-                                    <option value="6.0">6.0kW (Large room/medium office)</option>
-                                    <option value="7.1">7.1kW (Very large room/office)</option>
-                                    <option value="9.0">9.0kW (Small commercial space)</option>
-                                    <option value="10.0">10.0kW (Medium commercial space)</option>
-                                    <option value="12.0">12.0kW (Large commercial space)</option>
-                                    <option value="14.0">14.0kW (Very large commercial)</option>
-                                    <option value="16.0">16.0kW (Industrial application)</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="indoorUnitType">Indoor Unit Type *</label>
-                                <select id="indoorUnitType" name="indoorUnitType" required>
-                                    <option value="">Select unit type...</option>
-                                    <option value="wall">Wall Mounted Split</option>
-                                    <option value="floor">Floor Standing</option>
-                                    <option value="ceiling-cassette">Ceiling Cassette (4-way)</option>
-                                    <option value="ceiling-ducted">Ceiling Ducted</option>
-                                    <option value="multi-split">Multi-Split System</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="manufacturerPreference">Manufacturer Preference</label>
-                                <select id="manufacturerPreference" name="manufacturerPreference">
-                                    <option value="any">Any Manufacturer (Best Value)</option>
-                                    <option value="mitsubishi">Mitsubishi Electric Preferred</option>
-                                    <option value="daikin">Daikin Preferred</option>
-                                    <option value="fujitsu">Fujitsu Preferred</option>
-                                    <option value="mhi">MHI Preferred</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="pipeRunDistance">Pipe Run Distance (meters) *</label>
-                                <select id="pipeRunDistance" name="pipeRunDistance" required>
-                                    <option value="">Select distance...</option>
-                                    <option value="5">Up to 5m (Very short run)</option>
-                                    <option value="10">5-10m (Short run)</option>
-                                    <option value="15">10-15m (Medium run)</option>
-                                    <option value="20">15-20m (Long run)</option>
-                                    <option value="25">20-25m (Very long run)</option>
-                                    <option value="30">25-30m (Extended run)</option>
-                                    <option value="40">30-40m (Commercial long run)</option>
-                                    <option value="50">40-50m (Maximum run)</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="installationDifficulty">Installation Complexity</label>
-                                <select id="installationDifficulty" name="installationDifficulty">
-                                    <option value="standard">Standard (Easy access, ground floor)</option>
-                                    <option value="moderate">Moderate (Some height work, normal access)</option>
-                                    <option value="difficult">Difficult (High access, tight spaces)</option>
-                                    <option value="complex">Complex (Specialist access, multiple obstacles)</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-section">
-                        <h3>🏗️ Site Conditions</h3>
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="drainageOption">Condensate Drainage</label>
-                                <select id="drainageOption" name="drainageOption">
-                                    <option value="gravity">Gravity drainage (downhill to outside)</option>
-                                    <option value="pump-required">Condensate pump required</option>
-                                    <option value="external-only">External drainage only</option>
-                                    <option value="assessment-needed">Assessment required</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="accessEquipment">Access Equipment Required</label>
-                                <select id="accessEquipment" name="accessEquipment">
-                                    <option value="none">No special access required</option>
-                                    <option value="ladders">Extension ladders sufficient</option>
-                                    <option value="scaffold">Mobile scaffold required</option>
-                                    <option value="cherry-picker">Cherry picker required</option>
-                                    <option value="specialist">Specialist access required</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="coreHoles">Core Drilling Required</label>
-                                <select id="coreHoles" name="coreHoles">
-                                    <option value="none">No core drilling</option>
-                                    <option value="small">1-2 small holes (110mm)</option>
-                                    <option value="medium">2-3 medium holes (150mm)</option>
-                                    <option value="large">Large holes or multiple (200mm+)</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group full-width">
-                                <label for="additionalNotes">Additional Notes / Special Requirements</label>
-                                <textarea id="additionalNotes" name="additionalNotes" rows="4" placeholder="Any specific requirements, constraints, or notes about the installation..."></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Generate Quote Button -->
-                    <div class="generate-section">
-                        <button type="button" onclick="generateQuote()" class="generate-btn">
-                            🚀 Generate Intelligent Quote
-                        </button>
-                        <p class="help-text">Click above to create your professional quote and equipment selection</p>
-                    </div>
-
-                </form>
-            </div>
-        </main>
-    </div>
-
-    <script>
-        function generateQuote() {
-            alert('Generate Quote button clicked!');
-            
-            // Validate required fields
-            var customerName = document.getElementById('customerName').value;
-            var customerAddress = document.getElementById('customerAddress').value;
-            var projectType = document.getElementById('projectType').value;
-            var capacity = document.getElementById('capacityRequired').value;
-            var unitType = document.getElementById('indoorUnitType').value;
-            var pipeDistance = document.getElementById('pipeRunDistance').value;
-            
-            if (!customerName || !customerAddress || !projectType || !capacity || !unitType || !pipeDistance) {
-                alert('Please fill in all required fields (marked with *)');
-                return;
-            }
-            
-            alert('Validation passed! Collecting data...');
-            
-            // Simple data collection
-            var projectData = {
-                customerName: customerName,
-                customerAddress: customerAddress,
-                projectName: document.getElementById('projectName').value,
-                contactPhone: document.getElementById('contactPhone').value,
-                contactEmail: document.getElementById('contactEmail').value,
-                projectType: projectType,
-                capacityRequired: capacity,
-                indoorUnitType: unitType,
-                manufacturerPreference: document.getElementById('manufacturerPreference').value,
-                pipeRunDistance: pipeDistance,
-                installationDifficulty: document.getElementById('installationDifficulty').value,
-                drainageOption: document.getElementById('drainageOption').value,
-                accessEquipment: document.getElementById('accessEquipment').value,
-                coreHoles: document.getElementById('coreHoles').value,
-                additionalNotes: document.getElementById('additionalNotes').value
-            };
-            
-            alert('Data collected successfully!');
-            
-            // Store data
-            try {
-                sessionStorage.setItem('oracleProjectData', JSON.stringify(projectData));
-                alert('Project data stored!');
-                
-                var intelligenceData = {
-                    capacity: parseFloat(capacity),
-                    unitType: unitType,
-                    pipeDistance: parseInt(pipeDistance),
-                    projectType: projectType,
-                    manufacturerPref: document.getElementById('manufacturerPreference').value
-                };
-                
-                sessionStorage.setItem('oracleIntelligenceData', JSON.stringify(intelligenceData));
-                alert('Intelligence data stored!');
-                
-                // Test read back
-                var testData = sessionStorage.getItem('oracleProjectData');
-                if (testData) {
-                    alert('SUCCESS! Data verified. Redirecting to equipment page...');
-                    
-                    // Change button text
-                    var btn = document.querySelector('.generate-btn');
-                    btn.textContent = 'Redirecting to Equipment Selection...';
-                    btn.disabled = true;
-                    
-                    // Redirect after 2 seconds
-                    setTimeout(function() {
-                        window.location.href = 'equipment.html';
-                    }, 2000);
-                    
-                } else {
-                    alert('ERROR: Could not verify data storage');
+                    const item = document.createElement('div');
+                    item.className = 'material-item';
+                    item.innerHTML = `
+                        <span>${material.name}</span>
+                        <span>£${material.price.toFixed(2)}</span>
+                    `;
+                    container.appendChild(item);
                 }
-                
-            } catch (error) {
-                alert('ERROR storing data: ' + error.message);
             }
-        }
-    </script>
+        });
+    });
+    
+    updateCableTrayWidth(); // Auto-select cable tray width
+    calculateTotals();
+}
 
-    <style>
-        .company-logo-placeholder {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: #00A651;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
+// FIX 3: Intelligent cable tray width selection
+function updateCableTrayWidth() {
+    const cableCount = calculateCableRequirements();
+    let recommendedWidth = 100;
+    
+    if (cableCount > 10) recommendedWidth = 300;
+    else if (cableCount > 6) recommendedWidth = 200;
+    else if (cableCount > 3) recommendedWidth = 150;
+    
+    document.getElementById('cableTrayWidth').value = recommendedWidth;
+}
+
+function calculateCableRequirements() {
+    // Calculate based on system capacity and type
+    const baseCount = state.capacity ? Math.ceil(state.capacity / 2) : 2;
+    const systemMultiplier = state.systemType === 'multi-split' ? 1.5 : 1;
+    return Math.ceil(baseCount * systemMultiplier);
+}
+
+// FIX 4: Simplified labour structure
+function updateLabour() {
+    const labourType = document.getElementById('labourType').value;
+    const container = document.getElementById('labourBreakdown');
+    container.innerHTML = '';
+    
+    state.labour = labourRates[labourType] || {};
+    
+    Object.values(state.labour).forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'material-item';
+        const cost = item.rate * item.hours;
+        div.innerHTML = `
+            <span>${item.description} (${item.hours}h @ £${item.rate}/h)</span>
+            <span>£${cost.toFixed(2)}</span>
+        `;
+        container.appendChild(div);
+    });
+    
+    calculateTotals();
+}
+
+// FIX 5: Hire equipment with delivery costs
+function updateHireBreakdown() {
+    const container = document.getElementById('hireBreakdown');
+    container.innerHTML = '';
+    
+    const distance = parseFloat(document.getElementById('deliveryDistance').value) || 0;
+    const deliveryMultiplier = distance > 50 ? 1.5 : 1;
+    
+    state.hireEquipment.forEach(item => {
+        const deliveryCost = item.delivery * deliveryMultiplier;
+        const totalCost = item.daily + deliveryCost;
         
-        .form-section {
-            margin: 30px 0;
-            padding: 25px;
-            background: #f9f9f9;
-            border-radius: 12px;
-            border-left: 4px solid #00A651;
-        }
-        
-        .form-section h3 {
-            color: #00A651;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
-        
-        .generate-section {
-            text-align: center;
-            margin: 40px 0;
-            padding: 30px;
-            background: linear-gradient(135deg, #00A651, #008B44);
-            border-radius: 20px;
-            color: white;
-        }
-        
-        .generate-btn {
-            background: white;
-            color: #00A651;
-            border: none;
-            padding: 20px 40px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .generate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .help-text {
-            margin-top: 15px;
-            opacity: 0.9;
-            font-size: 1rem;
-        }
-    </style>
-</body>
-</html>
+        const div = document.createElement('div');
+        div.className = 'material-item';
+        div.innerHTML = `
+            <div>
+                <strong>${item.name}</strong><br>
+                <small>Daily: £${item.daily} + Delivery: £${deliveryCost.toFixed(2)}</small>
+            </div>
+            <span>£${totalCost.toFixed(2)}</span>
+        `;
+        container.appendChild(div);
+    });
+    
+    calculateTotals();
+}
+
+// FIX 6: Summary totals calculation
+function calculateTotals() {
+    // Equipment total
+    state.totals.equipment = 0;
+    if (state.selectedIndoorUnit) state.totals.equipment += state.selectedIndoorUnit.price;
+    if (state.selectedOutdoorUnit) state.totals.equipment += state.selectedOutdoorUnit.price;
+    
+    // Materials total
+    state.totals.materials = state.materials.reduce((sum, material) => sum + material.price, 0);
+    
+    // Cable tray cost
+    const cableTrayWidth = parseInt(document.getElementById('cableTrayWidth').value) || 100;
+    const cableTrayCost = (cableTrayWidth / 100) * 25; // £25 per 100mm width
+    state.totals.materials += cableTrayCost;
+    
+    // Labour total
+    state.totals.labour = Object.values(state.labour)
+        .reduce((sum, item) => sum + (item.rate * item.hours), 0);
+    
+    // Hire equipment total
+    const distance = parseFloat(document.getElementById('deliveryDistance').value) || 0;
+    const deliveryMultiplier = distance > 50 ? 1.5 : 1;
+    state.totals.hire = state.hireEquipment
+        .reduce((sum, item) => sum + item.daily + (item.delivery * deliveryMultiplier), 0);
+    
+    // Grand total
+    state.totals.grand = state.totals.equipment + state.totals.materials + 
+                       state.totals.labour + state.totals.hire;
+}
+
+// Update summary display
+function updateSummaryTotals() {
+    calculateTotals();
+    
+    document.getElementById('equipmentTotal').textContent = `£${state.totals.equipment.toFixed(2)}`;
+    document.getElementById('materialsTotal').textContent = `£${state.totals.materials.toFixed(2)}`;
+    document.getElementById('labourTotal').textContent = `£${state.totals.labour.toFixed(2)}`;
+    document.getElementById('hireTotal').textContent = `£${state.totals.hire.toFixed(2)}`;
+    document.getElementById('grandTotal').textContent = `£${state.totals.grand.toFixed(2)}`;
+}
+
+// Update your materials database to exclude unnecessary items
+const materialsDatabase = {
+    piping: [
+        { id: 'pipe-6mm', name: '6mm Copper Pipe (per meter)', price: 8.50, required: true },
+        { id: 'pipe-10mm', name: '10mm Copper Pipe (per meter)', price: 12.50, required: true }
+    ],
+    electrical: [
+        { id: 'cable-3core', name: '3 Core Cable (per meter)', price: 4.20, required: true },
+        { id: 'isolator', name: 'Electrical Isolator', price: 45.00, required: true }
+    ],
+    fittings: [
+        { id: 'bracket-wall', name: 'Wall Mounting Bracket', price: 35.00, required: true },
+        { id: 'drain-pump', name: 'Condensate Drain Pump', price: 120.00, required: false }
+    ],
+    unnecessary: [
+        { id: 'flare-nuts', name: 'Flare Nuts', price: 5.00, required: false, exclude: true }
+        // Add other unnecessary items here with exclude: true
+    ]
+};
