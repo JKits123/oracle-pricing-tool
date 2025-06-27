@@ -108,6 +108,17 @@
                                     <option value="multi-split">Multi-Split System</option>
                                 </select>
                             </div>
+
+                            <div class="form-group">
+                                <label for="manufacturerPreference">Manufacturer Preference</label>
+                                <select id="manufacturerPreference" name="manufacturerPreference">
+                                    <option value="any">Any Manufacturer (Best Value)</option>
+                                    <option value="mitsubishi">Mitsubishi Electric Preferred</option>
+                                    <option value="daikin">Daikin Preferred</option>
+                                    <option value="fujitsu">Fujitsu Preferred</option>
+                                    <option value="mhi">MHI Preferred</option>
+                                </select>
+                            </div>
                             
                             <div class="form-group">
                                 <label for="pipeRunDistance">Pipe Run Distance (meters) *</label>
@@ -131,16 +142,6 @@
                                     <option value="moderate">Moderate (Some height work, normal access)</option>
                                     <option value="difficult">Difficult (High access, tight spaces)</option>
                                     <option value="complex">Complex (Specialist access, multiple obstacles)</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="existingPowerSupply">Existing Power Supply</label>
-                                <select id="existingPowerSupply" name="existingPowerSupply">
-                                    <option value="adequate">Adequate supply available</option>
-                                    <option value="upgrade-needed">Power upgrade required</option>
-                                    <option value="new-supply">New supply required</option>
-                                    <option value="unknown">Unknown - assessment needed</option>
                                 </select>
                             </div>
                         </div>
@@ -261,6 +262,10 @@
                             <h4>Estimated Cable Tray:</h4>
                             <p id="cableTrayPreview">Select pipe run distance for tray calculations...</p>
                         </div>
+                        <div class="preview-section">
+                            <h4>Pre-Selected Materials:</h4>
+                            <p id="materialsPreview">Materials will be automatically calculated...</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -269,7 +274,7 @@
 
     <script src="scripts.js"></script>
     <script>
-        // Wizard functionality
+        // Wizard functionality - Fixed refresh hanging issue
         let currentStep = 1;
         const totalSteps = 3;
 
@@ -278,16 +283,31 @@
         });
 
         function initializeWizard() {
-            // Add event listeners for intelligent previews
-            document.getElementById('capacityRequired').addEventListener('change', updateIntelligencePreview);
-            document.getElementById('indoorUnitType').addEventListener('change', updateIntelligencePreview);
-            document.getElementById('pipeRunDistance').addEventListener('change', updateIntelligencePreview);
-            document.getElementById('projectType').addEventListener('change', updateIntelligencePreview);
+            // Add event listeners for intelligent previews - Fixed to prevent page refresh
+            const selects = ['capacityRequired', 'indoorUnitType', 'pipeRunDistance', 'projectType', 'manufacturerPreference'];
+            selects.forEach(selectId => {
+                const element = document.getElementById(selectId);
+                if (element) {
+                    element.addEventListener('change', function(e) {
+                        e.preventDefault();
+                        updateIntelligencePreview();
+                    });
+                }
+            });
             
             // Navigation event listeners
-            document.getElementById('nextBtn').addEventListener('click', nextStep);
-            document.getElementById('prevBtn').addEventListener('click', prevStep);
-            document.getElementById('generateQuote').addEventListener('click', generateQuote);
+            document.getElementById('nextBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                nextStep();
+            });
+            document.getElementById('prevBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                prevStep();
+            });
+            document.getElementById('generateQuote').addEventListener('click', function(e) {
+                e.preventDefault();
+                generateQuote();
+            });
             
             updateProgressBar();
         }
@@ -395,13 +415,15 @@
             const unitType = document.getElementById('indoorUnitType').value;
             const pipeDistance = document.getElementById('pipeRunDistance').value;
             const projectType = document.getElementById('projectType').value;
+            const manufacturerPref = document.getElementById('manufacturerPreference').value;
             
-            updateEquipmentRecommendations(capacity, unitType, projectType);
+            updateEquipmentRecommendations(capacity, unitType, projectType, manufacturerPref);
             updatePipeSizing(capacity);
             updateCableTrayCalculation(pipeDistance);
+            updateMaterialsPreview(capacity, pipeDistance, unitType);
         }
 
-        function updateEquipmentRecommendations(capacity, unitType, projectType) {
+        function updateEquipmentRecommendations(capacity, unitType, projectType, manufacturerPref) {
             const preview = document.getElementById('equipmentPreview');
             
             if (!capacity || !unitType) {
@@ -412,26 +434,56 @@
             let recommendations = [];
             const cap = parseFloat(capacity);
             
-            // Determine suitable manufacturers based on capacity and application
-            if (cap <= 7.1 && (projectType === 'domestic' || unitType === 'wall')) {
-                recommendations.push('Mitsubishi M Series', 'Daikin Standard Range', 'Fujitsu Split Systems', 'MHI RAC');
+            // Smart filtering based on manufacturer preference
+            if (manufacturerPref === 'mitsubishi') {
+                if (cap <= 9.0 && (projectType === 'domestic' || unitType === 'wall')) {
+                    recommendations.push('Mitsubishi M Series');
+                }
+                if (cap >= 2.5) {
+                    recommendations.push('Mitsubishi Mr Slim');
+                }
+            } else if (manufacturerPref === 'daikin') {
+                if (cap <= 7.1 && (projectType === 'domestic' || unitType === 'wall')) {
+                    recommendations.push('Daikin Standard Range');
+                }
+                if (cap >= 3.5) {
+                    recommendations.push('Daikin Sky Air');
+                }
+            } else if (manufacturerPref === 'fujitsu') {
+                if (cap <= 9.0 && (projectType === 'domestic' || unitType === 'wall')) {
+                    recommendations.push('Fujitsu Split Systems');
+                }
+                if (cap >= 10.0) {
+                    recommendations.push('Fujitsu Air Stage');
+                }
+            } else if (manufacturerPref === 'mhi') {
+                if (cap <= 7.1) {
+                    recommendations.push('MHI RAC');
+                }
+                if (cap >= 5.0) {
+                    recommendations.push('MHI PAC');
+                }
+            } else {
+                // Any manufacturer - show best options
+                if (cap <= 7.1 && (projectType === 'domestic' || unitType === 'wall')) {
+                    recommendations.push('M Series', 'Standard Range', 'Split Systems');
+                }
+                if (cap >= 5.0 && (projectType === 'commercial' || unitType === 'ceiling-cassette')) {
+                    recommendations.push('Mr Slim', 'Sky Air', 'PAC');
+                }
+                if (cap >= 10.0) {
+                    recommendations.push('Air Stage', 'Sky Air', 'PAC');
+                }
             }
             
-            if (cap >= 5.0 && (projectType === 'commercial' || unitType === 'ceiling-cassette' || unitType === 'multi-split')) {
-                recommendations.push('Mitsubishi Mr Slim', 'Daikin Sky Air', 'MHI PAC');
-            }
-            
-            if (cap >= 10.0) {
-                recommendations.push('Fujitsu Air Stage', 'Daikin Sky Air', 'MHI PAC');
-            }
-            
+            // Filter out incompatible unit types
             if (unitType === 'ceiling-cassette') {
                 recommendations = recommendations.filter(r => !r.includes('M Series') && !r.includes('Split Systems'));
             }
             
             preview.textContent = recommendations.length > 0 ? 
-                `Recommended: ${recommendations.join(', ')}` : 
-                'No specific recommendations for this combination';
+                `Will show: ${recommendations.join(', ')} at ${capacity}kW` : 
+                'No suitable equipment for this combination';
         }
 
         function updatePipeSizing(capacity) {
@@ -467,7 +519,7 @@
                 maxRun = '50m';
             }
             
-            preview.textContent = `Liquid: ${liquidPipe}, Gas: ${gasPipe} (Max run: ${maxRun})`;
+            preview.textContent = `Auto-selected: ${liquidPipe} × ${gasPipe} pre-insulated set (Max: ${maxRun})`;
         }
 
         function updateCableTrayCalculation(pipeDistance) {
@@ -483,7 +535,43 @@
             const totalDistance = distance + allowance;
             const trayLengths = Math.ceil(totalDistance / 3); // 3m tray lengths
             
-            preview.textContent = `${trayLengths} × 3m cable tray lengths (${totalDistance}m total inc. allowances)`;
+            preview.textContent = `Auto-calculated: ${trayLengths} × 3m cable tray lengths`;
+        }
+
+        function updateMaterialsPreview(capacity, pipeDistance, unitType) {
+            const preview = document.getElementById('materialsPreview');
+            
+            if (!capacity || !pipeDistance) {
+                preview.textContent = 'Materials will be automatically calculated...';
+                return;
+            }
+            
+            let materials = [];
+            
+            // Pipe set
+            const cap = parseFloat(capacity);
+            if (cap <= 3.5) materials.push('1/4" × 3/8" pipe set');
+            else if (cap <= 5.0) materials.push('1/4" × 1/2" pipe set');
+            else if (cap <= 7.1) materials.push('3/8" × 5/8" pipe set');
+            else if (cap <= 10.0) materials.push('3/8" × 3/4" pipe set');
+            else materials.push('1/2" × 7/8" pipe set');
+            
+            // Cable tray
+            const distance = parseInt(pipeDistance);
+            const trayLengths = Math.ceil((distance + 5) / 3);
+            materials.push(`${trayLengths} × cable tray lengths`);
+            
+            // Unit-specific materials
+            if (unitType === 'ceiling-cassette') {
+                materials.push('Cassette suspension kit', 'Threaded studding', 'Uni-Strut');
+            } else if (unitType === 'wall') {
+                materials.push('Wall mounting brackets');
+            }
+            
+            // Drainage
+            materials.push('Condensate drainage', 'P-trap kit');
+            
+            preview.textContent = `Pre-selected: ${materials.join(', ')}`;
         }
 
         function generateQuote() {
@@ -509,17 +597,21 @@
                 // Store project data globally
                 window.projectData = projectData;
                 
-                // Store intelligence data
+                // Store intelligence data for equipment filtering
                 window.intelligenceData = {
                     capacity: parseFloat(projectData.capacityRequired),
                     unitType: projectData.indoorUnitType,
                     pipeDistance: parseInt(projectData.pipeRunDistance),
                     projectType: projectData.projectType,
-                    complexity: projectData.installationDifficulty
+                    manufacturerPref: projectData.manufacturerPreference,
+                    complexity: projectData.installationDifficulty,
+                    drainageOption: projectData.drainageOption,
+                    accessEquipment: projectData.accessEquipment,
+                    coreHoles: projectData.coreHoles
                 };
                 
                 // Show loading state
-                document.getElementById('generateQuote').textContent = 'Generating Quote...';
+                document.getElementById('generateQuote').textContent = 'Generating Intelligent Quote...';
                 document.getElementById('generateQuote').disabled = true;
                 
                 // Simulate processing time then redirect
