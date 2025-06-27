@@ -596,9 +596,10 @@
                 
                 // Store project data globally
                 window.projectData = projectData;
-                
+                // Store project data in sessionStorage for persistence
+                sessionStorage.setItem('oracleProjectData', JSON.stringify(projectData));
                 // Store intelligence data for equipment filtering
-                window.intelligenceData = {
+                const.intelligenceData = {
                     capacity: parseFloat(projectData.capacityRequired),
                     unitType: projectData.indoorUnitType,
                     pipeDistance: parseInt(projectData.pipeRunDistance),
@@ -609,7 +610,7 @@
                     accessEquipment: projectData.accessEquipment,
                     coreHoles: projectData.coreHoles
                 };
-                
+                sessionStorage.setItem('oracleIntelligenceData', JSON.stringify(intelligenceData));
                 // Show loading state
                 document.getElementById('generateQuote').textContent = 'Generating Intelligent Quote...';
                 document.getElementById('generateQuote').disabled = true;
