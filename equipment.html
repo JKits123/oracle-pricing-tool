@@ -135,118 +135,121 @@
     <script>
         // Equipment Database - Comprehensive but filtered by intelligence
         const equipmentDatabase = {
-            indoorUnits: {
-                mitsubishi: {
-                    wall: [
-                        { capacity: 2.5, model: "MSZ-AP25VGK", description: "M Series Wall Unit 2.5kW", cost: 445, type: "wall", suitableFor: ["domestic", "commercial"] },
-                        { capacity: 3.5, model: "MSZ-AP35VGK", description: "M Series Wall Unit 3.5kW", cost: 525, type: "wall", suitableFor: ["domestic", "commercial"] },
-                        { capacity: 5.0, model: "MSZ-AP50VGK", description: "M Series Wall Unit 5.0kW", cost: 685, type: "wall", suitableFor: ["domestic", "commercial"] },
-                        { capacity: 6.0, model: "MSZ-AP60VGK", description: "M Series Wall Unit 6.0kW", cost: 825, type: "wall", suitableFor: ["domestic", "commercial"] },
-                        { capacity: 7.1, model: "MSZ-AP71VGK", description: "M Series Wall Unit 7.1kW", cost: 945, type: "wall", suitableFor: ["domestic", "commercial"] }
-                    ],
-                    cassette: [
-                        { capacity: 5.0, model: "PLA-M50EA", description: "Mr Slim Cassette 5.0kW", cost: 1245, type: "ceiling-cassette", suitableFor: ["commercial"] },
-                        { capacity: 6.0, model: "PLA-M60EA", description: "Mr Slim Cassette 6.0kW", cost: 1385, type: "ceiling-cassette", suitableFor: ["commercial"] },
-                        { capacity: 7.1, model: "PLA-M71EA", description: "Mr Slim Cassette 7.1kW", cost: 1525, type: "ceiling-cassette", suitableFor: ["commercial"] },
-                        { capacity: 9.0, model: "PLA-M90EA", description: "Mr Slim Cassette 9.0kW", cost: 1745, type: "ceiling-cassette", suitableFor: ["commercial"] },
-                        { capacity: 10.0, model: "PLA-M100EA", description: "Mr Slim Cassette 10.0kW", cost: 1925, type: "ceiling-cassette", suitableFor: ["commercial"] }
-                    ],
-                    floor: [
-                        { capacity: 5.0, model: "MFZ-KT50VG", description: "Floor Standing 5.0kW", cost: 1125, type: "floor", suitableFor: ["commercial"] },
-                        { capacity: 7.1, model: "MFZ-KT71VG", description: "Floor Standing 7.1kW", cost: 1325, type: "floor", suitableFor: ["commercial"] }
-                    ]
-                },
-                daikin: {
-                    wall: [
-                        { capacity: 2.5, model: "FTXM25R", description: "Standard Range Wall 2.5kW", cost: 425, type: "wall", suitableFor: ["domestic"] },
-                        { capacity: 3.5, model: "FTXM35R", description: "Standard Range Wall 3.5kW", cost: 495, type: "wall", suitableFor: ["domestic"] },
-                        { capacity: 5.0, model: "FTXM50R", description: "Standard Range Wall 5.0kW", cost: 645, type: "wall", suitableFor: ["domestic"] },
-                        { capacity: 6.0, model: "FTXM60R", description: "Standard Range Wall 6.0kW", cost: 785, type: "wall", suitableFor: ["domestic"] },
-                        { capacity: 7.1, model: "FTXM71R", description: "Standard Range Wall 7.1kW", cost: 895, type: "wall", suitableFor: ["domestic"] }
-                    ],
-                    cassette: [
-                        { capacity: 5.0, model: "FCQ50F", description: "Sky Air Cassette 5.0kW", cost: 1185, type: "ceiling-cassette", suitableFor: ["commercial"] },
-                        { capacity: 6.0, model: "FCQ60F", description: "Sky Air Cassette 6.0kW", cost: 1325, type: "ceiling-cassette", suitableFor: ["commercial"] },
-                        { capacity: 7.1, model: "FCQ71F", description: "Sky Air Cassette 7.1kW", cost: 1465, type: "ceiling-cassette", suitableFor: ["commercial"] },
-                        { capacity: 10.0, model: "FCQ100F", description: "Sky Air Cassette 10.0kW", cost: 1825, type: "ceiling-cassette", suitableFor: ["commercial"] }
-                    ]
-                },
-                fujitsu: {
-                    wall: [
-                        { capacity: 2.5, model: "ASYG09KETA", description: "Split System Wall 2.5kW", cost: 415, type: "wall", suitableFor: ["domestic"] },
-                        { capacity: 3.5, model: "ASYG12KETA", description: "Split System Wall 3.5kW", cost: 475, type: "wall", suitableFor: ["domestic"] },
-                        { capacity: 5.0, model: "ASYG18KETA", description: "Split System Wall 5.0kW", cost: 625, type: "wall", suitableFor: ["domestic"] },
-                        { capacity: 7.1, model: "ASYG24KETA", description: "Split System Wall 7.1kW", cost: 865, type: "wall", suitableFor: ["domestic"] }
-                    ],
-                    cassette: [
-                        { capacity: 10.0, model: "AUXG36KRLB", description: "Air Stage Cassette 10.0kW", cost: 1945, type: "ceiling-cassette", suitableFor: ["commercial"] },
-                        { capacity: 12.0, model: "AUXG45KRLB", description: "Air Stage Cassette 12.0kW", cost: 2185, type: "ceiling-cassette", suitableFor: ["commercial"] },
-                        { capacity: 14.0, model: "AUXG54KRLB", description: "Air Stage Cassette 14.0kW", cost: 2425, type: "ceiling-cassette", suitableFor: ["commercial"] }
-                    ]
-                },
-                mhi: {
-                    wall: [
-                        { capacity: 2.5, model: "SRK25ZSA-W", description: "RAC Wall 2.5kW", cost: 465, type: "wall", suitableFor: ["domestic"] },
-                        { capacity: 3.5, model: "SRK35ZSA-W", description: "RAC Wall 3.5kW", cost: 545, type: "wall", suitableFor: ["domestic"] },
-                        { capacity: 5.0, model: "SRK50ZSA-W", description: "RAC Wall 5.0kW", cost: 705, type: "wall", suitableFor: ["domestic"] },
-                        { capacity: 7.1, model: "SRK71ZSA-W", description: "RAC Wall 7.1kW", cost: 925, type: "wall", suitableFor: ["domestic"] }
-                    ],
-                    cassette: [
-                        { capacity: 5.0, model: "PLA-RP50BA", description: "PAC Cassette 5.0kW", cost: 1285, type: "ceiling-cassette", suitableFor: ["commercial"] },
-                        { capacity: 6.0, model: "PLA-RP60BA", description: "PAC Cassette 6.0kW", cost: 1425, type: "ceiling-cassette", suitableFor: ["commercial"] },
-                        { capacity: 7.1, model: "PLA-RP71BA", description: "PAC Cassette 7.1kW", cost: 1565, type: "ceiling-cassette", suitableFor: ["commercial"] },
-                        { capacity: 10.0, model: "PLA-RP100BA", description: "PAC Cassette 10.0kW", cost: 1945, type: "ceiling-cassette", suitableFor: ["commercial"] }
-                    ]
-                }
-            },
-            outdoorUnits: {
-                mitsubishi: [
-                    { capacity: 2.5, model: "MUZ-AP25VG", description: "M Series Outdoor 2.5kW", cost: 425 },
-                    { capacity: 3.5, model: "MUZ-AP35VG", description: "M Series Outdoor 3.5kW", cost: 485 },
-                    { capacity: 5.0, model: "MUZ-AP50VG", description: "M Series Outdoor 5.0kW", cost: 625 },
-                    { capacity: 6.0, model: "MUZ-AP60VG", description: "M Series Outdoor 6.0kW", cost: 745 },
-                    { capacity: 7.1, model: "MUZ-AP71VG", description: "M Series Outdoor 7.1kW", cost: 845 },
-                    { capacity: 9.0, model: "PUHZ-ZRP90VKA", description: "Mr Slim Outdoor 9.0kW", cost: 1125 },
-                    { capacity: 10.0, model: "PUHZ-ZRP100VKA", description: "Mr Slim Outdoor 10.0kW", cost: 1245 }
-                ],
-                daikin: [
-                    { capacity: 2.5, model: "RXM25R", description: "Standard Outdoor 2.5kW", cost: 405 },
-                    { capacity: 3.5, model: "RXM35R", description: "Standard Outdoor 3.5kW", cost: 465 },
-                    { capacity: 5.0, model: "RXM50R", description: "Standard Outdoor 5.0kW", cost: 585 },
-                    { capacity: 6.0, model: "RXM60R", description: "Standard Outdoor 6.0kW", cost: 705 },
-                    { capacity: 7.1, model: "RXM71R", description: "Standard Outdoor 7.1kW", cost: 805 },
-                    { capacity: 10.0, model: "RZQ100F", description: "Sky Air Outdoor 10.0kW", cost: 1185 }
-                ],
-                fujitsu: [
-                    { capacity: 2.5, model: "AOYG09KETA", description: "Split Outdoor 2.5kW", cost: 395 },
-                    { capacity: 3.5, model: "AOYG12KETA", description: "Split Outdoor 3.5kW", cost: 445 },
-                    { capacity: 5.0, model: "AOYG18KETA", description: "Split Outdoor 5.0kW", cost: 565 },
-                    { capacity: 7.1, model: "AOYG24KETA", description: "Split Outdoor 7.1kW", cost: 785 },
-                    { capacity: 10.0, model: "AOYG36KRLB", description: "Air Stage Outdoor 10.0kW", cost: 1245 },
-                    { capacity: 12.0, model: "AOYG45KRLB", description: "Air Stage Outdoor 12.0kW", cost: 1425 },
-                    { capacity: 14.0, model: "AOYG54KRLB", description: "Air Stage Outdoor 14.0kW", cost: 1625 }
-                ],
-                mhi: [
-                    { capacity: 2.5, model: "SRC25ZSA-W", description: "RAC Outdoor 2.5kW", cost: 445 },
-                    { capacity: 3.5, model: "SRC35ZSA-W", description: "RAC Outdoor 3.5kW", cost: 505 },
-                    { capacity: 5.0, model: "SRC50ZSA-W", description: "RAC Outdoor 5.0kW", cost: 645 },
-                    { capacity: 7.1, model: "SRC71ZSA-W", description: "RAC Outdoor 7.1kW", cost: 845 },
-                    { capacity: 10.0, model: "PQRY-P100YLM-A", description: "PAC Outdoor 10.0kW", cost: 1285 }
-                ]
-            },
-            pipeSets: [
-                { liquidSize: "1/4", gasSize: "3/8", suitableFor: [2.5, 3.5], maxDistance: 20, cost: 125, description: "1/4\" × 3/8\" Pre-insulated Set" },
-                { liquidSize: "1/4", gasSize: "1/2", suitableFor: [5.0], maxDistance: 30, cost: 145, description: "1/4\" × 1/2\" Pre-insulated Set" },
-                { liquidSize: "1/4", gasSize: "1/2", suitableFor: [5.0, 6.0], maxDistance: 30, cost: 145, description: "1/4\" × 1/2\" Pre-insulated Set" }
-                { liquidSize: "3/8", gasSize: "3/4", suitableFor: [9.0, 10.0], maxDistance: 45, cost: 195, description: "3/8\" × 3/4\" Pre-insulated Set" },
-                { liquidSize: "1/2", gasSize: "7/8", suitableFor: [12.0, 14.0, 16.0], maxDistance: 50, cost: 225, description: "1/2\" × 7/8\" Pre-insulated Set" }
+    indoorUnits: {
+        mitsubishi: {
+            wall: [
+                { capacity: 2.5, model: "MSZ-AP25VGK", description: "M Series Wall Unit 2.5kW", cost: 445, type: "wall", suitableFor: ["domestic", "commercial"] },
+                { capacity: 3.5, model: "MSZ-AP35VGK", description: "M Series Wall Unit 3.5kW", cost: 525, type: "wall", suitableFor: ["domestic", "commercial"] },
+                { capacity: 5.0, model: "MSZ-AP50VGK", description: "M Series Wall Unit 5.0kW", cost: 685, type: "wall", suitableFor: ["domestic", "commercial"] },
+                { capacity: 6.0, model: "MSZ-AP60VGK", description: "M Series Wall Unit 6.0kW", cost: 825, type: "wall", suitableFor: ["domestic", "commercial"] },
+                { capacity: 7.1, model: "MSZ-AP71VGK", description: "M Series Wall Unit 7.1kW", cost: 945, type: "wall", suitableFor: ["domestic", "commercial"] }
             ],
-            cableTray: [
-                { length: 3, width: 100, description: "Cable Tray 3m × 100mm", cost: 45 },
-                { length: 3, width: 150, description: "Cable Tray 3m × 150mm", cost: 55 },
-                { length: 3, width: 200, description: "Cable Tray 3m × 200mm", cost: 65 }
+            cassette: [
+                { capacity: 5.0, model: "PLA-M50EA", description: "Mr Slim Cassette 5.0kW", cost: 1245, type: "ceiling-cassette", suitableFor: ["commercial"] },
+                { capacity: 6.0, model: "PLA-M60EA", description: "Mr Slim Cassette 6.0kW", cost: 1385, type: "ceiling-cassette", suitableFor: ["commercial"] },
+                { capacity: 7.1, model: "PLA-M71EA", description: "Mr Slim Cassette 7.1kW", cost: 1525, type: "ceiling-cassette", suitableFor: ["commercial"] },
+                { capacity: 9.0, model: "PLA-M90EA", description: "Mr Slim Cassette 9.0kW", cost: 1745, type: "ceiling-cassette", suitableFor: ["commercial"] },
+                { capacity: 10.0, model: "PLA-M100EA", description: "Mr Slim Cassette 10.0kW", cost: 1925, type: "ceiling-cassette", suitableFor: ["commercial"] }
+            ],
+            floor: [
+                { capacity: 5.0, model: "MFZ-KT50VG", description: "Floor Standing 5.0kW", cost: 1125, type: "floor", suitableFor: ["commercial"] },
+                { capacity: 7.1, model: "MFZ-KT71VG", description: "Floor Standing 7.1kW", cost: 1325, type: "floor", suitableFor: ["commercial"] }
             ]
-        };
+        },
+        daikin: {
+            wall: [
+                { capacity: 2.5, model: "FTXM25R", description: "Standard Range Wall 2.5kW", cost: 425, type: "wall", suitableFor: ["domestic"] },
+                { capacity: 3.5, model: "FTXM35R", description: "Standard Range Wall 3.5kW", cost: 495, type: "wall", suitableFor: ["domestic"] },
+                { capacity: 5.0, model: "FTXM50R", description: "Standard Range Wall 5.0kW", cost: 645, type: "wall", suitableFor: ["domestic"] },
+                { capacity: 6.0, model: "FTXM60R", description: "Standard Range Wall 6.0kW", cost: 785, type: "wall", suitableFor: ["domestic"] },
+                { capacity: 7.1, model: "FTXM71R", description: "Standard Range Wall 7.1kW", cost: 895, type: "wall", suitableFor: ["domestic"] }
+            ],
+            cassette: [
+                { capacity: 5.0, model: "FCQ50F", description: "Sky Air Cassette 5.0kW", cost: 1185, type: "ceiling-cassette", suitableFor: ["commercial"] },
+                { capacity: 6.0, model: "FCQ60F", description: "Sky Air Cassette 6.0kW", cost: 1325, type: "ceiling-cassette", suitableFor: ["commercial"] },
+                { capacity: 7.1, model: "FCQ71F", description: "Sky Air Cassette 7.1kW", cost: 1465, type: "ceiling-cassette", suitableFor: ["commercial"] },
+                { capacity: 10.0, model: "FCQ100F", description: "Sky Air Cassette 10.0kW", cost: 1825, type: "ceiling-cassette", suitableFor: ["commercial"] }
+            ]
+        },
+        fujitsu: {
+            wall: [
+                { capacity: 2.5, model: "ASYG09KETA", description: "Split System Wall 2.5kW", cost: 415, type: "wall", suitableFor: ["domestic"] },
+                { capacity: 3.5, model: "ASYG12KETA", description: "Split System Wall 3.5kW", cost: 475, type: "wall", suitableFor: ["domestic"] },
+                { capacity: 5.0, model: "ASYG18KETA", description: "Split System Wall 5.0kW", cost: 625, type: "wall", suitableFor: ["domestic"] },
+                { capacity: 6.0, model: "ASYG24KETA", description: "Split System Wall 6.0kW", cost: 785, type: "wall", suitableFor: ["domestic"] },
+                { capacity: 7.1, model: "ASYG28KETA", description: "Split System Wall 7.1kW", cost: 865, type: "wall", suitableFor: ["domestic"] }
+            ],
+            cassette: [
+                { capacity: 10.0, model: "AUXG36KRLB", description: "Air Stage Cassette 10.0kW", cost: 1945, type: "ceiling-cassette", suitableFor: ["commercial"] },
+                { capacity: 12.0, model: "AUXG45KRLB", description: "Air Stage Cassette 12.0kW", cost: 2185, type: "ceiling-cassette", suitableFor: ["commercial"] },
+                { capacity: 14.0, model: "AUXG54KRLB", description: "Air Stage Cassette 14.0kW", cost: 2425, type: "ceiling-cassette", suitableFor: ["commercial"] }
+            ]
+        },
+        mhi: {
+            wall: [
+                { capacity: 2.5, model: "SRK25ZSA-W", description: "RAC Wall 2.5kW", cost: 465, type: "wall", suitableFor: ["domestic"] },
+                { capacity: 3.5, model: "SRK35ZSA-W", description: "RAC Wall 3.5kW", cost: 545, type: "wall", suitableFor: ["domestic"] },
+                { capacity: 5.0, model: "SRK50ZSA-W", description: "RAC Wall 5.0kW", cost: 705, type: "wall", suitableFor: ["domestic"] },
+                { capacity: 6.0, model: "SRK60ZSA-W", description: "RAC Wall 6.0kW", cost: 825, type: "wall", suitableFor: ["domestic"] },
+                { capacity: 7.1, model: "SRK71ZSA-W", description: "RAC Wall 7.1kW", cost: 925, type: "wall", suitableFor: ["domestic"] }
+            ],
+            cassette: [
+                { capacity: 5.0, model: "FDTC50VD", description: "Cassette 5.0kW", cost: 1285, type: "ceiling-cassette", suitableFor: ["commercial"] },
+                { capacity: 7.1, model: "FDTC71VD", description: "Cassette 7.1kW", cost: 1565, type: "ceiling-cassette", suitableFor: ["commercial"] },
+                { capacity: 10.0, model: "FDTC100VD", description: "Cassette 10.0kW", cost: 1945, type: "ceiling-cassette", suitableFor: ["commercial"] }
+            ]
+        }
+    },
+    outdoorUnits: {
+        mitsubishi: [
+            { capacity: 2.5, model: "MUZ-AP25VG", description: "M Series Outdoor 2.5kW", cost: 425 },
+            { capacity: 3.5, model: "MUZ-AP35VG", description: "M Series Outdoor 3.5kW", cost: 485 },
+            { capacity: 5.0, model: "MUZ-AP50VG", description: "M Series Outdoor 5.0kW", cost: 625 },
+            { capacity: 6.0, model: "MUZ-AP60VG", description: "M Series Outdoor 6.0kW", cost: 745 },
+            { capacity: 7.1, model: "MUZ-AP71VG", description: "M Series Outdoor 7.1kW", cost: 845 },
+            { capacity: 9.0, model: "PUHZ-ZRP90VKA", description: "Mr Slim Outdoor 9.0kW", cost: 1125 },
+            { capacity: 10.0, model: "PUHZ-ZRP100VKA", description: "Mr Slim Outdoor 10.0kW", cost: 1245 }
+        ],
+        daikin: [
+            { capacity: 2.5, model: "RXM25R", description: "Standard Outdoor 2.5kW", cost: 405 },
+            { capacity: 3.5, model: "RXM35R", description: "Standard Outdoor 3.5kW", cost: 465 },
+            { capacity: 5.0, model: "RXM50R", description: "Standard Outdoor 5.0kW", cost: 585 },
+            { capacity: 6.0, model: "RXM60R", description: "Standard Outdoor 6.0kW", cost: 705 },
+            { capacity: 7.1, model: "RXM71R", description: "Standard Outdoor 7.1kW", cost: 805 },
+            { capacity: 10.0, model: "RZQ100F", description: "Sky Air Outdoor 10.0kW", cost: 1185 }
+        ],
+        fujitsu: [
+            { capacity: 2.5, model: "AOYG09KETA", description: "Split Outdoor 2.5kW", cost: 395 },
+            { capacity: 3.5, model: "AOYG12KETA", description: "Split Outdoor 3.5kW", cost: 445 },
+            { capacity: 5.0, model: "AOYG18KETA", description: "Split Outdoor 5.0kW", cost: 565 },
+            { capacity: 6.0, model: "AOYG24KETA", description: "Split Outdoor 6.0kW", cost: 685 },
+            { capacity: 7.1, model: "AOYG28KETA", description: "Split Outdoor 7.1kW", cost: 785 },
+            { capacity: 10.0, model: "AOYG36KRLB", description: "Air Stage Outdoor 10.0kW", cost: 1245 },
+            { capacity: 12.0, model: "AOYG45KRLB", description: "Air Stage Outdoor 12.0kW", cost: 1425 },
+            { capacity: 14.0, model: "AOYG54KRLB", description: "Air Stage Outdoor 14.0kW", cost: 1625 }
+        ],
+        mhi: [
+            { capacity: 2.5, model: "SRC25ZSA-W", description: "RAC Outdoor 2.5kW", cost: 445 },
+            { capacity: 3.5, model: "SRC35ZSA-W", description: "RAC Outdoor 3.5kW", cost: 505 },
+            { capacity: 5.0, model: "SRC50ZSA-W", description: "RAC Outdoor 5.0kW", cost: 645 },
+            { capacity: 6.0, model: "SRC60ZSA-W", description: "RAC Outdoor 6.0kW", cost: 765 },
+            { capacity: 7.1, model: "SRC71ZSA-W", description: "RAC Outdoor 7.1kW", cost: 845 },
+            { capacity: 10.0, model: "SRC100ZSA-W", description: "RAC Outdoor 10.0kW", cost: 1285 }
+        ]
+    },
+    pipeSets: [
+        { liquidSize: "1/4", gasSize: "3/8", suitableFor: [2.5, 3.5], maxDistance: 20, cost: 125, description: "1/4\" × 3/8\" Pre-insulated Set" },
+        { liquidSize: "1/4", gasSize: "1/2", suitableFor: [5.0, 6.0], maxDistance: 30, cost: 145, description: "1/4\" × 1/2\" Pre-insulated Set" },
+        { liquidSize: "3/8", gasSize: "5/8", suitableFor: [7.1], maxDistance: 40, cost: 175, description: "3/8\" × 5/8\" Pre-insulated Set" },
+        { liquidSize: "3/8", gasSize: "3/4", suitableFor: [9.0, 10.0], maxDistance: 45, cost: 195, description: "3/8\" × 3/4\" Pre-insulated Set" },
+        { liquidSize: "1/2", gasSize: "7/8", suitableFor: [12.0, 14.0, 16.0], maxDistance: 50, cost: 225, description: "1/2\" × 7/8\" Pre-insulated Set" }
+    ],
+    cableTray: [
+        { length: 3, width: 100, description: "Cable Tray 3m × 100mm", cost: 45 },
+        { length: 3, width: 150, description: "Cable Tray 3m × 150mm", cost: 55 },
+        { length: 3, width: 200, description: "Cable Tray 3m × 200mm", cost: 65 }
+    ]
+};
 
         // Global variables for selections
         let selectedIndoorUnit = null;
