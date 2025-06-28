@@ -253,6 +253,44 @@
 
         // Auto-select cable tray when capacity changes
         document.getElementById('capacity').addEventListener('input', autoSelectCableTray);
+       // FIXED: Equipment pairing logic
+        function selectEquipment(unit, type, cardElement) {
+            if (type === 'indoor') {
+                // Clear previous indoor selections
+                document.querySelectorAll('.equipment-card').forEach(card => {
+                    if (card.innerHTML.includes('🏠 Indoor')) {
+                        card.classList.remove('selected');
+                    }
+                });
+                
+                selectedIndoor = unit;
+                cardElement.classList.add('selected');
+                
+            } else {
+                // OUTDOOR UNIT SELECTION
+                if (!selectedIndoor) {
+                    alert('Please select an indoor unit first');
+                    return;
+                }
+                
+                if (Math.abs(selectedIndoor.capacity - unit.capacity) > 0.1) {
+                    alert(`❌ Capacity Mismatch!\n\nIndoor: ${selectedIndoor.capacity}kW\nOutdoor: ${unit.capacity}kW`);
+                    return;
+                }
+                
+                document.querySelectorAll('.equipment-card').forEach(card => {
+                    if (card.innerHTML.includes('🏭 Outdoor')) {
+                        card.classList.remove('selected');
+                    }
+                });
+                
+                selectedOutdoor = unit;
+                cardElement.classList.add('selected');
+                
+                const systemPrice = selectedIndoor.price + selectedOutdoor.price;
+                alert(`✅ System Selected!\nIndoor: ${selectedIndoor.name}\nOutdoor: ${selectedOutdoor.name}\nTotal: £${systemPrice.toFixed(2)}`);
+            }
+        } 
     </script>
 </body>
 </html>
