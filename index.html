@@ -257,39 +257,113 @@
 
         // Auto-select cable tray when capacity changes
         document.getElementById('capacity').addEventListener('input', autoSelectCableTray);
-       // FIXED: Equipment pairing logic
-        function selectEquipment(unit, type, cardElement) {
-            if (type === 'indoor') {
-                // Clear previous indoor selections
-                document.querySelectorAll('.equipment-card').forEach(card => {
-                    if (card.innerHTML.includes('🏠 Indoor')) {
-                        card.classList.remove('selected');
-                    }
-                });
-                
-                selectedIndoor = unit;
-                cardElement.classList.add('selected');
-                
-            } else {
-                // OUTDOOR UNIT SELECTION
-                if (!selectedIndoor) {
-                    alert('Please select an indoor unit first');
-                    return;
-                }
-                
-                // Check manufacturer match
-const indoorManufacturer = document.getElementById('indoorManufacturer').value;
-const outdoorManufacturer = document.getElementById('outdoorManufacturer').value;
-
-if (indoorManufacturer !== outdoorManufacturer) {
-    alert(`❌ Manufacturer Mismatch!\n\nIndoor: ${indoorManufacturer}\nOutdoor: ${outdoorManufacturer}\n\nUnits must be from same manufacturer.`);
-    return;
+// FIXED: Equipment pairing logic with complete manufacturer and capacity validation
+function selectEquipment(unit, type, cardElement) {
+    if (type === 'indoor') {
+        // Clear previous indoor selections
+        document.querySelectorAll('.equipment-card').forEach(card => {
+            if (card.innerHTML.includes('🏠 Indoor')) {
+                card.classList.remove('selected');
+            }
+        });
+        
+        selectedIndoor = unit;
+        cardElement.classList.add('selected');
+        
+        // Update manufacturer syncing when indoor unit is selected
+        updateIndoorManufacturer();
+        
+        // Clear any previous outdoor selection to force reselection with new indoor unit
+        document.querySelectorAll('.equipment-card').forEach(card => {
+            if (card.innerHTML.includes('🏭 Outdoor')) {
+                card.classList.remove('selected');
+            }
+        });
+        selectedOutdoor = null;
+        
+    } else {
+        // OUTDOOR UNIT SELECTION
+        if (!selectedIndoor) {
+            alert('❌ Please select an indoor unit first!');
+            return;
+        }
+        
+        // Get manufacturer values
+        const indoorManufacturer = document.getElementById('indoorManufacturer').value;
+        const outdoorManufacturer = document.getElementById('outdoorManufacturer').value;
+        
+        // Check manufacturer match
+        if (indoorManufacturer !== outdoorManufacturer) {
+            alert(`❌ Manufacturer Mismatch!\n\nIndoor: ${indoorManufacturer}\nOutdoor: ${outdoorManufacturer}\n\nUnits must be from same manufacturer.\n\nPlease select outdoor manufacturer: ${indoorManufacturer}`);
+            return;
+        }
+        
+        // Specific check for problematic combinations (MHI + Daikin mentioned in handoff)
+        if ((indoorManufacturer.toLowerCase().includes('mhi') && outdoorManufacturer.toLowerCase().includes('daikin')) ||
+            (indoorManufacturer.toLowerCase().includes('daikin') && outdoorManufacturer.toLowerCase().includes('mhi'))) {
+            alert(`❌ Incompatible Manufacturer Combination!\n\nMHI and Daikin systems cannot be paired together.\n\nPlease select units from the same manufacturer.`);
+            return;
+        }
+        
+        // Check capacity match (allowing 0.1kW tolerance for manufacturing variations)
+        if (Math.abs(selectedIndoor.capacity - unit.capacity) > 0.1) {
+            alert(`❌ Capacity Mismatch!\n\nIndoor: ${selectedIndoor.capacity}kW\nOutdoor: ${unit.capacity}kW\n\nUnits must have matching capacity.\n\nPlease select a ${selectedIndoor.capacity}kW outdoor unit.`);
+            return;
+        }
+        
+        // All checks passed - proceed with selection
+        // Clear previous outdoor selections
+        document.querySelectorAll('.equipment-card').forEach(card => {
+            if (card.innerHTML.includes('🏭 Outdoor')) {
+                card.classList.remove('selected');
+            }
+        });
+        
+        selectedOutdoor = unit;
+        cardElement.classList.add('selected');
+        
+        // Update capacity-dependent elements (cable tray, etc.)
+        updateCapacity();
+        
+        // Update totals
+        updateTotals();
+        
+        // Success feedback
+        console.log(`✅ Equipment paired successfully: ${selectedIndoor.model} + ${selectedOutdoor.model}`);
+    }
 }
 
-// Check capacity match
-if (Math.abs(selectedIndoor.capacity - unit.capacity) > 0.1) {
-    alert(`❌ Capacity Mismatch!\n\nIndoor: ${selectedIndoor.capacity}kW\nOutdoor: ${unit.capacity}kW\n\nUnits must have matching capacity.`);
-    return;
+// Enhanced manufacturer update function to ensure sync
+function updateIndoorManufacturer() {
+    const indoorManufacturer = document.getElementById('indoorManufacturer').value;
+    const outdoorManufacturerSelect = document.getElementById('outdoorManufacturer');
+    
+    if (outdoorManufacturerSelect && indoorManufacturer) {
+        outdoorManufacturerSelect.value = indoorManufacturer;
+        
+        // Trigger change event to update outdoor equipment options
+        outdoorManufacturerSelect.dispatchEvent(new Event('change'));
+    }
+}
+
+// Helper function to validate current selection (can be called elsewhere)
+function validateCurrentSelection() {
+    if (!selectedIndoor || !selectedOutdoor) {
+        return { valid: false, message: 'Both indoor and outdoor units must be selected' };
+    }
+    
+    const indoorMfg = document.getElementById('indoorManufacturer').value;
+    const outdoorMfg = document.getElementById('outdoorManufacturer').value;
+    
+    if (indoorMfg !== outdoorMfg) {
+        return { valid: false, message: 'Manufacturer mismatch detected' };
+    }
+    
+    if (Math.abs(selectedIndoor.capacity - selectedOutdoor.capacity) > 0.1) {
+        return { valid: false, message: 'Capacity mismatch detected' };
+    }
+    
+    return { valid: true, message: 'Selection valid' };
 }
                 
                 document.querySelectorAll('.equipment-card').forEach(card => {
