@@ -277,10 +277,20 @@
                     return;
                 }
                 
-                if (Math.abs(selectedIndoor.capacity - unit.capacity) > 0.1) {
-                    alert(`❌ Capacity Mismatch!\n\nIndoor: ${selectedIndoor.capacity}kW\nOutdoor: ${unit.capacity}kW`);
-                    return;
-                }
+                // Check manufacturer match
+const indoorManufacturer = document.getElementById('indoorManufacturer').value;
+const outdoorManufacturer = document.getElementById('outdoorManufacturer').value;
+
+if (indoorManufacturer !== outdoorManufacturer) {
+    alert(`❌ Manufacturer Mismatch!\n\nIndoor: ${indoorManufacturer}\nOutdoor: ${outdoorManufacturer}\n\nUnits must be from same manufacturer.`);
+    return;
+}
+
+// Check capacity match
+if (Math.abs(selectedIndoor.capacity - unit.capacity) > 0.1) {
+    alert(`❌ Capacity Mismatch!\n\nIndoor: ${selectedIndoor.capacity}kW\nOutdoor: ${unit.capacity}kW\n\nUnits must have matching capacity.`);
+    return;
+}
                 
                 document.querySelectorAll('.equipment-card').forEach(card => {
                     if (card.innerHTML.includes('🏭 Outdoor')) {
