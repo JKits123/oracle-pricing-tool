@@ -96,18 +96,21 @@
 
         <div class="form-group">
             <label for="systemType">System Type:</label>
-            <select id="systemType">
-                <option value="">Select system type...</option>
-                <option value="split">Split System</option>
-                <option value="ducted">Ducted System</option>
-                <option value="multi-split">Multi-Split System</option>
-            </select>
+           <select id="systemType" onchange="updateSystem()">
+    <option value="">Select system type...</option>
+    <option value="split">Split System</option>
+</select> 
         </div>
 
         <div class="form-group">
-            <label for="capacity">System Capacity (kW):</label>
-            <input type="number" id="capacity" placeholder="Enter capacity (e.g., 3.5)">
-        </div>
+    <label for="indoorType">Indoor Unit Type:</label>
+    <select id="indoorType" onchange="updateEquipmentDisplay()">
+        <option value="">Select indoor type...</option>
+        <option value="wall">Wall Mount</option>
+        <option value="ducted">Ducted</option>
+        <option value="cassette">Ceiling Cassette</option>
+    </select>
+</div>
 
         <div class="form-group">
             <label for="indoorManufacturer">Indoor Unit Manufacturer:</label>
@@ -116,6 +119,7 @@
                 <option value="daikin">Daikin</option>
                 <option value="mitsubishi">Mitsubishi Electric</option>
                 <option value="fujitsu">Fujitsu General</option>
+             <option value="mhi">MHI (Mitsubishi Heavy Industries)</option>   
             </select>
         </div>
 
