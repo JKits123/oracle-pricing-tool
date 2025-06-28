@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HVAC System Enquiry - Current Development Limited</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #E8F7F0 0%, #ffffff 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #00B74A 0%, #008A37 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 183, 74, 0.3);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: #00B74A;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 3px solid #8C8C8C;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .logo::after {
+            content: 'CD';
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .company-name {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .enquiry-form {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #00B74A;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-title {
+            color: #008A37;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-subtitle {
+            color: #8C8C8C;
+            font-size: 1rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            color: #008A37;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-input, .form-select {
+            padding: 0.8rem;
+            border: 2px solid #E8F7F0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #00B74A;
+            box-shadow: 0 0 0 3px rgba(0, 183, 74, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #8C8C8C;
+        }
+
+        .capacity-group {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0.5rem;
+            align-items: end;
+        }
+
+        .capacity-unit {
+            background: #E8F7F0;
+            color: #008A37;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            border: 2px solid #E8F7F0;
+        }
+
+        .pipe-run-group {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0.5rem;
+            align-items: end;
+        }
+
+        .pipe-unit {
+            background: #E8F7F0;
+            color: #008A37;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            border: 2px solid #E8F7F0;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00B74A 0%, #008A37 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 183, 74, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 183, 74, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #8C8C8C;
+            border: 2px solid #8C8C8C;
+        }
+
+        .btn-secondary:hover {
+            background: #8C8C8C;
+            color: white;
+        }
+
+        .info-section {
+            background: #E8F7F0;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 4px solid #00B74A;
+        }
+
+        .info-title {
+            color: #008A37;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-text {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .company-name {
+                font-size: 1.4rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .validation-message {
+            color: #e74c3c;
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo"></div>
+            <div>
+                <div class="company-name">CURRENT DEVELOPMENT LIMITED</div>
+                <div class="tagline">Professional HVAC Solutions</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <form class="enquiry-form" id="enquiryForm">
+            <div class="form-header">
+                <h1 class="form-title">HVAC System Enquiry</h1>
+                <p class="form-subtitle">Professional system specification and pricing</p>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="form-label" for="customerName">Customer Name <span class="required">*</span></label>
+                    <input type="text" id="customerName" name="customerName" class="form-input" placeholder="Enter customer name" required>
+                    <div class="validation-message">Customer name is required</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="contactNumber">Contact Number <span class="required">*</span></label>
+                    <input type="tel" id="contactNumber" name="contactNumber" class="form-input" placeholder="Enter contact number" required>
+                    <div class="validation-message">Contact number is required</div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label class="form-label" for="projectAddress">Project Address <span class="required">*</span></label>
+                    <input type="text" id="projectAddress" name="projectAddress" class="form-input" placeholder="Enter full project address" required>
+                    <div class="validation-message">Project address is required</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="systemType">System Type</label>
+                    <select id="systemType" name="systemType" class="form-select">
+                        <option value="split">Split System</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="indoorUnitType">Indoor Unit Type <span class="required">*</span></label>
+                    <select id="indoorUnitType" name="indoorUnitType" class="form-select" required>
+                        <option value="">Select unit type</option>
+                        <option value="wall">Wall Mounted</option>
+                        <option value="ducted">Ducted</option>
+                        <option value="cassette">Ceiling Cassette</option>
+                        <option value="console">Floor Console</option>
+                        <option value="suspended">Ceiling Suspended</option>
+                    </select>
+                    <div class="validation-message">Indoor unit type is required</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="capacity">System Capacity <span class="required">*</span></label>
+                    <div class="capacity-group">
+                        <input type="number" id="capacity" name="capacity" class="form-input" placeholder="Enter capacity" min="1.5" max="20" step="0.5" required>
+                        <div class="capacity-unit">kW</div>
+                    </div>
+                    <div class="validation-message">Capacity is required (1.5-20 kW)</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="pipeRun">Maximum Pipe Run <span class="required">*</span></label>
+                    <div class="pipe-run-group">
+                        <input type="number" id="pipeRun" name="pipeRun" class="form-input" placeholder="Enter distance" min="1" max="100" required>
+                        <div class="pipe-unit">meters</div>
+                    </div>
+                    <div class="validation-message">Pipe run distance is required</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="manufacturer">Preferred Manufacturer</label>
+                    <select id="manufacturer" name="manufacturer" class="form-select">
+                        <option value="">Any manufacturer</option>
+                        <option value="daikin">Daikin</option>
+                        <option value="mitsubishi">Mitsubishi Electric</option>
+                        <option value="mhi">Mitsubishi Heavy Industries</option>
+                        <option value="toshiba">Toshiba</option>
+                        <option value="panasonic">Panasonic</option>
+                    </select>
+                </div>
+
+                <div class="form-group full-width">
+                    <label class="form-label" for="additionalNotes">Additional Requirements</label>
+                    <textarea id="additionalNotes" name="additionalNotes" class="form-input" placeholder="Any special requirements, installation notes, or preferences..." rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button type="button" class="btn btn-secondary">
+                    <span>📋</span> Save Draft
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <span>⚡</span> Continue to Equipment Selection
+                </button>
+            </div>
+        </form>
+
+        <div class="info-section">
+            <div class="info-title">💡 System Specification Guide</div>
+            <div class="info-text">
+                Our intelligent system will automatically select compatible equipment based on your specifications. 
+                Pipe run length affects equipment selection and pipe sizing - longer runs may require upgraded equipment series.
+                All selections can be customized in the next step.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form validation and submission
+        document.getElementById('enquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (validateForm()) {
+                // Store enquiry data
+                const enquiryData = {
+                    customerName: document.getElementById('customerName').value,
+                    contactNumber: document.getElementById('contactNumber').value,
+                    projectAddress: document.getElementById('projectAddress').value,
+                    systemType: document.getElementById('systemType').value,
+                    indoorUnitType: document.getElementById('indoorUnitType').value,
+                    capacity: parseFloat(document.getElementById('capacity').value),
+                    pipeRun: parseInt(document.getElementById('pipeRun').value),
+                    manufacturer: document.getElementById('manufacturer').value,
+                    additionalNotes: document.getElementById('additionalNotes').value,
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Store in session storage for next page
+                sessionStorage.setItem('enquiryData', JSON.stringify(enquiryData));
+                
+                // Navigate to equipment selection
+                // window.location.href = 'equipment.html';
+                alert('✅ Enquiry saved! Ready to navigate to equipment selection.\n\nNext: Implement navigation to equipment.html');
+            }
+        });
+
+        function validateForm() {
+            let isValid = true;
+            const requiredFields = ['customerName', 'contactNumber', 'projectAddress', 'indoorUnitType', 'capacity', 'pipeRun'];
+            
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field) return; // Skip if field doesn't exist
+                
+                const validationMessage = field.parentNode.querySelector('.validation-message');
+                
+                if (!field.value.trim()) {
+                    field.style.borderColor = '#e74c3c';
+                    if (validationMessage) validationMessage.style.display = 'block';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '#E8F7F0';
+                    if (validationMessage) validationMessage.style.display = 'none';
+                }
+            });
+            
+            return isValid;
+        }
+
+        // Real-time validation with null checks
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.form-input, .form-select').forEach(field => {
+                field.addEventListener('blur', function() {
+                    const validationMessage = this.parentNode.querySelector('.validation-message');
+                    
+                    if (this.hasAttribute('required') && !this.value.trim()) {
+                        this.style.borderColor = '#e74c3c';
+                        if (validationMessage) validationMessage.style.display = 'block';
+                    } else {
+                        this.style.borderColor = '#E8F7F0';
+                        if (validationMessage) validationMessage.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
